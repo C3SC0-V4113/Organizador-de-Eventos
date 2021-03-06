@@ -1763,7 +1763,7 @@ input, select, textarea {
 			input[type="reset"].style4:hover,
 			button.style4:hover,
 			.button.style4:hover {
-				background-color: #f08888;
+				background-color: #f6c90E;
 			}
 
 			input[type="button"].style4:active,
@@ -1771,7 +1771,7 @@ input, select, textarea {
 			input[type="reset"].style4:active,
 			button.style4:active,
 			.button.style4:active {
-				background-color: #f08888;
+				background-color: #f6c90E;
 			}
 
 
@@ -2192,7 +2192,7 @@ input, select, textarea {
 				}
 
 				#nav > ul > li:hover > a {
-					color:#638fc9;
+					color:#f6c90E;
 				}
 
 				#nav > ul > li.active > a, #nav > ul > li.active > span {
@@ -2225,8 +2225,8 @@ input, select, textarea {
 			-ms-transition: all .25s ease-in-out;
 			transition: all .25s ease-in-out;
 			display: block;
-			color: #eee;
 			color: rgba(255, 255, 255, 0.75);
+			color: #f6c90E;
 			text-transform: uppercase;
 			text-decoration: none;
 			font-size: 0.7em;
@@ -2244,7 +2244,7 @@ input, select, textarea {
 			}
 
 			.dropotron li:hover > a, .dropotron li:hover > span {
-				color: #638fc9;
+				color: #f6c90E;
 			}
 
 /* Intro */
