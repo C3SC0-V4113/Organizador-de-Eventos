@@ -1754,7 +1754,7 @@ input, select, textarea {
 		input[type="reset"].style4,
 		button.style4,
 		.button.style4 {
-			background: #EA5455 url("images/overlay.png");
+			background: #FFB400  url("images/overlay.png");
 			color: #fff;
 		}
 
@@ -2055,6 +2055,11 @@ input, select, textarea {
 			.wrapper.style2 .title {
 				background:  #eee;
 				color: #F7B661;
+			}
+
+			.wrapper.style2 p{
+				background:  #eee;
+				color: #3a4750;
 			}
 
 		.wrapper.style3 {
