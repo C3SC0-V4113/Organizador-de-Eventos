@@ -2075,6 +2075,24 @@ input, select, textarea {
 				border: solid 5px #eee;
 			}
 
+			.wrapper.style4 {
+				background: #2E3943 url("images/overlay.png");
+			}
+	
+				.wrapper.style4 .title {
+					background: #2E3943 url("images/overlay.png");
+					color: #F7b661;
+				}
+
+				.wrapper.style4 h3 {
+					background: #2E3943 url("images/overlay.png");
+					color: #eee;
+				}
+	
+				.wrapper.style4 .image {
+					border: solid 5px #eee;
+				}
+
 /* Page Wrapper */
 
 	#page-wrapper > section {
@@ -3025,3 +3043,11 @@ input, select, textarea {
 						}
 
 	}
+
+	#map {
+		height: 500px;
+		width: 100%;
+		border: solid 5px #eee;
+		
+	}
+	
