@@ -70,6 +70,11 @@ input::-moz-focus-inner {
 	padding: 0;
 }
 
+input[type="file"] {
+	width: 550px;
+	height: 35px;
+	}
+
 input, select, textarea {
 	-moz-appearance: none;
 	-webkit-appearance: none;
@@ -151,9 +156,11 @@ input, select, textarea {
 
 	hr {
 		border: 0;
-		border-top: solid 1px #ddd;
+		border-top: solid 1px rgb(209, 209, 209);
 		margin: 2em 0 2em 0;
 	}
+
+	
 
 	sub {
 		position: relative;
@@ -1466,6 +1473,14 @@ input, select, textarea {
 			font-size: 2em;
 			letter-spacing: 0.075em;
 			line-height: 1.5em;
+			text-align: center;
+		}
+		header.style2 h2 {
+			font-weight: 700;
+			font-size: 1.5em;
+			letter-spacing: 0.075em;
+			line-height: 1.5em;
+			text-align: center;
 		}
 
 		header.style1 p {
@@ -1589,6 +1604,48 @@ input, select, textarea {
 		border: 0;
 	}
 
+/*FORM SERVICIOS*/
+form input[type="text"].service,
+	form input[type="email"].service,
+	form input[type="password"].service,
+	form select.service,
+	form textarea.service {
+		-moz-transition: all .25s ease-in-out;
+		-webkit-transition: all .25s ease-in-out;
+		-ms-transition: all .25s ease-in-out;
+		transition: all .25s ease-in-out;
+		-webkit-appearance: none;
+		display: block;
+		border: 0;
+		background: rgb(252, 250, 250);
+		box-shadow: inset 0px 0px 1px 0px #a0a1a7;
+		border-radius: 0.35em;
+		width: 100%;
+		padding: 0.75em 1em 0.75em 1em;
+		color: #1C2530;
+	}
+
+		form input[type="text"].service:focus,
+		form input[type="email"].service:focus,
+		form input[type="password"].service:focus,
+		form select.service:focus,
+		form textarea.service:focus {
+			background: #f8f8f8;
+		}
+
+	form input[type="text"].service,
+	form input[type="email"].service
+	input[type="password"].service {
+		line-height: 1em;
+	}
+
+	form select.service {
+		line-height: 1em;
+	}
+
+	form textarea.service {
+		min-height: 8em;
+	}	
 /* Image */
 
 	.image {
@@ -1627,6 +1684,33 @@ input, select, textarea {
 		}
 
 /* Button */
+    input[type="button"].special,
+	input[type="submit"].special,
+	input[type="reset"].special,
+	button.special,
+	.button.special {
+		-moz-transition: all .25s ease-in-out;
+		-webkit-transition: all .25s ease-in-out;
+		-ms-transition: all .25s ease-in-out;
+		transition: all .25s ease-in-out;
+		display: inline-block;
+		background: #444;
+		text-align: center;
+		text-transform: uppercase;
+		font-weight: 700;
+		letter-spacing: 0.25em;
+		text-decoration: none;
+		border-radius: 0.35em;
+		border: 0;
+		outline: 0;
+		cursor: pointer;
+		padding: 0 2.25em 0 2.25em;
+		font-size: 0.9em;
+		min-width: 6em;
+		height: 3em;
+		line-height: 2em;
+		
+	}
 
 	input[type="button"],
 	input[type="submit"],
@@ -1773,6 +1857,31 @@ input, select, textarea {
 			.button.style4:active {
 				background-color: #f6c90E;
 			}
+
+			input[type="button"].style5,
+			input[type="submit"].style5,
+			input[type="reset"].style5,
+			button.style5,
+			.button.style5 {
+				background: #AB2A3E url("images/overlay.png");
+				color: #fff;
+			}
+	
+				input[type="button"].style5:hover,
+				input[type="submit"].style5:hover,
+				input[type="reset"].style5:hover,
+				button.style5:hover,
+				.button.style5:hover {
+					background-color: #aa5b67;
+				}
+	
+				input[type="button"].style5:active,
+				input[type="submit"].style5:active,
+				input[type="reset"].style5:active,
+				button.style5:active,
+				.button.style5:active {
+					background-color: #b34354;
+				}
 
 
 /* List */
@@ -2846,6 +2955,15 @@ input, select, textarea {
 					font-size: 1.5em;
 					letter-spacing: 0.075em;
 					line-height: 1.25em;
+				}
+
+				.container header.style2 h2 {
+					font-size: 1.5em;
+					letter-spacing: 0.075em;
+					line-height: 1.25em;
+					margin-top: 0;
+					margin-bottom: 0;
+					text-align: center;
 				}
 
 				header.style1 p {
