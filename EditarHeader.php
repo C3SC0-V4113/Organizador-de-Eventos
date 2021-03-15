@@ -7,8 +7,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <link rel="stylesheet" href="assets/css/main.css?<?php echo time().".0"; ?>" media="all" />
 </head>
-
-<body class="no-sidebar is-preload">
+<?php
+        $matrizBD = array("SERVICIOS DE CALIDAD","Para que tus eventos sean únicos y especiales");
+?>
+<script type="text/javascript">
+    var arrayJS = <?php echo json_encode($matrizBD);?>;
+    for (var i = 0; i < arrayJS.length; i++) {
+        console.log("<br>" + arrayJS[i]);
+    }
+</script>
+<body class="no-sidebar is-preload" onload="Header(arrayJS[0],arrayJS[1])">
     <div id="page-wrapper">
 
         <!-- Header -->
@@ -45,78 +53,51 @@
             </nav>
 
         </section>
-
-        <!-- SERVICIOS -->
-        <?php
-			$matrizBD =  array(
-			'0' => 
-			array('nombre'=>'Name Servicio 1','descrip'=>'Descripcion1:scbwucdbucbuebckebceh','icono'=>'fas fa-home'),
-			'1' => 
-			array('nombre'=>'Name Servicio 2','descrip'=>'Descripcion2:scbwucdbucbuebckebceh','icono'=>'fas fa-phone'),
-			'2' => 
-			array('nombre'=>'Name Servicio 3','descrip'=>'Descripcion3:scbwucdbucbuebckebceh','icono'=>'far fa-credit-card'), 
-			'3' => 
-			array('nombre'=>'Name Servicio 4','descrip'=>'Descripcion4:scbwucdbucbuebckebceh','icono'=>'fas fa-coffee'),
-			'4' => 
-			array('nombre'=>'Name Servicio 5','descrip'=>'Descripcion5:scbwucdbucbuebckebceh','icono'=>'fas fa-box'),
-			'5' => 
-			array('nombre'=>'Name Servicio 6','descrip'=>'Descripcion6:scbwucdbucbuebckebceh','icono'=>'fas fa-building'));
-			require 'class/servicios.php';
-			$Servicios = new Servicio();
-		?>
-        <div id='main' class='wrapper style2'>
-            <div class='title'>NUESTROS SERVICIOS</div>
-            <div class="col-12">
-                <header class="style2">
-                    <h2>EDITAR SERVICIOS</h2>
-                </header>
-                <ul class="actions special">
-                    <form id="servicesbtn" name="servicesbtn">
-                        <li>
-                            <input type="submit" class="button special style5 large" value="Editar Header"
-                                onclick="document.servicesbtn.action = 'EditarHeader.php';">
-                        </li>
-                        <li><input type="submit" class="button special style5 large " value="Agregar Servicio"
-                                onclick="document.servicesbtn.action = 'AgregarServicios.php';" />
-                        </li>
-                        <li><input type="submit" class="button special style5 large" value="Actualizar Servicios"
-                                onclick="document.servicesbtn.action = 'ActualizarServicios.php';" />
-                        </li>
-                        <li><input type="submit" class="button special style5 large" value="Eliminar Servicio"
-                                onclick="document.servicesbtn.action = 'EliminarServicios.php';" />
-                        </li>
-
-                    </form>
-                    <hr>
-                </ul>
-            </div>
-            <div class='container'>
-                <div id='content'>
-                    <article class='box post'>
-                        <?php 
-		                    $Servicios -> GenerarHeaderServicios('SERVICIOS DE CALIDAD','Para que tus eventos sean únicos y especiales');
-		                ?>
-
-                        <div class='feature-list'>
-                            <div class='row'>
-                                <?php 
-		                            for ($i=0; $i<sizeof($matrizBD); $i++) 
-		                            { 
-		                            	$Servicios -> setNombre($matrizBD[$i]['nombre']);
-		                            	$Servicios -> setDescripcion($matrizBD[$i]['descrip']);
-		                            	$Servicios -> setURL_Icono($matrizBD[$i]['icono']);
-		                            	$Servicios -> GenerarServicio();
-		                            }
-		                        ?>
-                            </div>
-                        </div>
-                        <ul class='actions special'>
-                            <li><a href='#' class='button style1 large'>Organiza tu Reunión</a></li>
-                        </ul>
+        
+        <!-- Main -->
+        <div id="main" class="wrapper style2">
+            <div class="title">Editar Header</div>
+            <div class="container">
+                <!-- Content -->
+                <div id="content">
+                    <article class="box post">
+                        <header class="style1">
+                            <h2>Editar Header de "Nuestros Servicios"</h2>
+                            <p>Modifique los siguientes campos:</p>
+                        </header>
+                        <section>
+                            <form class="service" id="EditHeader" name="EditHeader" method="post"
+                                action="./Guardar en Base">
+                                <div class="row gtr-50">
+                                    <div class="col-12">
+                                        <label for="nombreS">Titulo del Header</label>
+                                        <input class="service" type="text" name="tituloH" id="tituloH"
+                                            placeholder="Ingrese el Titulo del Header" onchange="cancel = true;" />
+                                    </div>
+                                    <div class="col-12">
+                                        <label for="descripH">Descripción del Header</label>
+                                        <textarea class="service" name="descripH" id="descripH"
+                                            placeholder="Ingrese la Descripción del Header" rows="4" onchange="cancel = true;" ></textarea>
+                                    </div>
+                                    <div class="col-12">
+                                        <ul class="actions">
+                                            <li><input type="submit" class="style5" value="Guardar Cambios" /></li>
+                                            <li><input type="submit" class="style2" value="Cancelar"
+                                                    onclick="cancel = true; document.EditHeader.action = 'ServiciosAd.php';" />
+                                            </li>
+                                            <li><input type="reset" class="style2" value="Limpiar Campos" onclick="cancel = true;LimpiarH();"/></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </form>
+                        </section>
                     </article>
                 </div>
+
             </div>
         </div>
+
+        <!-- Highlights -->
 
         <!-- Footer -->
         <section id="footer" class="wrapper">
@@ -223,6 +204,8 @@
     <script src="assets/js/breakpoints.min.js"></script>
     <script src="assets/js/util.js"></script>
     <script src="assets/js/main.js"></script>
+    <script src="assets/js/ConfirmarSalir.js"></script>
+    <script src="assets/js/RellenarInputs.js?<?php echo time().".0"; ?>"></script>
 
 </body>
 

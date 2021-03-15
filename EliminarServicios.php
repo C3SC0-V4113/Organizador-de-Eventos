@@ -29,7 +29,7 @@
                         <ul>
                             <li><a href="EditarHeader.php">Editar Header</a></li>
                             <li>
-                                <a>Editar Servicios</a>
+                                <a href="">Editar Servicios</a>
                                 <ul>
                                     <li><a href="AgregarServicios.php">Agregar Servicio</a></li>
                                     <li><a href="ActualizarServicios.php">Actualizar Servicio</a></li>
@@ -46,77 +46,102 @@
 
         </section>
 
-        <!-- SERVICIOS -->
-        <?php
-			$matrizBD =  array(
-			'0' => 
-			array('nombre'=>'Name Servicio 1','descrip'=>'Descripcion1:scbwucdbucbuebckebceh','icono'=>'fas fa-home'),
-			'1' => 
-			array('nombre'=>'Name Servicio 2','descrip'=>'Descripcion2:scbwucdbucbuebckebceh','icono'=>'fas fa-phone'),
-			'2' => 
-			array('nombre'=>'Name Servicio 3','descrip'=>'Descripcion3:scbwucdbucbuebckebceh','icono'=>'far fa-credit-card'), 
-			'3' => 
-			array('nombre'=>'Name Servicio 4','descrip'=>'Descripcion4:scbwucdbucbuebckebceh','icono'=>'fas fa-coffee'),
-			'4' => 
-			array('nombre'=>'Name Servicio 5','descrip'=>'Descripcion5:scbwucdbucbuebckebceh','icono'=>'fas fa-box'),
-			'5' => 
-			array('nombre'=>'Name Servicio 6','descrip'=>'Descripcion6:scbwucdbucbuebckebceh','icono'=>'fas fa-building'));
-			require 'class/servicios.php';
-			$Servicios = new Servicio();
-		?>
-        <div id='main' class='wrapper style2'>
-            <div class='title'>NUESTROS SERVICIOS</div>
-            <div class="col-12">
-                <header class="style2">
-                    <h2>EDITAR SERVICIOS</h2>
-                </header>
-                <ul class="actions special">
-                    <form id="servicesbtn" name="servicesbtn">
-                        <li>
-                            <input type="submit" class="button special style5 large" value="Editar Header"
-                                onclick="document.servicesbtn.action = 'EditarHeader.php';">
-                        </li>
-                        <li><input type="submit" class="button special style5 large " value="Agregar Servicio"
-                                onclick="document.servicesbtn.action = 'AgregarServicios.php';" />
-                        </li>
-                        <li><input type="submit" class="button special style5 large" value="Actualizar Servicios"
-                                onclick="document.servicesbtn.action = 'ActualizarServicios.php';" />
-                        </li>
-                        <li><input type="submit" class="button special style5 large" value="Eliminar Servicio"
-                                onclick="document.servicesbtn.action = 'EliminarServicios.php';" />
-                        </li>
-
-                    </form>
-                    <hr>
-                </ul>
-            </div>
-            <div class='container'>
-                <div id='content'>
-                    <article class='box post'>
+        <!-- Main -->
+        <div id="main" class="wrapper style2">
+            <div class="title">Eliminar Servicios</div>
+            <div class="container">
+                <!-- Content -->
+                <div id="content">
+                    <article class="box post">
+                        <header class="style1">
+                            <h2>Eliminar Servicios de la Web</h2>
+                            <p>Seleccione el Servicio que desea eliminar:</p>
+                        </header>
                         <?php 
-		                    $Servicios -> GenerarHeaderServicios('SERVICIOS DE CALIDAD','Para que tus eventos sean únicos y especiales');
-		                ?>
+                        $matrizBD = array(
+                            '1'=> array(
+                                'name'=>'Servicio chingon 1',
+                                'descrip'=>'descrip chingona 1',
+                                'url' => 'images/pic01.jpg'),
+                            '2'=> array(
+                                'name'=>'Servicio chido 2',
+                                'descrip'=>'descrip chingona 2',
+                                'url' => 'images/pic02.jpg'),
+                            '3'=> array(
+                                'name'=>'Servicio genial 3',
+                                'descrip'=>'descrip chingona 3',
+                                'url' => 'images/pic03.jpg'),
+                            '4'=> array(
+                                'name'=>'Servicio sabroson 4',
+                                'descrip'=>'descrip chingona 4',
+                                'url' => 'images/pic04.jpg'),
+                            '5'=> array(
+                                'name'=>'Servicio chingon 5',
+                                'descrip'=>'descrip chingona 5',
+                                'url' => 'images/pic05.jpg'),
+                            '6'=> array(
+                                'name'=>'Servicio chido 6',
+                                'descrip'=>'descrip chingona 6',
+                                'url' => 'images/pic06.jpg'),
+                            '7'=> array(
+                                'name'=>'Servicio genial 7',
+                                'descrip'=>'descrip chingona 7',
+                                'url' => 'images/pic07.jpg'),
+                            '8'=> array(
+                                'name'=>'Servicio cool 8',
+                                'descrip'=>'descrip chingona 8',
+                                'url' => 'images/pic08.jpg'),
+                            '9'=> array(
+                                'name'=>'Servicio chingon 9',
+                                'descrip'=>'descrip chingona 9',
+                                'url' => 'images/pic09.jpg'));
 
-                        <div class='feature-list'>
-                            <div class='row'>
+                        ?>
+                        <script type="text/javascript">
+                        // obtenemos el array de valores mediante la conversion a json del
+                        // array de php
+                        var arrayJS = <?php echo json_encode($matrizBD);?>;
+
+                        // Mostramos los valores del array
+                        for (var i = 0; i < arrayJS.length; i++) {
+                            console.log("<br>" + arrayJS[i]);
+                        }
+                        </script>
+
+                        <form name="PantallaSer" id="PantallaSer">
+                            <select name="Pantalla" id="Pantalla" size="8"
+                                onchange="Rellenar(arrayJS[this.value]['name'],arrayJS[this.value]['descrip'],arrayJS[this.value]['url'])">
                                 <?php 
-		                            for ($i=0; $i<sizeof($matrizBD); $i++) 
-		                            { 
-		                            	$Servicios -> setNombre($matrizBD[$i]['nombre']);
-		                            	$Servicios -> setDescripcion($matrizBD[$i]['descrip']);
-		                            	$Servicios -> setURL_Icono($matrizBD[$i]['icono']);
-		                            	$Servicios -> GenerarServicio();
-		                            }
-		                        ?>
-                            </div>
-                        </div>
-                        <ul class='actions special'>
-                            <li><a href='#' class='button style1 large'>Organiza tu Reunión</a></li>
-                        </ul>
+                            for ($i=1; $i <= sizeof($matrizBD) ; $i++) 
+                            { 
+                              echo "<option value='".$i."'>".$matrizBD[$i]['name']."</option>";
+                            }
+                            ?>
+                            </select>
+                        </form>
+                        <hr>
+                        <section>
+                            <form class="service" id="AddServices" name="AddServices" method="post"
+                                action="./Guardar en Base" enctype="multipart/form-data">
+                                    <div class="col-12">
+                                        <ul class="actions">
+                                            <li><input type="submit" class="style6" value="Eliminar Servicio" /></li>
+                                            <li><input type="submit" class="style2" value="Cancelar"
+                                                    onclick="document.AddServices.action = 'ServiciosAd.php';" />
+                                            </li>
+                                        </ul>
+                                    </div>
+
+                                </div>
+                            </form>
+                        </section>
                     </article>
                 </div>
+
             </div>
         </div>
+
+        <!-- Highlights -->
 
         <!-- Footer -->
         <section id="footer" class="wrapper">
@@ -223,6 +248,8 @@
     <script src="assets/js/breakpoints.min.js"></script>
     <script src="assets/js/util.js"></script>
     <script src="assets/js/main.js"></script>
+    <script src="assets/js/ConfirmarSalir.js"></script>
+    <script src="assets/js/RellenarInputs.js?<?php echo time().".0"; ?>"></script>
 
 </body>
 

@@ -6,6 +6,22 @@
 	html5up.net | @ajlkn
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 */
+:not(a.iconpicker-item i,span.input-group-addon i)
+{
+	font-family: 'Source Sans Pro', sans-serif !important;
+}
+a.iconpicker-item[title~=".fab"],i.fab
+{
+	display: none;
+	visibility: hidden;
+	width: 0;
+	height: 0;
+	size: 0;
+	transform: scale(none);
+	font-size: 0;
+	position: absolute;
+}
+
 
 html, body, div, span, applet, object,
 iframe, h1, h2, h3, h4, h5, h6, p, blockquote,
@@ -73,6 +89,11 @@ input::-moz-focus-inner {
 input[type="file"] {
 	width: 550px;
 	height: 35px;
+	}
+
+	section .imagenes{
+		width: 	100%;
+		height: 100%;
 	}
 
 input, select, textarea {
@@ -1546,7 +1567,26 @@ input, select, textarea {
 		-webkit-appearance: none;
 		display: block;
 		border: 0;
-		background: #eee;
+		background: rgb(252, 250, 250);
+		box-shadow: inset 0px 0px 1px 0px #a0a1a7;
+		border-radius: 0.35em;
+		width: 100%;
+		padding: 0.75em 1em 0.75em 1em;
+	}
+
+	form input[type="text"]:disabled,
+	form input[type="email"]:disabled,
+	form input[type="password"]:disabled,
+	form select:disabled,
+	form textarea:disabled {
+		-moz-transition: all .25s ease-in-out;
+		-webkit-transition: all .25s ease-in-out;
+		-ms-transition: all .25s ease-in-out;
+		transition: all .25s ease-in-out;
+		-webkit-appearance: none;
+		display: block;
+		border: 0;
+		background: rgb(252, 250, 250);
 		box-shadow: inset 0px 0px 1px 0px #a0a1a7;
 		border-radius: 0.35em;
 		width: 100%;
@@ -1569,7 +1609,15 @@ input, select, textarea {
 
 	form select {
 		line-height: 1em;
+		padding: 9px;
+        border-radius: 1px;
+        border: 1px solid #ddd;
+        font-weight: bold;
+        color: #252627;
+        font-size: 16px;
+		
 	}
+	
 
 	form textarea {
 		min-height: 8em;
@@ -1881,6 +1929,32 @@ form input[type="text"].service,
 				button.style5:active,
 				.button.style5:active {
 					background-color: #b34354;
+				}
+
+
+				input[type="button"].style6,
+			input[type="submit"].style6,
+			input[type="reset"].style6,
+			button.style6,
+			.button.style6 {
+				background: #ad001a url("images/overlay.png");
+				color: #fff;
+			}
+	
+				input[type="button"].style6:hover,
+				input[type="submit"].style6:hover,
+				input[type="reset"].style6:hover,
+				button.style6:hover,
+				.button.style6:hover {
+					background-color: #b44657;
+				}
+	
+				input[type="button"].style6:active,
+				input[type="submit"].style6:active,
+				input[type="reset"].style6:active,
+				button.style6:active,
+				.button.style6:active {
+					background-color: #be2f44;
 				}
 
 
@@ -2688,6 +2762,7 @@ form input[type="text"].service,
 				.feature-list > .row > :first-child > section {
 					border-top: 0;
 					padding-top: 0;
+					text-align: justify;
 				}
 
 		/* Nav */
