@@ -7,15 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <link rel="stylesheet" href="assets/css/main.css?<?php echo time().".0"; ?>" media="all" />
 </head>
-<?php
-        $matrizBD = array("SERVICIOS DE CALIDAD","Para que tus eventos sean únicos y especiales");
-?>
-<script type="text/javascript">
-    var arrayJS = <?php echo json_encode($matrizBD);?>;
-    for (var i = 0; i < arrayJS.length; i++) {
-        console.log("<br>" + arrayJS[i]);
-    }
-</script>
 <body class="no-sidebar is-preload" onload="Header(arrayJS[0],arrayJS[1])">
     <div id="page-wrapper">
 
@@ -53,7 +44,7 @@
             </nav>
 
         </section>
-        
+
         <!-- Main -->
         <div id="main" class="wrapper style2">
             <div class="title">Editar Header</div>
@@ -67,7 +58,7 @@
                         </header>
                         <section>
                             <form class="service" id="EditHeader" name="EditHeader" method="post"
-                                action="./Guardar en Base">
+                                action="RespuestaServicios.php">
                                 <div class="row gtr-50">
                                     <div class="col-12">
                                         <label for="nombreS">Titulo del Header</label>
@@ -77,15 +68,17 @@
                                     <div class="col-12">
                                         <label for="descripH">Descripción del Header</label>
                                         <textarea class="service" name="descripH" id="descripH"
-                                            placeholder="Ingrese la Descripción del Header" rows="4" onchange="cancel = true;" ></textarea>
+                                            placeholder="Ingrese la Descripción del Header" rows="4"
+                                            onchange="cancel = true;"></textarea>
                                     </div>
                                     <div class="col-12">
                                         <ul class="actions">
-                                            <li><input type="submit" class="style5" value="Guardar Cambios" /></li>
+                                            <li><input id="actualizarH" name="actualizarH" type="submit" class="style5" value="Actualizar Cambios" onclick ="cancel=false;" /></li>
                                             <li><input type="submit" class="style2" value="Cancelar"
                                                     onclick="cancel = true; document.EditHeader.action = 'ServiciosAd.php';" />
                                             </li>
-                                            <li><input type="reset" class="style2" value="Limpiar Campos" onclick="cancel = true;LimpiarH();"/></li>
+                                            <li><input type="reset" class="style2" value="Limpiar Campos"
+                                                    onclick="cancel = true;LimpiarH();" /></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -206,6 +199,32 @@
     <script src="assets/js/main.js"></script>
     <script src="assets/js/ConfirmarSalir.js"></script>
     <script src="assets/js/RellenarInputs.js?<?php echo time().".0"; ?>"></script>
+
+    <?php
+        $Base = new mysqli('localhost','root','','mydb',3307);
+        $Base -> set_charset("utf8");
+        $Consulta = "SELECT * FROM InfoServicios";
+        $Resultados = $Base->query($Consulta);
+        if($Ejecucion->num_rows!=0)
+        {
+            if($Ejecucion)
+            {
+                $fila = $Ejecucion->fetch_assoc();
+                $existe = true;
+            }  
+        }
+        else 
+        {
+            echo'<script type="text/javascript">alert("Aún no hay información sobre el Header en la base de datos, porfavor llene los campos");</script>';
+            $existe = false;
+        }
+?>
+<script type="text/javascript">
+var arrayJS = <?php echo json_encode($fila);?>;
+for (var i = 0; i < arrayJS.length; i++) {
+    console.log("<br>" + arrayJS[i]);
+}
+</script>
 
 </body>
 

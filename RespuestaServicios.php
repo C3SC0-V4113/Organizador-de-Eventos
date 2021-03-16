@@ -6,6 +6,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <link rel="stylesheet" href="assets/css/main.css?<?php echo time().".0"; ?>" media="all" />
+
+
 </head>
 
 <body class="no-sidebar is-preload">
@@ -23,7 +25,7 @@
             <!-- Nav -->
             <nav id="nav">
                 <ul>
-                    <li><a href="indexAdmin.php">INICIO</a></li>
+                    <li><a href="indexAdmin.html">INICIO</a></li>
                     <li>
                         <a href="ServiciosAd.php">NUESTROS SERVICIOS</a>
                         <ul>
@@ -46,81 +48,100 @@
 
         </section>
 
-        <!-- SERVICIOS -->
-        <?php
-			require 'class/servicios.php';
-            $Servicios = new Servicio();
-			$Base = new mysqli('localhost','root','','mydb',3307);
-            $Base -> set_charset("utf8");
-            $Consulta = "Select * from Servicios order by Nombre asc, CHAR_LENGTH(Descripcion) Desc";
-            $Ejecucion = $Base->query($Consulta);
-
-		?>
-        <div id='main' class='wrapper style2'>
-            <div class='title'>NUESTROS SERVICIOS</div>
-            <div class="col-12">
-                <header class="style2">
-                    <h2>EDITAR SERVICIOS</h2>
-                </header>
-                <ul class="actions special">
-                    <form id="servicesbtn" name="servicesbtn">
-                        <li>
-                            <input type="submit" class="button special style5 large" value="Editar Header"
-                                onclick="document.servicesbtn.action = 'EditarHeader.php';">
-                        </li>
-                        <li><input type="submit" class="button special style5 large " value="Agregar Servicio"
-                                onclick="document.servicesbtn.action = 'AgregarServicios.php';" />
-                        </li>
-                        <li><input type="submit" class="button special style5 large" value="Actualizar Servicios"
-                                onclick="document.servicesbtn.action = 'ActualizarServicios.php';" />
-                        </li>
-                        <li><input type="submit" class="button special style5 large" value="Eliminar Servicio"
-                                onclick="document.servicesbtn.action = 'EliminarServicios.php';" />
-                        </li>
-
-                    </form>
-                    <hr>
-                </ul>
-            </div>
-            <div class='container'>
-                <div id='content'>
-                    <article class='box post'>
-                        <?php 
-		                    $Servicios -> GenerarHeaderServicios('SERVICIOS DE CALIDAD','Para que tus eventos sean únicos y especiales');
-                            
-		                ?>
-
-                        <div class='feature-list'>
-                            <div class='row'>
-                                <?php 
-                                if($Ejecucion->num_rows!=0)
+        <!-- Main -->
+        <div id="main" class="wrapper style2">
+            <div class="title">Agregar Servicios</div>
+            <div class="container">
+                <!-- Content -->
+                <div id="content">
+                    <article class="box post">
+                        <header class="style1">
+                            <?php
+                            require 'class/servicios.php';
+                            $Servicios = new Servicio();
+                            $Base = new mysqli('localhost','root','','mydb',3307);
+                            $Base -> set_charset("utf8");
+                            if(isset($_POST['guardarS']))
+                            {
+                                $nameS = isset($_POST['nombreS']) ? trim($_POST['nombreS']):-1;
+                                $descripS = isset($_POST['descripS']) ? trim($_POST['descripS']):-1;
+                                $iconoS = isset($_POST['Icono']) ? trim($_POST['Icono']):-1;
+                                
+                                if($nameS!=-1 && $descripS!=-1 && $iconoS!=-1)
                                 {
-                                    if($Ejecucion)
+                                    $Consulta = "Select idServicios from Servicios order by idServicios DESC LIMIT 1";
+                                    $IdC = $Base->query($Consulta);
+                                    $totalR = $IdC->num_rows; 
+                                    if($IdC)
                                     {
-                                        while ($fila = $Ejecucion->fetch_assoc())
+                                        if($totalR!=0)
                                         {
-                                            $Servicios -> ExtraerBase($fila);
-		                            	    $Servicios -> GenerarServicio();
+                                            $Id = $Servicios -> Id($IdC->fetch_assoc());
                                         }
-                                    }  
+                                        else 
+                                        {
+                                            $Id =1;
+                                            echo $Id;
+                                        }
+                                        $Insert = "INSERT INTO Servicios (idServicios, Nombre, Descripcion, urlIMG, IdEmpresa, Id_Usuario)";
+                                        $Insert .= "VALUES (?,?,?,?,?,?)";
+                                        $AnU =1;
+                                        $Resultado = $Base->prepare($Insert);
+                                        $Resultado->bind_param("isssii",$Id,$nameS,$descripS,$iconoS,$AnU,$AnU);
+                                        $Resultado->execute();
+                                        if(($Resultado->affected_rows)!=0 && ($Resultado->affected_rows)!=-1)
+                                        {
+                                            echo "<h2>¡Proceso Realizado con Éxito!</h2>";
+                                            echo "<p>El Servicio: $nameS se guardo con éxito en la Base de Datos.</p>";
+                                            echo "<ul class='actions special'><form id='back' name='back'><li>
+                                            <a href='AgregarServicios.php'><input type='button' class='button special style5 large' value='Agregar otro Servicio'></a>
+                                            <a href='ServiciosAd.php'><input type='button' class='button special style5 large' value='Regresar al la seccion de Servicios'></a>
+                                            </li></form></ul>";
+                                        }
+                                        else 
+                                        {
+                                            echo "<h2>¡Error, al ingresar los datos a la base de datos!</h2>";
+                                            echo "<p>Vuelva a intentarlo otra vez, porfavor</p>";
+                                            echo "<ul class='actions special'><form id='back' name='back'><li>
+                                            <a href='AgregarServicios.php'><input type='button' class='button special style5 large' value='Intentarlo de Nuevo'></a>
+                                            </li></form></ul>";
+                                        }
+                                    }
+                                    $Base ->close();
+                                    
                                 }
                                 else 
                                 {
-                                    echo "<header class='col-12 style1'><br><hr>";
-                                    echo "<p>Oops! Parece que aún no hay servicios registrados.</p><hr></header>";
+                                    echo "<h2>¡Error, faltan argumentos!</h2>";
+                                    echo "<p>Vuelva a intentarlo otra vez, esta vez ingrese todos los argumentos solicitados</p>";
+                                    echo "<ul class='actions special'><form id='back' name='back'><li>
+                                    <a href='AgregarServicios.php'><input type='button' class='button special style5 large' value='Intentarlo de Nuevo'></a>
+                                    </li></form></ul>";
                                 }
+
+                            }
+                            else if(isset($_POST['actualizarH']))
+                            {
+
+                                $nameS = isset($_POST['tituloH']) ? trim($_POST['tituloH']):-1;
+                                $descripS = isset($_POST['descripH']) ? trim($_POST['descripH']):-1;
+                                $existe = isset($_POST['existe']) ? trim($_POST['existe']):-1;
+                                echo $existe;
                                 
-                                $Base -> close();          
-		                        ?>
-                            </div>
-                        </div>
-                        <ul class='actions special'>
-                            <li><a href='#' class='button style1 large'>Organiza tu Reunión</a></li>
-                        </ul>
+
+                            }
+                            ?>
+                        </header>
+                        <section>
+
+                        </section>
                     </article>
                 </div>
+
             </div>
         </div>
+
+        <!-- Highlights -->
 
         <!-- Footer -->
         <section id="footer" class="wrapper">
@@ -227,6 +248,9 @@
     <script src="assets/js/breakpoints.min.js"></script>
     <script src="assets/js/util.js"></script>
     <script src="assets/js/main.js"></script>
+    <script src="assets/js/ConfirmarSalir.js"></script>
+    <script src="assets/js/RellenarInputs.js?<?php echo time().".0"; ?>"></script>
+
 
 </body>
 

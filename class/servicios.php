@@ -44,12 +44,22 @@ class Servicio
         </header>";
     }
     
-    public function ExtraerBase($Row)
+    public function ExtraerBase($fila)
     {
-        if ($Row !=NULL) {
-            setNombre($SelectVector['Nombre']);
-            setDescripcion($Row['Descripcion']);
-            setURL_Icono($Row['urlIMAGE']);
+        if ($fila!=NULL) {
+            $this-> setNombre($fila['Nombre']);
+		    $this-> setDescripcion($fila['Descripcion']);
+		    $this-> setURL_Icono($fila['urlIMG']);
+        }
+        else {}
+    }
+
+    public function Id($fila)
+    {
+        if ($fila!=NULL) {
+            $num = $fila['idServicios'];
+            $num++;
+            return $num;
         }
         else {}
     }

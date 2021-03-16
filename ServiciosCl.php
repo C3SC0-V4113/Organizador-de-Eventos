@@ -53,24 +53,11 @@
         <!-- SERVICIOS -->
         <?php
             require 'class/servicios.php';
-            require 'class/bd.php';
             $Servicios = new Servicio();
-            $Conectar = new Conexion();
-
-			$matrizBD =  array(
-			'0' => 
-			array('nombre'=>'Name Servicio 1','descrip'=>'Descripcion1:scbwucdbucbuebckebceh','icono'=>'fa-home'),
-            '1' => 
-			array('nombre'=>'Name Servicio 2','descrip'=>'Descripcion2:scbwucdbucbuebckebceh','icono'=>'fa-phone'),
-			'2' => 
-			array('nombre'=>'Name Servicio 3','descrip'=>'Descripcion3:scbwucdbucbuebckebceh','icono'=>'fa-servicestack'), 
-			'3' => 
-			array('nombre'=>'Name Servicio 4','descrip'=>'Descripcion4:scbwucdbucbuebckebceh','icono'=>'fa-person-booth'),
-			'4' => 
-			array('nombre'=>'Name Servicio 5','descrip'=>'Descripcion5:scbwucdbucbuebckebceh','icono'=>'fa-pen'),
-			'5' => 
-			array('nombre'=>'Name Servicio 6','descrip'=>'Descripcion6:scbwucdbucbuebckebceh','icono'=>'fa-video'));
-			
+            $Base = new mysqli('localhost','root','','mydb',3307);
+            $Base -> set_charset("utf8");
+            $Consulta = "Select * from Servicios order by Nombre asc, CHAR_LENGTH(Descripcion) Desc";
+            $Ejecucion = $Base->query($Consulta);
 		?>
         <div id='main' class='wrapper style2'>
             <div class='title'>NUESTROS SERVICIOS</div>
@@ -83,13 +70,15 @@
                         <div class='feature-list'>
                             <div class='row'>
                                 <?php 
-		                            for ($i=0; $i<sizeof($matrizBD); $i++) 
-		                            { 
-                                        $Servicios->setNombre($matrizBD[$i]['nombre']);
-                                        $Servicios->setDescripcion($matrizBD[$i]['descrip']);
-                                        $Servicios->setURL_Icono($matrizBD[$i]['icono']);
-		                            	$Servicios -> GenerarServicio();
-		                            }
+		                            if($Ejecucion)
+                                    {
+                                        while ($fila = $Ejecucion->fetch_assoc())
+                                        {
+                                            $Servicios -> ExtraerBase($fila);
+                                            $Servicios -> GenerarServicio();
+                                        }
+                                    }
+                                    $Base->close();
 		                        ?>
                             </div>
                         </div>

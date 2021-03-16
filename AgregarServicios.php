@@ -29,7 +29,7 @@
             <!-- Nav -->
             <nav id="nav">
                 <ul>
-                    <li><a href="indexAdmin.html">INICIO</a></li>
+                    <li><a href="indexAdmin.php">INICIO</a></li>
                     <li>
                         <a href="ServiciosAd.php">NUESTROS SERVICIOS</a>
                         <ul>
@@ -65,12 +65,13 @@
                         </header>
                         <section>
                             <form class="service" id="AddServices" name="AddServices" method="post"
-                                action="./Guardar en Base" enctype="multipart/form-data">
+                                action="RespuestaServicios.php">
                                 <div class="row gtr-50">
                                     <div class="col-6 col-12-small">
                                         <label for="nombreS">Nombre del Servicio</label>
-                                        <input class="service" type="text" name="nombreS" id="nombreS"
-                                            placeholder="Ingrese el Nombre del Servicio" onchange="cancel = true;" />
+                                        <input class="service" type="text" name="nombreS" id="nombreS" maxlength="45"
+                                            placeholder="Ingrese el Nombre del Servicio" onchange="cancel = true;"
+                                            required />
                                     </div>
                                     <div class="col-6 col-12-small">
                                         <label for="urlIcon">Icono del Servicio</label>
@@ -78,10 +79,11 @@
                                             <div class="col-md-12">
                                                 <div class=" form-group">
                                                     <div class="input-group">
-                                                        <input data-placement="bottomRight" id="urlIcon" name="urlIcon"
+                                                        <input type="text" id="Icono" name="Icono"
+                                                            data-placement="bottomRight"
                                                             class="form-control icp icp-auto" value="fas fa-archive"
-                                                            type="text" disabled />
-                                                        <span class="input-group-addon"></span>
+                                                            readonly style="cursor:default;" />
+                                                        <span class="input-group-addon" style="cursor:pointer;"></span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -93,17 +95,19 @@
                                     </div>
                                     <div class="col-12 col-12-small">
                                         <label for="descripS">Descripción del Servicio</label>
-                                        <textarea class="service" name="descripS" id="descripS"
+                                        <textarea class="service" name="descripS" id="descripS" maxlength="300"
                                             placeholder="Ingrese la Descripción del Servicio" rows="4"
-                                            onchange="cancel = true;"></textarea>
+                                            onchange="cancel = true;" required></textarea>
                                     </div>
                                     <div class="col-12">
                                         <ul class="actions">
-                                            <li><input type="submit" class="style5" value="Guardar Servicio" /></li>
+                                            <li><input type="submit" id='guardarS' name="guardarS" class="style5"
+                                                    value="Guardar Servicio" onclick="cancel = false;" /></li>
                                             <li><input type="submit" class="style2" value="Cancelar"
                                                     onclick="cancel = true; document.AddServices.action = 'ServiciosAd.php';" />
                                             </li>
-                                            <li><input type="reset" class="style2" value="Limpiar Campos" onclick="Limpiar()" /></li>
+                                            <li><input type="reset" class="style2" value="Limpiar Campos"
+                                                    onclick="Limpiar()" /></li>
                                         </ul>
                                     </div>
                                 </div>

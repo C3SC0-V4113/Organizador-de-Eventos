@@ -141,8 +141,8 @@
                                                     <div class="input-group">
                                                         <input data-placement="bottomRight" id="urlIcon" name="urlIcon"
                                                             class="form-control icp icp-auto" value="fas fa-archive"
-                                                            type="text" disabled />
-                                                        <span class="input-group-addon"></span>
+                                                            type="text" readonly style="cursor:default;"/>
+                                                        <span class="input-group-addon" style="cursor:pointer;"></span>
                                                     </div>
                                                 </div>
                                             </div>
