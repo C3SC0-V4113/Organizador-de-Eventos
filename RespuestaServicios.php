@@ -107,8 +107,6 @@
                                             </li></form></ul>";
                                         }
                                     }
-                                    $Base ->close();
-                                    
                                 }
                                 else 
                                 {
@@ -123,13 +121,119 @@
                             else if(isset($_POST['actualizarH']))
                             {
 
-                                $nameS = isset($_POST['tituloH']) ? trim($_POST['tituloH']):-1;
-                                $descripS = isset($_POST['descripH']) ? trim($_POST['descripH']):-1;
-                                $existe = isset($_POST['existe']) ? trim($_POST['existe']):-1;
-                                echo $existe;
+                                $tituloH = isset($_POST['tituloH']) ? trim($_POST['tituloH']):-1;
+                                $descripH = isset($_POST['descripH']) ? trim($_POST['descripH']):-1;
+                                $Consulta = "SELECT * FROM InfoServicios";
+                                $Resultados = $Base->query($Consulta);
+                                if($Resultados->num_rows!=0)
+                                {
+                                    $Update = "UPDATE InfoServicios SET HeaderTitulo='$tituloH', DescripcionHeader='$descripH' where idEmpresa=1";
+                                    $Actualizacion = $Base->query($Update);
+                                }
+                                else 
+                                {
+                                    $PrimerI = "INSERT INTO InfoServicios(idEmpresa,HeaderTitulo,DescripcionHeader) VALUES(?,?,?)";
+                                    $In = $Base->prepare($PrimerI);
+                                    $IdEmpresa =1;
+                                    $In -> bind_param("iss",$IdEmpresa,$tituloH,$descripH);
+                                    $In->execute();
+                                }
+                                    $Exito = $Base->affected_rows;
+                                    if($Exito!=-1)
+                                    {
+                                        echo "<h2>¡Datos Actualizados con Éxito!</h2>";
+                                            echo "<p>La información del Header de 'Nuestros Servicios' ha sido actualizada con Éxito.</p>";
+                                            echo "<ul class='actions special'><form id='back' name='back'><li>
+                                            <a href='ServiciosAd.php'><input type='button' class='button special style5 large' value='Regresar a la seccion de Servicios'></a>
+                                            </li></form></ul>";
+                                    }
+                                    else 
+                                    {
+                                        echo "<h2>¡Error, al actualizar los datos en la base de datos!</h2>";
+                                        echo "<p>Vuelva a intentarlo otra vez, porfavor</p>";
+                                        echo "<ul class='actions special'><form id='back' name='back'><li>
+                                        <a href='EditarHeader.php'><input type='button' class='button special style5 large' value='Intentarlo de Nuevo'></a>
+                                        </li></form></ul>";
+                                    }
                                 
 
                             }
+                            else if(isset($_POST['modificarS']))
+                            {
+                                $nameS = isset($_POST['nombreS']) ? trim($_POST['nombreS']):-1;
+                                $descripS = isset($_POST['descripS']) ? trim($_POST['descripS']):-1;
+                                $iconoS = isset($_POST['Icono']) ? trim($_POST['Icono']):-1;
+                                $ID = isset($_POST['IdServicios']) ? trim($_POST['IdServicios']):-1;
+                                $Compa = "Select Nombre,Descripcion,urlIMG from Servicios where idServicios=$ID";
+                                $Comparacion = $Base->query($Compa);
+                                if($Comparacion->num_rows!=0)
+                                {
+                                    if($Comparacion)
+                                    {
+                                       $fila = $Comparacion->fetch_assoc();
+                                       if($fila['Nombre'] == $nameS && $fila['Descripcion']==$descripS && $fila['urlIMG']==$iconoS)
+                                       {
+                                        echo "<h2>No se realizó ningún cambio</h2>";
+                                        echo "<p>Usted no realizó ningún cambio en los campos.</p>";
+                                        echo "<ul class='actions special'><form id='back' name='back'><li>
+                                        <a href='ActualizarServicios.php'><input type='button' class='button special style5 large' value='Intentarlo de Nuevo'></a>
+                                        </li></form></ul>";
+                                       }
+                                       else 
+                                       {
+                                            $UpdateSer = "UPDATE Servicios SET Nombre='$nameS', Descripcion='$descripS',urlIMG='$iconoS' where idServicios=$ID";
+                                            $EjecutarA = $Base->query($UpdateSer);
+                                            $Exito = $Base->affected_rows;
+                                            if($Exito!=-1)
+                                            {
+                                                echo "<h2>¡Servicio Actualizado con Éxito!</h2>";
+                                                echo "<p>El Servicio '$nameS' fue actualizado con Éxito</p>";
+                                                echo "<ul class='actions special'><form id='back' name='back'>
+                                                <a href='ActualizarServicios.php'><input type='button' class='button special style5 large' value='Actualizar Otro Servicio'></a>
+                                                <li>
+                                                <a href='ServiciosAd.php'><input type='button' class='button special style5 large' value='Regresar al la seccion de Servicios'></a>
+                                                </li></form></ul>";
+                                            }
+                                            else 
+                                            {
+                                                echo "<h2>¡Error, al actualizar el servicio en la base de datos!</h2>";
+                                                echo "<p>Vuelva a intentarlo otra vez, porfavor</p>";
+                                                echo "<ul class='actions special'><form id='back' name='back'><li>
+                                                <a href='ActualizarServicios.php'><input type='button' class='button special style5 large' value='Intentarlo de Nuevo'></a>
+                                                </li></form></ul>";
+                                            }
+                                       }
+                                        
+                                    }  
+                                }
+                            }
+                            else if(isset($_POST['eliminarS']))
+                            {
+                                $deleteID= isset($_POST['IdServicios']) ? trim($_POST['IdServicios']):-1;
+                                $nameS = isset($_POST['name']) ? trim($_POST['name']):-1;
+                                $Delete = "DELETE FROM Servicios where idServicios='$deleteID'";
+                                $EjecutarD = $Base->query($Delete);
+                                $Exito = $Base->affected_rows;
+                                if($Exito!=-1)
+                                {
+                                    echo "<h2>¡Servicio Eliminado con Éxito!</h2>";
+                                    echo "<p>El Servicio '$nameS' fue eliminado con Éxito</p>";
+                                    echo "<ul class='actions special'><form id='back' name='back'>
+                                    <a href='EliminarServicios.php'><input type='button' class='button special style5 large' value='Eliminar Otro Servicio'></a>
+                                    <li>
+                                    <a href='ServiciosAd.php'><input type='button' class='button special style5 large' value='Regresar al la seccion de Servicios'></a>
+                                    </li></form></ul>";
+                                }
+                                else 
+                                {
+                                    echo "<h2>¡Error, al eliminar el servicio de la base de datos!</h2>";
+                                    echo "<p>Vuelva a intentarlo otra vez, porfavor</p>";
+                                    echo "<ul class='actions special'><form id='back' name='back'><li>
+                                    <a href='EliminarServicios.php'><input type='button' class='button special style5 large' value='Intentarlo de Nuevo'></a>
+                                    </li></form></ul>";
+                                }
+                            }
+                            $Base ->close();
                             ?>
                         </header>
                         <section>

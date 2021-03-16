@@ -52,8 +52,6 @@
             $Servicios = new Servicio();
 			$Base = new mysqli('localhost','root','','mydb',3307);
             $Base -> set_charset("utf8");
-            $Consulta = "Select * from Servicios order by Nombre asc, CHAR_LENGTH(Descripcion) Desc";
-            $Ejecucion = $Base->query($Consulta);
 
 		?>
         <div id='main' class='wrapper style2'>
@@ -85,14 +83,29 @@
             <div class='container'>
                 <div id='content'>
                     <article class='box post'>
-                        <?php 
-		                    $Servicios -> GenerarHeaderServicios('SERVICIOS DE CALIDAD','Para que tus eventos sean únicos y especiales');
-                            
+                    <br>
+                        <?php
+                        $HeaderC = "SELECT * FROM InfoServicios";
+                        $HeaderR = $Base->query($HeaderC);
+                        if($HeaderR->num_rows!=0)
+                        {
+                            if($HeaderR)
+                            {
+                                $fila = $HeaderR->fetch_assoc();
+                                $Servicios -> GenerarHeaderServicios($fila['HeaderTitulo'],$fila['DescripcionHeader']);
+                            }  
+                        }
+                        else 
+                        {
+                            $Servicios -> GenerarHeaderServicios('Oops!','Aún no hay información ingresada para esta sección.');
+                        } 
 		                ?>
 
                         <div class='feature-list'>
                             <div class='row'>
                                 <?php 
+                                $Consulta = "Select * from Servicios order by Nombre asc";
+                                $Ejecucion = $Base->query($Consulta);
                                 if($Ejecucion->num_rows!=0)
                                 {
                                     if($Ejecucion)

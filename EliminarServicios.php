@@ -58,77 +58,67 @@
                             <p>Seleccione el Servicio que desea eliminar:</p>
                         </header>
                         <?php 
-                        $matrizBD = array(
-                            '1'=> array(
-                                'name'=>'Servicio chingon 1',
-                                'descrip'=>'descrip chingona 1',
-                                'url' => 'images/pic01.jpg'),
-                            '2'=> array(
-                                'name'=>'Servicio chido 2',
-                                'descrip'=>'descrip chingona 2',
-                                'url' => 'images/pic02.jpg'),
-                            '3'=> array(
-                                'name'=>'Servicio genial 3',
-                                'descrip'=>'descrip chingona 3',
-                                'url' => 'images/pic03.jpg'),
-                            '4'=> array(
-                                'name'=>'Servicio sabroson 4',
-                                'descrip'=>'descrip chingona 4',
-                                'url' => 'images/pic04.jpg'),
-                            '5'=> array(
-                                'name'=>'Servicio chingon 5',
-                                'descrip'=>'descrip chingona 5',
-                                'url' => 'images/pic05.jpg'),
-                            '6'=> array(
-                                'name'=>'Servicio chido 6',
-                                'descrip'=>'descrip chingona 6',
-                                'url' => 'images/pic06.jpg'),
-                            '7'=> array(
-                                'name'=>'Servicio genial 7',
-                                'descrip'=>'descrip chingona 7',
-                                'url' => 'images/pic07.jpg'),
-                            '8'=> array(
-                                'name'=>'Servicio cool 8',
-                                'descrip'=>'descrip chingona 8',
-                                'url' => 'images/pic08.jpg'),
-                            '9'=> array(
-                                'name'=>'Servicio chingon 9',
-                                'descrip'=>'descrip chingona 9',
-                                'url' => 'images/pic09.jpg'));
-
+                        require 'class/servicios.php';
+                        $Servicios = new Servicio();
+                        $Base = new mysqli('localhost','root','','mydb',3307);
+                        $Base -> set_charset("utf8");
+                        $Consulta = "Select * from Servicios order by Nombre asc";
+                        $Ejecucion = $Base->query($Consulta);
+                        if($Ejecucion->num_rows!=0)
+                        {
+                            if($Ejecucion)
+                            {
+                                $i=1;
+                                while ($fila = $Ejecucion->fetch_assoc())
+                                {
+                                    $Datos[$i] = $fila;
+                                    $i++;
+                                }
+                            }  
+                        }
+                        else 
+                        {
+                            $Datos[1] = array('idServicios' => '','Nombre' => '','Descripcion' => '','urlIMG' =>'none');
+                            $Datos[2] = array('idServicios' => '','Nombre' => '','Descripcion' => '','urlIMG' =>'none');
+                            $Datos[3] = array('idServicios' => '','Nombre' => 'Oops!','Descripcion' => '','urlIMG' =>'none');
+                            $Datos[4] = array('idServicios' => '','Nombre' => 'Aún no hay servicios registrados en la Base de Datos','Descripcion' => '','urlIMG' =>'none');
+                            $Datos[5] = array('idServicios' => '','Nombre' => '','Descripcion' => '','urlIMG' =>'none');
+                            $Datos[6] = array('idServicios' => '','Nombre' => '','Descripcion' => '','urlIMG' =>'none');
+                        }
+                        $Base->close();
                         ?>
                         <script type="text/javascript">
-                        // obtenemos el array de valores mediante la conversion a json del
-                        // array de php
-                        var arrayJS = <?php echo json_encode($matrizBD);?>;
-
-                        // Mostramos los valores del array
+                        var arrayJS = <?php echo json_encode($Datos);?>;
                         for (var i = 0; i < arrayJS.length; i++) {
                             console.log("<br>" + arrayJS[i]);
                         }
                         </script>
 
                         <form name="PantallaSer" id="PantallaSer">
-                            <select name="Pantalla" id="Pantalla" size="8"
-                                onchange="Rellenar(arrayJS[this.value]['name'],arrayJS[this.value]['descrip'],arrayJS[this.value]['url'])">
+                            <select name="Pantalla" id="Pantalla" size="8" onchange="OnlyID(arrayJS[this.value]['idServicios'],arrayJS[this.value]['Nombre'],arrayJS[this.value]['urlIMG'])">
                                 <?php 
-                            for ($i=1; $i <= sizeof($matrizBD) ; $i++) 
+                            for ($i=1; $i <= sizeof($Datos) ; $i++) 
                             { 
-                              echo "<option value='".$i."'>".$matrizBD[$i]['name']."</option>";
+                                echo "<option value='".$i."'>";
+                                if($Datos[$i]['urlIMG']!="none"){echo "Servicio $i:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";}
+                                else{}
+                                echo $Datos[$i]['Nombre']."</option>";
                             }
                             ?>
                             </select>
                         </form>
                         <hr>
                         <section>
-                            <form class="service" id="AddServices" name="AddServices" method="post"
-                                action="./Guardar en Base" enctype="multipart/form-data">
+                            <form class="service" id="Delete" name="Delete" method="post"
+                                action="RespuestaServicios.php" enctype="multipart/form-data">
                                     <div class="col-12">
                                         <ul class="actions">
-                                            <li><input type="submit" class="style6" value="Eliminar Servicio" /></li>
+                                            <li><input type="submit" class="style6" value="Eliminar Servicio" id="eliminarS" name="eliminarS" disabled onclick="confirmar()" /></li>
                                             <li><input type="submit" class="style2" value="Cancelar"
-                                                    onclick="document.AddServices.action = 'ServiciosAd.php';" />
+                                                    onclick="document.Delete.action = 'ServiciosAd.php'; cancel=true;" />
                                             </li>
+                                            <input type="hidden" id="IdServicios" name="IdServicios" value="-1" readonly required>
+                                            <input type="hidden" id="name" name="name" value="-1" readonly required>
                                         </ul>
                                     </div>
 
@@ -250,6 +240,7 @@
     <script src="assets/js/main.js"></script>
     <script src="assets/js/ConfirmarSalir.js"></script>
     <script src="assets/js/RellenarInputs.js?<?php echo time().".0"; ?>"></script>
+    <script src="assets/js/Seguro.js?<?php echo time().".0"; ?>"></script>
 
 </body>
 

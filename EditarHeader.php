@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <link rel="stylesheet" href="assets/css/main.css?<?php echo time().".0"; ?>" media="all" />
 </head>
-<body class="no-sidebar is-preload" onload="Header(arrayJS[0],arrayJS[1])">
+<body class="no-sidebar is-preload" onload="Header(arrayJS['HeaderTitulo'],arrayJS['DescripcionHeader'])">
     <div id="page-wrapper">
 
         <!-- Header -->
@@ -62,20 +62,20 @@
                                 <div class="row gtr-50">
                                     <div class="col-12">
                                         <label for="nombreS">Titulo del Header</label>
-                                        <input class="service" type="text" name="tituloH" id="tituloH"
-                                            placeholder="Ingrese el Titulo del Header" onchange="cancel = true;" />
+                                        <input class="service" type="text" name="tituloH" id="tituloH" maxlength="50"
+                                            placeholder="Ingrese el Titulo del Header" onchange="cancel = true;" required/>
                                     </div>
                                     <div class="col-12">
                                         <label for="descripH">Descripción del Header</label>
-                                        <textarea class="service" name="descripH" id="descripH"
+                                        <textarea class="service" name="descripH" id="descripH" maxlength="200"
                                             placeholder="Ingrese la Descripción del Header" rows="4"
-                                            onchange="cancel = true;"></textarea>
+                                            onchange="cancel = true;" required></textarea>
                                     </div>
                                     <div class="col-12">
                                         <ul class="actions">
                                             <li><input id="actualizarH" name="actualizarH" type="submit" class="style5" value="Actualizar Cambios" onclick ="cancel=false;" /></li>
-                                            <li><input type="submit" class="style2" value="Cancelar"
-                                                    onclick="cancel = true; document.EditHeader.action = 'ServiciosAd.php';" />
+                                            <li><a href="ServiciosAd.php"><input type="button" class="style2" value="Cancelar"
+                                                    onclick="cancel = true;" /></a>
                                             </li>
                                             <li><input type="reset" class="style2" value="Limpiar Campos"
                                                     onclick="cancel = true;LimpiarH();" /></li>
@@ -205,19 +205,18 @@
         $Base -> set_charset("utf8");
         $Consulta = "SELECT * FROM InfoServicios";
         $Resultados = $Base->query($Consulta);
-        if($Ejecucion->num_rows!=0)
+        if($Resultados->num_rows!=0)
         {
-            if($Ejecucion)
+            if($Resultados)
             {
-                $fila = $Ejecucion->fetch_assoc();
-                $existe = true;
+                $fila = $Resultados->fetch_assoc();
             }  
         }
         else 
         {
-            echo'<script type="text/javascript">alert("Aún no hay información sobre el Header en la base de datos, porfavor llene los campos");</script>';
-            $existe = false;
+            echo'<script type="text/javascript">alert("Aún no hay información sobre el Header en la base de datos, porfavor llene los campos.");</script>';
         }
+        $Base->close();
 ?>
 <script type="text/javascript">
 var arrayJS = <?php echo json_encode($fila);?>;

@@ -63,75 +63,67 @@
                             <p>Seleccione el Servicio que desea modificar:</p>
                         </header>
                         <?php 
-                        $matrizBD = array(
-                            '1'=> array(
-                                'name'=>'Servicio chingon 1',
-                                'descrip'=>'descrip chingona 1',
-                                'icono' => 'fas fa-bicycle'),
-                            '2'=> array(
-                                'name'=>'Servicio chido 2',
-                                'descrip'=>'descrip chingona 2',
-                                'icono' => 'fas fa-coffe'),
-                            '3'=> array(
-                                'name'=>'Servicio genial 3',
-                                'descrip'=>'descrip chingona 3',
-                                'icono' => 'fas fa-utensils'),
-                            '4'=> array(
-                                'name'=>'Servicio sabroson 4',
-                                'descrip'=>'descrip chingona 4',
-                                'icono' => 'fas fa-bath'),
-                            '5'=> array(
-                                'name'=>'Servicio chingon 5',
-                                'descrip'=>'descrip chingona 5',
-                                'icono' => 'fas fa-money-bill-alt'),
-                            '6'=> array(
-                                'name'=>'Servicio chido 6',
-                                'descrip'=>'descrip chingona 6',
-                                'icono' => 'fas fa-user'),
-                            '7'=> array(
-                                'name'=>'Servicio genial 7',
-                                'descrip'=>'descrip chingona 7',
-                                'icono' => 'fas fa-users'),
-                            '8'=> array(
-                                'name'=>'Servicio cool 8',
-                                'descrip'=>'descrip chingona 8',
-                                'icono' => 'fas fa-glass-martini'),
-                            '9'=> array(
-                                'name'=>'Servicio chingon 9',
-                                'descrip'=>'descrip chingona 9',
-                                'icono' => 'far fa-calendar-alt'));
+                        require 'class/servicios.php';
+                        $Servicios = new Servicio();
+                        $Base = new mysqli('localhost','root','','mydb',3307);
+                        $Base -> set_charset("utf8");
+                        $Consulta = "Select * from Servicios order by Nombre asc";
+                        $Ejecucion = $Base->query($Consulta);
+                        if($Ejecucion->num_rows!=0)
+                        {
+                            if($Ejecucion)
+                            {
+                                $i=1;
+                                while ($fila = $Ejecucion->fetch_assoc())
+                                {
+                                    $Datos[$i] = $fila;
+                                    $i++;
+                                }
+                            }  
+                        }
+                        else 
+                        {
+                            $Datos[1] = array('idServicios' => '','Nombre' => '','Descripcion' => '','urlIMG' =>'none');
+                            $Datos[2] = array('idServicios' => '','Nombre' => '','Descripcion' => '','urlIMG' =>'none');
+                            $Datos[3] = array('idServicios' => '','Nombre' => 'Oops!','Descripcion' => '','urlIMG' =>'none');
+                            $Datos[4] = array('idServicios' => '','Nombre' => 'Aún no hay servicios registrados en la Base de Datos','Descripcion' => '','urlIMG' =>'none');
+                            $Datos[5] = array('idServicios' => '','Nombre' => '','Descripcion' => '','urlIMG' =>'none');
+                            $Datos[6] = array('idServicios' => '','Nombre' => '','Descripcion' => '','urlIMG' =>'none');
+                        }
                         ?>
-
                         <script type="text/javascript">
-                        var arrayJS = <?php echo json_encode($matrizBD);?>;
+                        var arrayJS = <?php echo json_encode($Datos);?>;
                         for (var i = 0; i < arrayJS.length; i++) {
                             console.log("<br>" + arrayJS[i]);
                         }
                         </script>
 
                         <form name="PantallaSer" id="PantallaSer">
-                            <select name="Pantalla" id="Pantalla" size="8"
-                                onchange="RellenarS(arrayJS[this.value]['name'],arrayJS[this.value]['descrip'],arrayJS[this.value]['icono'])">
+                            <select name="Pantalla" id="Pantalla" size="7"
+                                onchange="RellenarS(arrayJS[this.value]['Nombre'],arrayJS[this.value]['Descripcion'],arrayJS[this.value]['urlIMG'],arrayJS[this.value]['idServicios'])">
                                 <?php 
-                            for ($i=1; $i <= sizeof($matrizBD) ; $i++) 
+                            for ($i=1; $i <= sizeof($Datos) ; $i++) 
                             { 
-                              echo "<option value='".$i."'>".$matrizBD[$i]['name']."</option>";
+                              echo "<option value='".$i."'>";
+                              if($Datos[$i]['urlIMG']!="none"){echo "Servicio $i:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";}
+                              else{}
+                              echo $Datos[$i]['Nombre']."</option>";
                             }
                             ?>
                             </select>
                         </form>
-                        <hr>
                         <section>
                             <header class="style2">
                                 <h2>Modifique el Servicio:</h2>
                             </header>
                             <form class="service" id="AddServices" name="AddServices" method="post"
-                                action="./Guardar en Base" enctype="multipart/form-data">
+                                action="RespuestaServicios.php" enctype="multipart/form-data">
                                 <div class="row gtr-50">
                                     <div class="col-6 col-12-small">
                                         <label for="nombreS">Nombre del Servicio</label>
-                                        <input class="service" type="text" name="nombreS" id="nombreS"
-                                            placeholder="Ingrese el Nombre del Servicio" onchange="cancel = true;" />
+                                        <input class="service" type="text" name="nombreS" id="nombreS" disabled
+                                            placeholder="Ingrese el Nombre del Servicio" onchange="cancel = true;" maxlength ="45"
+                                            required />
                                     </div>
                                     <div class="col-6 col-12-small">
                                         <label for="urlIcon">Icono del Servicio</label>
@@ -139,9 +131,9 @@
                                             <div class="col-md-12">
                                                 <div class=" form-group">
                                                     <div class="input-group">
-                                                        <input data-placement="bottomRight" id="urlIcon" name="urlIcon"
+                                                        <input data-placement="bottomRight" id="Icono" name="Icono"
                                                             class="form-control icp icp-auto" value="fas fa-archive"
-                                                            type="text" readonly style="cursor:default;"/>
+                                                            type="text" readonly style="cursor:default;" required />
                                                         <span class="input-group-addon" style="cursor:pointer;"></span>
                                                     </div>
                                                 </div>
@@ -154,18 +146,20 @@
                                     </div>
                                     <div class="col-12 col-12-small">
                                         <label for="descripS">Descripción del Servicio</label>
-                                        <textarea class="service" name="descripS" id="descripS"
+                                        <textarea class="service" name="descripS" id="descripS" maxlength ="300"
                                             placeholder="Ingrese la Descripción del Servicio" rows="4"
-                                            onchange="cancel = true;"></textarea>
+                                            onchange="cancel = true;" disabled required></textarea>
                                     </div>
                                     <div class="col-12">
                                         <ul class="actions">
-                                            <li><input type="submit" class="style5" value="Guardar Cambios" /></li>
+                                            <li><input id="modificarS" name="modificarS" type="submit" class="style5"
+                                                    value="Guardar Cambios" onclick="cancel=false;" disabled /></li>
                                             <li><input type="submit" class="style2" value="Cancelar"
                                                     onclick="cancel = true; document.AddServices.action = 'ServiciosAd.php';" />
                                             </li>
                                             <li><input type="reset" class="style2" value="Limpiar Campos"
                                                     onclick="Limpiar()" /></li>
+                                            <input type="hidden" id="IdServicios" name="IdServicios" value="-1" readonly required>
                                         </ul>
                                     </div>
 

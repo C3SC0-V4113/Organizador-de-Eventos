@@ -1,17 +1,30 @@
-function RellenarS(Name, Descrip, Icono)
+function RellenarS(Name, Descrip, Icono, ID)
 {
     InName = document.getElementById("nombreS");
-    InURL = document.getElementById("urlIcon");
+    InURL = document.getElementById("Icono");
+    InID= document.getElementById("IdServicios");
     EtiquetaI = document.getElementById("iconos");
     InDescrip = document.getElementById("descripS");
+    Boton = document.getElementById("modificarS");
+    
+    if(Icono != 'none' )
+    {
+        InName.disabled = false;
+        InDescrip.disabled = false;
+        Boton.disabled = false;
+    
+        EtiquetaI.className = Icono;
+        InName.value = Name;
+        InDescrip.innerHTML = Descrip;
+        InURL.value = Icono;
+        InID.value = ID;
+    }
+    else
+    {
 
-    InName.disabled = false;
-    InDescrip.disabled = false;
+    }
+    
 
-    EtiquetaI.className = Icono;
-    InName.value = Name;
-    InDescrip.innerHTML = Descrip;
-    InURL.value = Icono;
 }
 
 function Limpiar()
@@ -47,4 +60,20 @@ function LimpiarH(){
     Titulo.value = '';
     Descrip = document.getElementById("descripH");
     Descrip.innerHTML =''; 
+}
+function OnlyID(ID,Nombre,Icono)
+{
+    InID= document.getElementById("IdServicios");
+    Name= document.getElementById("name");
+    Boton = document.getElementById("eliminarS");
+    if(Icono != 'none' )
+    {
+        Boton.disabled = false;
+        InID.value = ID;
+        Name.value = Nombre;
+    }
+    else
+    {
+
+    }
 }
