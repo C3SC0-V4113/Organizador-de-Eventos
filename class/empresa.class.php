@@ -36,6 +36,42 @@ class empresa{
         $this->logURL=$logURL;
     }
 
+    function ActualizarGen($nombre,$slogan,$icono,$desctitle,$descripcion,$telefono,$direccion,$email,$tituloFooter,$descfooter){
+        $this->nombre=$nombre;
+        $this->slogan=$slogan;
+        $this->logodesc=$icono;
+        $this->titulodesc=$desctitle;
+        $this->descripcion=$descripcion;
+        $this->telefono=$telefono;
+        $this->direccion=$direccion;
+        $this->email=$email;
+        $this->contacttitle=$tituloFooter;
+        $this->contactdesc=$descfooter;
+        $cadena="Update empresa SET Nombre='$nombre',TituloDescripcion='$desctitle',LogoDesc='$icono',Descripcion='$descripcion', Slogan='$slogan', Telefono='$telefono', Direccion='$direccion', Email='$email',ContactTitle='$tituloFooter', ContactDesc='$descfooter' WHERE idEmpresa=1 ";
+        return $cadena;
+    }
+
+    function ActualizarHighlights($titulo, $descripcion){
+        $this->eventostitle=$titulo;
+        $this->eventosdesc=$descripcion;
+        $cadena="Update empresa SET EventosTitle='$titulo', EventosDesc='$descripcion' WHERE idEmpresa=1 ";
+        return $cadena;
+    }
+
+    function ActualizarUbicacion($titulo, $descripcion){
+        $this->eventostitle=$titulo;
+        $this->eventosdesc=$descripcion;
+        $cadena="Update empresa SET UbicTitle='$titulo', UbicDesc='$descripcion' WHERE idEmpresa=1 ";
+        return $cadena;
+    }
+
+    function ActualizarContactos($titulo, $descripcion){
+        $this->eventostitle=$titulo;
+        $this->eventosdesc=$descripcion;
+        $cadena="Update empresa SET ContactTitle='$titulo', ContactDesc='$descripcion' WHERE idEmpresa=1 ";
+        return $cadena;
+    }
+
     public function ShowID(){
         echo $this->id;
     }
@@ -81,7 +117,7 @@ class empresa{
     public function ShowEmail(){
         echo $this->email;
     }
-    public function ShowlogURL($logURL){
+    public function ShowlogURL(){
         echo $this->logURL;
     }
 }

@@ -123,17 +123,13 @@
 							<ul class="actions special">
 								<form id="empresabtn" name="empresabtn">
 									<li>
-										<a href="ActualizarEmpresas.php"> <input type="submit" class="button special style5 large" value="Editar Informacion"></a>
+										<a href="./ActualizarEmpresa.php"> <input type="button" class="button special style5 large" value="Editar Informacion"></a>
 									</li>
 								</form>
 							</ul>
 						<?php
 						}
 						?>
-						<!--<ul class="actions special">
-									<li><a href="#" class="button style1 large">Organiza tu Reunión</a></li>
-									<li><a href="#" class="button style2 large">Más Información</a></li>
-								</ul>-->
 					</article>
 				</div>
 
@@ -173,7 +169,7 @@
 				<ul class="actions special">
 					<form id="empresabtn" name="empresabtn">
 						<li>
-							<a href="ActualizarEmpresas.php"> <input type="submit" class="button special style5 large" value="Editar Informacion"></a>
+							<a href="./ActualizarEmpresa.php"> <input type="button" class="button special style5 large" value="Editar Informacion"></a>
 						</li>
 					</form>
 				</ul>
@@ -200,7 +196,7 @@
 					<ul class="actions special">
 						<form id="empresabtn" name="empresabtn">
 							<li>
-								<a href="ActualizarEmpresas.php"> <input type="submit" class="button special style5 large" value="Editar Informacion"></a>
+								<a href="./ActualizarEmpresa.php"> <input type="button" class="button special style5 large" value="Editar Informacion"></a>
 							</li>
 						</form>
 					</ul>

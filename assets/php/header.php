@@ -10,7 +10,7 @@
             <ul class="actions special">
                 <form id="servicesbtn" name="servicesbtn">
                     <li>
-                        <input type="submit" class="button special style5 large" value="Editar Informacion" onclick="document.servicesbtn.action = 'ActualizarEmpresa.php';">
+                    <a href="./ActualizarEmpresa.php"> <input type="button" class="button special style5 large" value="Editar Informacion"></a>
                     </li>
                 </form>
             </ul>
