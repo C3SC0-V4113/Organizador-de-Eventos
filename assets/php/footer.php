@@ -77,7 +77,7 @@
                     <ul class="actions special">
                         <form id="servicesbtn" name="servicesbtn">
                             <li>
-                                <input type="submit" class="button special style5 large" value="Editar Informacion" onclick="document.servicesbtn.action = 'EditarHeader.php';">
+                                <input type="submit" class="button special style5 large" value="Editar Informacion" onclick="document.servicesbtn.action = 'ActualizarEmpresa.php';">
                             </li>
                         </form>
                     </ul>

@@ -1,6 +1,5 @@
 <!DOCTYPE HTML>
 <html>
-
 <head>
 	<title>ORGANIZADORA DE EVENTOS</title>
 	<meta charset="utf-8" />
@@ -9,7 +8,6 @@
 	<link rel="stylesheet" href="assets/css/main.css" />
 	<link rel="stylesheet" href="assets/css/main.css?<?php echo time() . ".0"; ?>" />
 </head>
-
 <body class="no-sidebar is-preload">
 	<form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
 		<select name="opciones" id="opciones">
@@ -19,7 +17,7 @@
 		<input type="submit" name="enviar" id="enviar" value="Cambiar Rol">
 	</form>
 	<?php
-	$admin = false;
+	$admin = true;
 	$permiso;
 	if (isset($_POST['enviar'])) {
 		$permiso = (isset($_POST['opciones'])) ? $_POST['opciones'] : '';
@@ -57,12 +55,12 @@
 	//Llenando la clase
 	require 'class/empresa.class.php';
 	//Conexion
-	$Base = new mysqli('localhost', 'root', '', 'mydb', 3307);
-	$Base->set_charset("utf8");
+	$Base = new mysqli('localhost','root','','mydb',3307);
+	$Base -> set_charset("utf8");
 	//Peticion
-	$Peticion = 'SELECT * FROM `empresa`';
-	$Retorno = $Base->query($Peticion);
-	$fila = $Retorno->fetch_assoc();
+	$Peticion='SELECT * FROM `empresa`';
+	$Retorno=$Base->query($Peticion);
+	$fila=$Retorno->fetch_assoc();
 	//Llenando la clase
 	$empresa = new empresa(
 		$fila['idEmpresa'],
@@ -85,16 +83,16 @@
 	?>
 	<div id="page-wrapper">
 		<?php
-		includeWithVariables('./assets/php/header.php', array('admin' => $admin, 'empresa' => $empresa));
+		includeWithVariables('./assets/php/header.php', array('admin' => $admin,'empresa'=>$empresa));
 		?>
 		<!-- Main -->
 		<div id="main" class="wrapper style2">
-			<div class="title">SOBRE NOSOTROS</div>
+			<div class="title">Informacion Basica de la Empresa</div>
 			<div class="container">
 				<!-- Content -->
 				<div id="content">
 					<article class="box post">
-						<header class="style1">
+						<!-- <header class="style1">
 							<h2>Nuestra Historia</h2>
 							<p>Creando Memorias desde 2021</p>
 						</header>
@@ -102,10 +100,8 @@
 							<div class="row">
 								<div class="col-6 col-12-medium">
 									<section>
-										<h3 class=<?php echo "'";
-													$empresa->Showlogodesc();
-													echo "'"; ?>><?php $empresa->Showtitulodesc(); ?></h3>
-										<p><?php $empresa->ShowDescripcion(); ?></p>
+										<h3 class=<?php echo "'"; $empresa->Showlogodesc(); echo "'";?>><?php $empresa->Showtitulodesc();?></h3>
+										<p><?php $empresa->ShowDescripcion();?></p>
 									</section>
 								</div>
 								<div class="col-6 col-12-medium">
@@ -121,20 +117,16 @@
 						if ($admin) {
 						?>
 							<ul class="actions special">
-								<form id="empresabtn" name="empresabtn">
+								<form id="servicesbtn" name="servicesbtn">
 									<li>
-										<a href="ActualizarEmpresas.php"> <input type="submit" class="button special style5 large" value="Editar Informacion"></a>
+										<input type="submit" class="button special style5 large" value="Editar Informacion" onclick="document.servicesbtn.action = 'EditarHeader.php';">
 									</li>
 								</form>
 							</ul>
 						<?php
 						}
 						?>
-						<!--<ul class="actions special">
-									<li><a href="#" class="button style1 large">Organiza tu Reunión</a></li>
-									<li><a href="#" class="button style2 large">Más Información</a></li>
-								</ul>-->
-					</article>
+					</article>-->
 				</div>
 
 			</div>
@@ -146,8 +138,8 @@
 				<div class="row aln-center">
 					<div class="col-12">
 						<section class="highlight">
-							<h3><a href="#"><?php $empresa->Showeventostitle(); ?></a></h3>
-							<p class="descrip"><?php $empresa->Showeventosdesc(); ?></p>
+							<h3><a href="#"><?php $empresa->Showeventostitle();?></a></h3>
+							<p class="descrip"><?php $empresa->Showeventosdesc();?></p>
 						</section>
 					</div>
 					<div class="col-4 col-12-medium">
@@ -171,9 +163,9 @@
 			if ($admin) {
 			?>
 				<ul class="actions special">
-					<form id="empresabtn" name="empresabtn">
+					<form id="servicesbtn" name="servicesbtn">
 						<li>
-							<a href="ActualizarEmpresas.php"> <input type="submit" class="button special style5 large" value="Editar Informacion"></a>
+							<input type="submit" class="button special style5 large" value="Editar Informacion" onclick="document.servicesbtn.action = 'EditarHeader.php';">
 						</li>
 					</form>
 				</ul>
@@ -187,8 +179,8 @@
 			<div class="container">
 				<div class="row aln-center">
 					<div class="col-6 col-12-medium">
-						<h3><a href="#"><?php $empresa->Showubictitle(); ?></a></h3>
-						<p class="descrip"><?php $empresa->Showubicdesc(); ?></p>
+						<h3><a href="#"><?php $empresa->Showubictitle();?></a></h3>
+						<p class="descrip"><?php $empresa->Showubicdesc();?></p>
 					</div>
 					<div class="col-6 col-12-medium">
 						<div id="map"></div>
@@ -198,9 +190,9 @@
 				if ($admin) {
 				?>
 					<ul class="actions special">
-						<form id="empresabtn" name="empresabtn">
+						<form id="servicesbtn" name="servicesbtn">
 							<li>
-								<a href="ActualizarEmpresas.php"> <input type="submit" class="button special style5 large" value="Editar Informacion"></a>
+								<input type="submit" class="button special style5 large" value="Editar Informacion" onclick="document.servicesbtn.action = 'EditarHeader.php';">
 							</li>
 						</form>
 					</ul>
@@ -210,7 +202,7 @@
 			</div>
 		</section>
 		<?php
-		includeWithVariables('./assets/php/footer.php', array('admin' => $admin, 'empresa' => $empresa));
+		includeWithVariables('./assets/php/footer.php', array('admin' => $admin,'empresa'=>$empresa));
 		?>
 	</div>
 	<!-- Scripts -->
@@ -223,5 +215,4 @@
 	<script src="assets/js/googleapi.js"></script>
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBDaeWicvigtP9xPv919E-RNoxfvC-Hqik&callback=iniciarMap"></script>
 </body>
-
 </html>
