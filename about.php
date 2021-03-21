@@ -63,13 +63,29 @@
 	$Peticion='SELECT * FROM `empresa`';
 	$Retorno=$Base->query($Peticion);
 	$fila=$Retorno->fetch_assoc();
-	print_r($fila);
 	//Llenando la clase
-	$empresa = new empresa($fila['idEmpresa'],$fila['Nombre'],$fila['Descripcion'],$fila['Slogan'],$fila['Telefono'],$fila['Direccion'],$fila['Email'],$fila['Logo_Url']);
+	$empresa = new empresa(
+		$fila['idEmpresa'],
+		$fila['Nombre'],
+		$fila['TituloDescripcion'],
+		$fila['LogoDesc'],
+		$fila['Descripcion'],
+		$fila['EventosTitle'],
+		$fila['EventosDesc'],
+		$fila['UbicTitle'],
+		$fila['UbicDesc'],
+		$fila['ContactTitle'],
+		$fila['ContactDesc'],
+		$fila['Slogan'],
+		$fila['Telefono'],
+		$fila['Direccion'],
+		$fila['Email'],
+		$fila['Logo_Url']
+	);
 	?>
 	<div id="page-wrapper">
 		<?php
-		includeWithVariables('./assets/php/header.php', array('admin' => $admin));
+		includeWithVariables('./assets/php/header.php', array('admin' => $admin,'empresa'=>$empresa));
 		?>
 		<!-- Main -->
 		<div id="main" class="wrapper style2">
@@ -86,7 +102,7 @@
 							<div class="row">
 								<div class="col-6 col-12-medium">
 									<section>
-										<h3 class="icon solid fa-check">SERIVICIO 1</h3>
+										<h3 class=<?php echo "'"; $empresa->Showlogodesc(); echo "'";?>><?php $empresa->Showtitulodesc();?></h3>
 										<p><?php $empresa->ShowDescripcion();?></p>
 									</section>
 								</div>
@@ -128,8 +144,8 @@
 				<div class="row aln-center">
 					<div class="col-12">
 						<section class="highlight">
-							<h3><a href="#">MOMENTOS INOLVIDABLES</a></h3>
-							<p class="descrip">Eget mattis at, laoreet vel amet sed velit aliquam diam ante, dolor aliquet sit amet vulputate mattis amet laoreet lorem. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perspiciatis numquam voluptatibus, sapiente sed sint enim deserunt omnis, necessitatibus impedit cupiditate est, magni tempore molestias repellat sequi ipsum error praesentium quod. Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur, obcaecati beatae commodi labore earum mollitia provident, rerum officia autem at, libero est in atque quia eaque minus quos ipsam! Aliquid! Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officia qui, dolorem aperiam quasi in, accusamus beatae vitae ducimus saepe asperiores sapiente possimus iste minus delectus ipsa maxime necessitatibus explicabo autem.</p>
+							<h3><a href="#"><?php $empresa->Showeventostitle();?></a></h3>
+							<p class="descrip"><?php $empresa->Showeventosdesc();?></p>
 						</section>
 					</div>
 					<div class="col-4 col-12-medium">
@@ -169,9 +185,8 @@
 			<div class="container">
 				<div class="row aln-center">
 					<div class="col-6 col-12-medium">
-						<h3><a href="#">ESTAMOS CERCA!</a></h3>
-						<p class="descrip">Eget mattis at, laoreet vel amet sed velit aliquam diam ante, dolor aliquet sit amet vulputate mattis amet laoreet lorem. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ducimus voluptates est dolorem totam corrupti suscipit laudantium at, incidunt ipsa. Reprehenderit voluptates tempore similique illo hic nihil corrupti facilis, ad eius!</p>
-						<p class="descrip">Eget mattis at, laoreet vel amet sed velit aliquam diam ante, dolor aliquet sit amet vulputate mattis amet laoreet lorem. Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate ad est porro minima nemo. Voluptatibus non architecto odit molestiae rem, sint eveniet veniam autem impedit ad inventore alias facere reiciendis. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus incidunt natus magnam, blanditiis sequi eum ut recusandae sed hic voluptatibus neque tempora, numquam expedita aliquam enim molestias facilis corrupti dolore?</p>
+						<h3><a href="#"><?php $empresa->Showubictitle();?></a></h3>
+						<p class="descrip"><?php $empresa->Showubicdesc();?></p>
 					</div>
 					<div class="col-6 col-12-medium">
 						<div id="map"></div>
@@ -193,7 +208,7 @@
 			</div>
 		</section>
 		<?php
-		includeWithVariables('./assets/php/footer.php', array('admin' => $admin));
+		includeWithVariables('./assets/php/footer.php', array('admin' => $admin,'empresa'=>$empresa));
 		?>
 	</div>
 	<!-- Scripts -->

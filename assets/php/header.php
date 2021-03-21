@@ -2,8 +2,8 @@
 <section id="header" class="wrapper">
     <!-- Logo -->
     <div id="logo">
-        <h1><a href="index.html">WINE & CHAMPAGNE</a></h1>
-        <p>¡BIENVENIDOS!</p>
+        <h1><a href="index.html"><?php $empresa->ShowNombre()?></a></h1>
+        <p><?php $empresa->ShowSlogan()?></p>
         <?php
         if ($admin) {
         ?>
