@@ -61,6 +61,7 @@
 
     //Llenando la clase
     require 'class/empresa.class.php';
+    require 'class/enlace.class.php';
     //Conexion
     $Base = new mysqli('localhost', 'root', '', 'mydb', 3307);
     $Base->set_charset("utf8");
@@ -158,6 +159,76 @@
                                                 <div class="col-xs-12">
                                                     <label for="DescContact">Descripción de Contactos</label>
                                                     <textarea class="empresa" name="DescContact" id="DescContact" placeholder="Ingrese la descripcion de los Contactos" rows="4" onchange="cancel = true;"><?php $empresa->Showcontactdesc() ?></textarea>
+                                                </div>
+                                                <!--Botones-->
+                                                <div class="col-xs-12">
+                                                    <ul class="actions">
+                                                        <li><input type="submit" id='guardarGen' name="guardarGen" class="style5" value="Guardar Cambios" onclick="cancel = false;" /></li>
+                                                        <li><input type="reset" class="style2" value="Limpiar Campos" onclick="Limpiar()" /></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </form>
+                                        <?php
+                                        if (isset($_POST['guardarGen'])) {
+                                            $nombre = (isset($_POST['nombreEmp'])) ? $_POST['nombreEmp'] : $empresa->ShowNombre();
+                                            $slogan = (isset($_POST['sloganEmp'])) ? $_POST['sloganEmp'] : $empresa->ShowSlogan();
+                                            $icono = (isset($_POST['DescIcon'])) ? $_POST['DescIcon'] : $empresa->Showlogodesc();
+                                            $DescTitle = (isset($_POST['DescTitle'])) ? $_POST['DescTitle'] : $empresa->Showtitulodesc();
+                                            $DescEmp = (isset($_POST['DescEmp'])) ? $_POST['DescEmp'] : $empresa->ShowDescripcion();
+                                            $telefono = (isset($_POST['telefono'])) ? $_POST['telefono'] : $empresa->ShowTelefono();
+                                            $direccion = (isset($_POST['direccion'])) ? $_POST['direccion'] : $empresa->ShowDireccion();
+                                            $email = (isset($_POST['email'])) ? $_POST['email'] : $empresa->ShowEmail();
+                                            $titleContact = (isset($_POST['TitleContact'])) ? $_POST['TitleContact'] : $empresa->Showcontacttitle();
+                                            $DescContact = (isset($_POST['DescContact'])) ? $_POST['DescContact'] : $empresa->Showcontactdesc();
+                                            $actualizacion = $empresa->ActualizarGen($nombre, $slogan, $icono, $DescTitle, $DescEmp, $telefono, $direccion, $email,$titleContact,$DescContact);
+
+                                            if ($Base->query($actualizacion) === TRUE) {
+                                                echo '<div class="alert alert-success" role="alert">Actualizado Correctamente</div>';
+                                            } else {
+                                                echo '<div class="alert alert-danger" role="alert">Ha ocurrido un Error al actualizar: ' . $Base->error . '</div>';
+                                            }
+                                        }
+                                        ?>
+                                    </section>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+
+            </div>
+            <header class="style1">
+                <h1>Control de Redes</h1>
+            </header>
+            <!--Redes Sociales-->
+            <div class="container">
+                <!-- Content -->
+                <div id="content">
+                    <article class="box post">
+                        <div class="feature-list">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <section>
+                                        <form class="empresa" id="UpdtempresaRedes" name="UpdtempresaRedes" method="post" action="<?php echo $_SERVER['PHP_SELF'] ?>">
+                                            <div class="row gtr-50">
+                                                <div class="col-xs-12 col-md-6">
+                                                    <label for="nombreEnlace">Nombre del enlace</label>
+                                                    <input class="empresa" value="<?php //$empresa->ShowNombre() ?>" type="text" name="nombreEnlace" id="nombreEnlace" maxlength="20" placeholder="Ingrese el Nombre del enlace" onchange="cancel = true;" />
+                                                </div>
+                                                <div class="col-xs-12 col-md-6">
+                                                    <label for="enlaceEmp">Direccion de Enlace</label>
+                                                    <input class="empresa" type="text" value="<?php //$empresa->ShowSlogan() ?>" name="enlaceEmp" id="enlaceEmp" placeholder="Ingrese el enlace" onchange="cancel = true;" />
+                                                </div>
+                                                <div class="col-xs-12">
+                                                    <ul class="actions">
+                                                        <li><input type="button" id='guardarEnlace' name="guardarEnlace" class="style3" value="Guardar Enlace"/></li>
+                                                        <li><input type="button" id='eliminarEnlace' name="eliminarEnlace" class="style2" value="Eliminar Enlace"/></li>
+                                                    </ul>
+                                                </div>
+                                                <div class="col-xs-12">
+                                                    <label for="enlacesGroup">Enlaces: </label>
+                                                    <select name="enlacesGroup" id="enlacesGroup" multiple></select>
                                                 </div>
                                                 <!--Botones-->
                                                 <div class="col-xs-12">
@@ -397,6 +468,7 @@
         gtag('js', new Date());
         gtag('config', 'UA-85082661-5');
     </script>
+    <script src="assets/js/gestorenlaces.js"></script>
 </body>
 
 </html>
