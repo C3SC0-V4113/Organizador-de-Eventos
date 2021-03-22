@@ -203,7 +203,7 @@
     <?php
         $Base = new mysqli('localhost','root','','mydb',3307);
         $Base -> set_charset("utf8");
-        $Consulta = "SELECT * FROM InfoServicios";
+        $Consulta = "SELECT * FROM InfoServicios where idEmpresa=1";
         $Resultados = $Base->query($Consulta);
         if($Resultados->num_rows!=0)
         {
