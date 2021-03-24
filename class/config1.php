@@ -33,7 +33,7 @@
       echo "<script language='javascript'> window.alert('Usuario y/o contraseña incorrecta.'); window.location.href='../Login.php' </script>";
     }
   }else {
-    echo "<script language='javascript'> window.alert('Usuario y/o contraseña incorrecta.'); window.location.href='../Login.php' </script>";
+    echo "<script language='javascript'> window.alert('Usuario y/o contraseña incorrecta.'); window.location.href='../Login.php'  </script>";
   }
 
 ?>
