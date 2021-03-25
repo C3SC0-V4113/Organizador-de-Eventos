@@ -1,4 +1,8 @@
 <?php require 'class/enlace.class.php'; ?>
+<?php 
+require 'class/empresa.class.php'; 
+$mysqli = new mysqli('localhost', 'root', '', 'mydb', 3307)  or die($mysqli->error);
+?>
 <!-- Footer -->
 <section id="footer" class="wrapper">
     <div class="title">CONTACTANOS</div>
@@ -49,7 +53,7 @@
                                 <h3 class="icon solid fa-comment">Redes Sociales</h3>
                                 <p>
                                     <?php
-                                    $mysqli = new mysqli('localhost', 'root', '', 'mydb', 3307)  or die($mysqli->error);
+                                    
                                     $inner = "SELECT enlaces.IDEnlaces, enlaces.Nombre,enlaces.Enlace FROM enlaces INNER JOIN detalle_empresa_enlaces ON enlaces.IDEnlaces=detalle_empresa_enlaces.IDEnlaces INNER JOIN empresa ON detalle_empresa_enlaces.IDEmpresa=empresa.idEmpresa";
                                     $resultado = $mysqli->query($inner);
                                     //pre_r($resultado->fetch_assoc());
