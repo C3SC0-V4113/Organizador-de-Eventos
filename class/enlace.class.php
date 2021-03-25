@@ -16,3 +16,11 @@ if(isset($_POST['guardarRedes'])){
     $segundaI="INSERT INTO `detalle_empresa_enlaces`(`IDEnlaces`, `IDEmpresa`) VALUES ($trueID,1)";
     $mysqli->query($segundaI) or die($mysqli->error);
 }
+
+if(isset($_GET['delete'])){
+    $id=$_GET['delete'];
+    $borrarDetalle="DELETE FROM `detalle_empresa_enlaces` WHERE IDEnlaces=$id";
+    $borrarBase="DELETE FROM `enlaces` WHERE IDEnlaces=$id";
+    $mysqli->query($borrarDetalle) or die($mysqli->error);
+    $mysqli->query($borrarBase) or die($mysqli->error);
+}

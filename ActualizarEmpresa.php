@@ -260,7 +260,7 @@
                                                                     </td>
                                                                     <td>
                                                                         <a href="ActualizarEmpresa.php?edit=<?php echo $selector['IDEnlaces']; ?>" class="btn btn-info">Editar</a>
-                                                                        <a href="ActualizarEmpresa.php?edit=<?php echo $selector['IDEnlaces']; ?>" class="btn btn-danger">Eliminar</a>
+                                                                        <a href="ActualizarEmpresa.php?delete=<?php echo $selector['IDEnlaces']; ?>" class="btn btn-danger">Eliminar</a>
                                                                     </td>
                                                                 </tr>
                                                             <?php endwhile; ?>
