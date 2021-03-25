@@ -1,6 +1,6 @@
 <?php
+//session_start();
 
-session_start();
 
 $nombre="";
 $urls="";
@@ -44,9 +44,9 @@ if(isset($_GET['delete'])){
 }
 
 if(isset($_GET['edit'])){
-    $ids=$_GET['edit'];
+    $id=$_GET['edit'];
     $update=true;
-    $peticionEntrada="SELECT * FROM `enlaces` WHERE IDEnlaces=$ids ";
+    $peticionEntrada="SELECT * FROM `enlaces` WHERE IDEnlaces=$id ";
     $result=$mysqli->query($peticionEntrada) or die($mysqli->error);
     if($result==TRUE){
         $selector=$result->fetch_array();

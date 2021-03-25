@@ -15,6 +15,8 @@
     <link href="dist/css/fontawesome-iconpicker.min.css?<?php echo time() . ".0"; ?>" rel="stylesheet">
 </head>
 
+<?php session_start(); ?>
+
 <body class="no-sidebar is-preload">
     <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
         <select name="opciones" id="opciones">
