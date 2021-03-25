@@ -1,10 +1,11 @@
+<?php require 'class/enlace.class.php'; ?>
 <!-- Footer -->
 <section id="footer" class="wrapper">
     <div class="title">CONTACTANOS</div>
     <div class="container">
         <header class="style1">
-            <h2><?php $empresa->Showcontacttitle()?></h2>
-            <p><?php $empresa->Showcontactdesc()?></p>
+            <h2><?php $empresa->Showcontacttitle() ?></h2>
+            <p><?php $empresa->Showcontactdesc() ?></p>
         </header>
         <div class="row">
             <div class="col-6 col-12-medium">
@@ -39,7 +40,7 @@
                             <section>
                                 <h3 class="icon solid fa-home">Dirección</h3>
                                 <p>
-                                    <?php $empresa->ShowDireccion()?>
+                                    <?php $empresa->ShowDireccion() ?>
                                 </p>
                             </section>
                         </div>
@@ -47,11 +48,15 @@
                             <section>
                                 <h3 class="icon solid fa-comment">Redes Sociales</h3>
                                 <p>
-                                <?php
-                                for ($i=0; $i < count($enlace) ; $i++) { 
-                                    echo "<a href='".$enlace[$i]->enlace()."'>".$enlace[$i]->nombre()."</a><br />";
-                                }
-                                ?>
+                                    <?php
+                                    $mysqli = new mysqli('localhost', 'root', '', 'mydb', 3307)  or die($mysqli->error);
+                                    $inner = "SELECT enlaces.IDEnlaces, enlaces.Nombre,enlaces.Enlace FROM enlaces INNER JOIN detalle_empresa_enlaces ON enlaces.IDEnlaces=detalle_empresa_enlaces.IDEnlaces INNER JOIN empresa ON detalle_empresa_enlaces.IDEmpresa=empresa.idEmpresa";
+                                    $resultado = $mysqli->query($inner);
+                                    //pre_r($resultado->fetch_assoc());
+                                    while ($selector = $resultado->fetch_assoc()) :
+                                    ?>
+                                    <a href="<?php echo $selector['Enlace'] ?>"><?php echo $selector['Nombre'] ?></a><br/>
+                                    <?php endwhile; ?>
                                 </p>
                             </section>
                         </div>
@@ -59,7 +64,7 @@
                             <section>
                                 <h3 class="icon solid fa-envelope">Correo Electronico</h3>
                                 <p>
-                                    <a href="#"><?php $empresa->ShowEmail()?></a>
+                                    <a href="#"><?php $empresa->ShowEmail() ?></a>
                                 </p>
                             </section>
                         </div>
@@ -67,7 +72,7 @@
                             <section>
                                 <h3 class="icon solid fa-phone">Telefono</h3>
                                 <p>
-                                <?php $empresa->ShowTelefono()?>
+                                    <?php $empresa->ShowTelefono() ?>
                                 </p>
                             </section>
                         </div>
@@ -79,7 +84,7 @@
                     <ul class="actions special">
                         <form id="servicesbtn" name="servicesbtn">
                             <li>
-                            <a href="./ActualizarEmpresa.php"> <input type="button" class="button special style5 large" value="Editar Informacion"></a>
+                                <a href="./ActualizarEmpresa.php"> <input type="button" class="button special style5 large" value="Editar Informacion"></a>
                             </li>
                         </form>
                     </ul>
