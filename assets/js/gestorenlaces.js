@@ -25,10 +25,12 @@ function initForms(){
 function AñadirEnlace(optionMenu, value,link){
     var texto="";
     var enlace="";
+    var completo="";
     var texto=value;
     enlace=link;
+    completo=texto+" - - - - "+enlace;
     var posicion = optionMenu.length;
-    optionMenu[posicion] = new Option(texto,enlace);
+    optionMenu[posicion] = new Option(completo,texto);
     document.UpdtempresaRedes.nombreEnlace.value="";
     document.UpdtempresaRedes.enlaceEmp.value="";
 }

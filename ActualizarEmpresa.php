@@ -61,7 +61,6 @@
 
     //Llenando la clase
     require 'class/empresa.class.php';
-    require 'class/enlace.class.php';
     //Conexion
     $Base = new mysqli('localhost', 'root', '', 'mydb', 3307);
     $Base->set_charset("utf8");
@@ -181,7 +180,7 @@
                                             $email = (isset($_POST['email'])) ? $_POST['email'] : $empresa->ShowEmail();
                                             $titleContact = (isset($_POST['TitleContact'])) ? $_POST['TitleContact'] : $empresa->Showcontacttitle();
                                             $DescContact = (isset($_POST['DescContact'])) ? $_POST['DescContact'] : $empresa->Showcontactdesc();
-                                            $actualizacion = $empresa->ActualizarGen($nombre, $slogan, $icono, $DescTitle, $DescEmp, $telefono, $direccion, $email,$titleContact,$DescContact);
+                                            $actualizacion = $empresa->ActualizarGen($nombre, $slogan, $icono, $DescTitle, $DescEmp, $telefono, $direccion, $email, $titleContact, $DescContact);
 
                                             if ($Base->query($actualizacion) === TRUE) {
                                                 echo '<div class="alert alert-success" role="alert">Actualizado Correctamente</div>';
@@ -208,60 +207,29 @@
                     <article class="box post">
                         <div class="feature-list">
                             <div class="row">
-                                <div class="col-xs-12">
-                                    <section>
-                                        <form class="empresa" id="UpdtempresaRedes" name="UpdtempresaRedes" method="post" action="<?php echo $_SERVER['PHP_SELF'] ?>">
+                                <section>
+                                    <div class="col-xs-12">
+                                    <?php require 'class/enlace.class.php'; ?>
+                                        <form action="class/enlace.class.php" method="post">
                                             <div class="row gtr-50">
                                                 <div class="col-xs-12 col-md-6">
-                                                    <label for="nombreEnlace">Nombre del enlace</label>
-                                                    <input class="empresa" value="<?php //$empresa->ShowNombre() ?>" type="text" name="nombreEnlace" id="nombreEnlace" maxlength="20" placeholder="Ingrese el Nombre del enlace" onchange="cancel = true;" />
+                                                    <label for="nombreredes">Ingrese el nombre de la red</label>
+                                                    <input type="text" class="redes" name="nombreredes" id="nombreredes">
                                                 </div>
                                                 <div class="col-xs-12 col-md-6">
-                                                    <label for="enlaceEmp">Direccion de Enlace</label>
-                                                    <input class="empresa" type="text" value="<?php //$empresa->ShowSlogan() ?>" name="enlaceEmp" id="enlaceEmp" placeholder="Ingrese el enlace" onchange="cancel = true;" />
+                                                    <label for="urlred">Ingrese la dirección</label>
+                                                    <input type="text" class="redes" name="urlred" id="urlred">
                                                 </div>
-                                                <div class="col-xs-12">
+                                                                                                <!--Botones-->                                       <div class="col-xs-12">
                                                     <ul class="actions">
-                                                        <li><input type="button" id='guardarEnlace' name="guardarEnlace" class="style3" value="Guardar Enlace"/></li>
-                                                        <li><input type="button" id='eliminarEnlace' name="eliminarEnlace" class="style2" value="Eliminar Enlace"/></li>
-                                                    </ul>
-                                                </div>
-                                                <div class="col-xs-12">
-                                                    <label for="enlacesGroup">Enlaces: </label>
-                                                    <select name="enlacesGroup" id="enlacesGroup" multiple></select>
-                                                </div>
-                                                <!--Botones-->
-                                                <div class="col-xs-12">
-                                                    <ul class="actions">
-                                                        <li><input type="submit" id='guardarGen' name="guardarGen" class="style5" value="Guardar Cambios" onclick="cancel = false;" /></li>
+                                                        <li><input type="submit" id='guardarRedes' name="guardarRedes" class="style5" value="Guardar Cambios" onclick="cancel = false;" /></li>
                                                         <li><input type="reset" class="style2" value="Limpiar Campos" onclick="Limpiar()" /></li>
                                                     </ul>
                                                 </div>
                                             </div>
                                         </form>
-                                        <?php
-                                        if (isset($_POST['guardarGen'])) {
-                                            $nombre = (isset($_POST['nombreEmp'])) ? $_POST['nombreEmp'] : $empresa->ShowNombre();
-                                            $slogan = (isset($_POST['sloganEmp'])) ? $_POST['sloganEmp'] : $empresa->ShowSlogan();
-                                            $icono = (isset($_POST['DescIcon'])) ? $_POST['DescIcon'] : $empresa->Showlogodesc();
-                                            $DescTitle = (isset($_POST['DescTitle'])) ? $_POST['DescTitle'] : $empresa->Showtitulodesc();
-                                            $DescEmp = (isset($_POST['DescEmp'])) ? $_POST['DescEmp'] : $empresa->ShowDescripcion();
-                                            $telefono = (isset($_POST['telefono'])) ? $_POST['telefono'] : $empresa->ShowTelefono();
-                                            $direccion = (isset($_POST['direccion'])) ? $_POST['direccion'] : $empresa->ShowDireccion();
-                                            $email = (isset($_POST['email'])) ? $_POST['email'] : $empresa->ShowEmail();
-                                            $titleContact = (isset($_POST['TitleContact'])) ? $_POST['TitleContact'] : $empresa->Showcontacttitle();
-                                            $DescContact = (isset($_POST['DescContact'])) ? $_POST['DescContact'] : $empresa->Showcontactdesc();
-                                            $actualizacion = $empresa->ActualizarGen($nombre, $slogan, $icono, $DescTitle, $DescEmp, $telefono, $direccion, $email,$titleContact,$DescContact);
-
-                                            if ($Base->query($actualizacion) === TRUE) {
-                                                echo '<div class="alert alert-success" role="alert">Actualizado Correctamente</div>';
-                                            } else {
-                                                echo '<div class="alert alert-danger" role="alert">Ha ocurrido un Error al actualizar: ' . $Base->error . '</div>';
-                                            }
-                                        }
-                                        ?>
-                                    </section>
-                                </div>
+                                    </div>
+                                </section>
                             </div>
                         </div>
                     </article>
@@ -283,10 +251,12 @@
                                     </label>
                                     <input class="empresa" value="<?php $empresa->Showeventostitle() ?>" type="text" name="titleEvent" id="titleEvent" maxlength="25" placeholder="Ingrese el Titulo" onchange="cancel = true;" />
                                 </div>
-                                    <div class="col-xs-12">
-                                                    <label for="descEvent"><p class="descrip">Descripción de Empresa</p></label>
-                                                    <textarea class="empresa" name="descEvent" id="descEvent" placeholder="Ingrese la descripción" rows="4" onchange="cancel = true;"><?php $empresa->Showeventosdesc() ?></textarea>
-                                                </div>
+                                <div class="col-xs-12">
+                                    <label for="descEvent">
+                                        <p class="descrip">Descripción de Empresa</p>
+                                    </label>
+                                    <textarea class="empresa" name="descEvent" id="descEvent" placeholder="Ingrese la descripción" rows="4" onchange="cancel = true;"><?php $empresa->Showeventosdesc() ?></textarea>
+                                </div>
                                 <div class="col-xs-12">
                                     <ul class="actions">
                                         <li><input type="submit" id='guardarEvent' name="guardarEvent" class="style5" value="Guardar Cambios" onclick="cancel = false;" /></li>
@@ -300,7 +270,7 @@
                             $titulo = (isset($_POST['titleEvent'])) ? $_POST['titleEvent'] : $empresa->Showeventostitle();
                             $desc = (isset($_POST['descEvent'])) ? $_POST['descEvent'] : $empresa->Showeventosdesc();
 
-                            $actualizacion = $empresa->ActualizarHighlights($titulo,$desc);
+                            $actualizacion = $empresa->ActualizarHighlights($titulo, $desc);
 
                             if ($Base->query($actualizacion) === TRUE) {
                                 echo '<div class="alert alert-success" role="alert">Actualizado Correctamente</div>';
@@ -327,10 +297,12 @@
                                     </label>
                                     <input class="empresa" value="<?php $empresa->Showubictitle() ?>" type="text" name="titleUbic" id="titleUbic" maxlength="25" placeholder="Ingrese el Titulo" onchange="cancel = true;" />
                                 </div>
-                                    <div class="col-xs-12">
-                                                    <label for="descUbi"><p class="descrip">Descripción de Ubicación</p></label>
-                                                    <textarea class="empresa" name="descUbi" id="descUbi" placeholder="Ingrese la descripción" rows="4" onchange="cancel = true;"><?php $empresa->Showubicdesc() ?></textarea>
-                                                </div>
+                                <div class="col-xs-12">
+                                    <label for="descUbi">
+                                        <p class="descrip">Descripción de Ubicación</p>
+                                    </label>
+                                    <textarea class="empresa" name="descUbi" id="descUbi" placeholder="Ingrese la descripción" rows="4" onchange="cancel = true;"><?php $empresa->Showubicdesc() ?></textarea>
+                                </div>
                                 <div class="col-xs-12">
                                     <ul class="actions">
                                         <li><input type="submit" id='guardarUbic' name="guardarUbic" class="style5" value="Guardar Cambios" onclick="cancel = false;" /></li>
@@ -344,7 +316,7 @@
                             $tituloU = (isset($_POST['titleUbic'])) ? $_POST['titleUbic'] : $empresa->Showubictitle();
                             $descU = (isset($_POST['descUbi'])) ? $_POST['descUbi'] : $empresa->Showubicdesc();
 
-                            $actualizacionU = $empresa->ActualizarUbicacion($tituloU,$descU);
+                            $actualizacionU = $empresa->ActualizarUbicacion($tituloU, $descU);
 
                             if ($Base->query($actualizacionU) === TRUE) {
                                 echo '<div class="alert alert-success" role="alert">Actualizado Correctamente</div>';
@@ -468,7 +440,6 @@
         gtag('js', new Date());
         gtag('config', 'UA-85082661-5');
     </script>
-    <script src="assets/js/gestorenlaces.js"></script>
 </body>
 
 </html>

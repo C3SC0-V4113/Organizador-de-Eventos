@@ -1,17 +1,10 @@
 <?php
-class enlace{
-    private $nombre;
-    private $enlace;
 
-    function __construct($nombre,$enlace)
-    {
-        $this->nombre=$nombre;
-        $this->enlace=$enlace;
-    }
+$mysqli=new mysqli('localhost', 'root', '', 'mydb', 3307);
 
-    function Peticion(){
-        $idEmpresa=0;
-        
-    }
+if(isset($_POST['guardarRedes'])){
+    $name=$_POST['nombreredes'];
+    $url=$_POST['urlred'];
+    $insercion="INSERT INTO `enlaces`(`Nombre`, `Enlace`) VALUES ('$name','$url')";
+    $mysqli->query($insercion) or die($mysqli->error);
 }
-?>

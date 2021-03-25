@@ -47,9 +47,11 @@
                             <section>
                                 <h3 class="icon solid fa-comment">Redes Sociales</h3>
                                 <p>
-                                    <a href="#">@untitled-corp</a><br />
-                                    <a href="#">linkedin.com/untitled</a><br />
-                                    <a href="#">facebook.com/untitled</a>
+                                <?php
+                                for ($i=0; $i < count($enlace) ; $i++) { 
+                                    echo "<a href='".$enlace[$i]->enlace()."'>".$enlace[$i]->nombre()."</a><br />";
+                                }
+                                ?>
                                 </p>
                             </section>
                         </div>
