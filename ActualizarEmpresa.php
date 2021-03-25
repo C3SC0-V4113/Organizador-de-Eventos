@@ -258,9 +258,12 @@
                                                                     <td>
                                                                         <?php echo $selector['Enlace'] ?>
                                                                     </td>
-                                                                
+                                                                    <td>
+                                                                        <a href="ActualizarEmpresa.php?edit=<?php echo $selector['IDEnlaces']; ?>" class="btn btn-info">Editar</a>
+                                                                        <a href="ActualizarEmpresa.php?edit=<?php echo $selector['IDEnlaces']; ?>" class="btn btn-danger">Eliminar</a>
+                                                                    </td>
                                                                 </tr>
-                                                                <?php endwhile; ?>
+                                                            <?php endwhile; ?>
                                                         </tbody>
                                                     </table>
                                                 </div>
