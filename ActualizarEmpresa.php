@@ -212,13 +212,14 @@
                                         <?php require 'class/enlace.class.php'; ?>
                                         <form action="class/enlace.class.php" method="post">
                                             <div class="row gtr-50">
+                                            <input type="hidden" name="idss" id="idss" value="<?php echo $id ?>">
                                                 <div class="col-xs-12 col-md-6">
                                                     <label for="nombreredes">Ingrese el nombre de la red</label>
-                                                    <input type="text" class="redes" name="nombreredes" id="nombreredes">
+                                                    <input type="text" class="redes" value="<?php echo $nombre; ?>" name="nombreredes" id="nombreredes">
                                                 </div>
                                                 <div class="col-xs-12 col-md-6">
                                                     <label for="urlred">Ingrese la dirección</label>
-                                                    <input type="text" class="redes" name="urlred" id="urlred">
+                                                    <input type="text" class="redes" value="<?php echo $urls; ?>" name="urlred" id="urlred">
                                                 </div>
                                                 <div class="col-xs-12" id="tabla">
                                                     <?php
@@ -269,10 +270,26 @@
                                                 </div>
                                                 <div>
                                                     <ul class="actions">
-                                                        <li><input type="submit" id='guardarRedes' name="guardarRedes" class="style5" value="Guardar Cambios" onclick="cancel = false;" /></li>
+                                                        <?php
+                                                        if ($update == true) :
+                                                        ?>
+                                                            <li><input type="submit" id='actualizarRedes' name="actualizarRedes" class="style5" value="Actualizar Datos" onclick="cancel = false;" /></li>
+                                                        <?php else : ?>
+                                                            <li><input type="submit" id='guardarRedes' name="guardarRedes" class="style5" value="Guardar Cambios" onclick="cancel = false;" /></li>
+                                                        <?php endif; ?>
                                                         <li><input type="reset" class="style2" value="Limpiar Campos" onclick="Limpiar()" /></li>
                                                     </ul>
                                                 </div>
+                                                <?php
+                                                if (isset($_SESSION['mensaje'])) :
+                                                ?>
+                                                    <div class="alert col-xs-12 alert-<?php echo $_SESSION['msg_type'] ?>">
+                                                        <?php
+                                                        echo $_SESSION['mensaje'];
+                                                        unset($_SESSION['mensaje']);
+                                                        ?>
+                                                    </div>
+                                                <?Php endif; ?>
                                             </div>
                                         </form>
                                     </div>
