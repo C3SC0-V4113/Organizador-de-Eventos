@@ -209,7 +209,7 @@
                             <div class="row">
                                 <section>
                                     <div class="col-xs-12">
-                                    <?php require 'class/enlace.class.php'; ?>
+                                        <?php require 'class/enlace.class.php'; ?>
                                         <form action="class/enlace.class.php" method="post">
                                             <div class="row gtr-50">
                                                 <div class="col-xs-12 col-md-6">
@@ -220,7 +220,51 @@
                                                     <label for="urlred">Ingrese la dirección</label>
                                                     <input type="text" class="redes" name="urlred" id="urlred">
                                                 </div>
-                                                                                                <!--Botones-->                                       <div class="col-xs-12">
+                                                <div class="col-xs-12" id="tabla">
+                                                    <?php
+                                                    function pre_r($array)
+                                                    {
+                                                        echo '<pre>';
+                                                        print_r($array);
+                                                        echo '</pre>';
+                                                    }
+
+                                                    $mysqli = new mysqli('localhost', 'root', '', 'mydb', 3307)  or die($mysqli->error);
+                                                    $inner = "SELECT enlaces.IDEnlaces, enlaces.Nombre,enlaces.Enlace
+                                                    FROM enlaces
+                                                    INNER JOIN detalle_empresa_enlaces
+                                                    ON enlaces.IDEnlaces=detalle_empresa_enlaces.IDEnlaces
+                                                    INNER JOIN empresa
+                                                    ON detalle_empresa_enlaces.IDEmpresa=empresa.idEmpresa";
+                                                    $resultado = $mysqli->query($inner);
+                                                    //pre_r($resultado->fetch_assoc());
+                                                    ?>
+                                                    <table class="table">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Nombre</th>
+                                                                <th>Enlace</th>
+                                                                <th colspan="2">Acciones</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <?php
+                                                            while ($selector = $resultado->fetch_assoc()) :
+                                                            ?>
+                                                                <tr>
+                                                                    <td>
+                                                                        <?php echo $selector['Nombre'] ?>
+                                                                    </td>
+                                                                    <td>
+                                                                        <?php echo $selector['Enlace'] ?>
+                                                                    </td>
+                                                                
+                                                                </tr>
+                                                                <?php endwhile; ?>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <div>
                                                     <ul class="actions">
                                                         <li><input type="submit" id='guardarRedes' name="guardarRedes" class="style5" value="Guardar Cambios" onclick="cancel = false;" /></li>
                                                         <li><input type="reset" class="style2" value="Limpiar Campos" onclick="Limpiar()" /></li>
