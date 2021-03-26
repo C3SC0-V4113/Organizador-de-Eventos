@@ -21,16 +21,16 @@
 
             <!-- Logo -->
             <div id="logo">
-                <h1><a href="indexAdmin.php">WINE & CHAMPAGNE<br>EVENTOS</a></h1>
+                <h1><a href="InicioAdmin.php">WINE & CHAMPAGNE<br>EVENTOS</a></h1>
                 <p>¡B I E N V E N I D O S!</p>
             </div>
 
             <!-- Nav -->
             <nav id="nav">
                 <ul>
-                    <li><a href="indexAdmin.php">INICIO</a></li>
+                    <li><a href="InicioAdmin.php">INICIO</a></li>
                     <li>
-                        <a href="ServiciosAd.php">NUESTROS SERVICIOS</a>
+                        <a href="ServiciosAdmin.php">NUESTROS SERVICIOS</a>
                         <ul>
                             <li><a href="EditarHeader.php">Editar Header</a></li>
                             <li>
@@ -43,8 +43,8 @@
                             </li>
                         </ul>
                     </li>
-                    <li><a href="BaseEventos.html">EVENTOS</a></li>
-                    <li><a href="Base.html">QUIENES SOMOS</a></li>
+                    <li><a href="EventosAdmin.php">EVENTOS</a></li>
+                    <li><a href="AcercadeAdmin.php">QUIENES SOMOS</a></li>
                     <li class="current"><a href="Base.html">CONTACTANOS</a></li>
                 </ul>
             </nav>

@@ -16,7 +16,7 @@
 
             <!-- Logo -->
             <div id="logo">
-                <h1><a href="InicioAdmin.php">WINE & CHAMPAGNE<br>EVENTOS</a></h1>
+                <h1><a href="indexAdmin.php">WINE & CHAMPAGNE<br>EVENTOS</a></h1>
                 <p>¡B I E N V E N I D O S!</p>
             </div>
 
@@ -29,7 +29,7 @@
                         <ul>
                             <li><a href="EditarHeader.php">Editar Header</a></li>
                             <li>
-                                <a href="">Editar Servicios</a>
+                                <a>Editar Servicios</a>
                                 <ul>
                                     <li><a href="AgregarServicios.php">Agregar Servicio</a></li>
                                     <li><a href="ActualizarServicios.php">Actualizar Servicio</a></li>
@@ -38,100 +38,102 @@
                             </li>
                         </ul>
                     </li>
-                    <li><a href="Eventos.php">EVENTOS</a></li>
+                    <li><a href="EventosAdmin.php">EVENTOS</a></li>
                     <li><a href="AcercadeAdmin.php">QUIENES SOMOS</a></li>
-                    <li class="current"><a href="Base.html">CONTACTANOS</a></li>
+                    <li class="current"><a href="Contactanos.php">CONTACTANOS</a></li>
                 </ul>
             </nav>
 
         </section>
 
-        <!-- Main -->
-        <div id="main" class="wrapper style2">
-            <div class="title">Eliminar Servicios</div>
-            <div class="container">
-                <!-- Content -->
-                <div id="content">
-                    <article class="box post">
-                        <header class="style1">
-                            <h2>Eliminar Servicios de la Web</h2>
-                            <p>Seleccione el Servicio que desea eliminar:</p>
-                        </header>
-                        <?php 
-                        require 'class/servicios.php';
-                        $Servicios = new Servicio();
-                        $Base = new mysqli('localhost','root','','mydb',3307);
-                        $Base -> set_charset("utf8");
-                        $Consulta = "Select * from Servicios order by Nombre asc";
-                        $Ejecucion = $Base->query($Consulta);
-                        if($Ejecucion->num_rows!=0)
+        <!-- SERVICIOS -->
+        <?php
+			require 'class/servicios.php';
+            $Servicios = new Servicio();
+			$Base = new mysqli('localhost','root','','mydb',3307);
+            $Base -> set_charset("utf8");
+
+		?>
+        <div id='main' class='wrapper style2'>
+            <div class='title'>NUESTROS SERVICIOS</div>
+            <div class="col-12">
+                <header class="style2">
+                    <h2>EDITAR SERVICIOS</h2>
+                </header>
+                <ul class="actions special">
+                    <form id="servicesbtn" name="servicesbtn">
+                        <li>
+                            <input type="submit" class="button special style5 large" value="Editar Header"
+                                onclick="document.servicesbtn.action = 'EditarHeader.php';">
+                        </li>
+                        <li><input type="submit" class="button special style5 large " value="Agregar Servicio"
+                                onclick="document.servicesbtn.action = 'AgregarServicios.php';" />
+                        </li>
+                        <li><input type="submit" class="button special style5 large" value="Actualizar Servicios"
+                                onclick="document.servicesbtn.action = 'ActualizarServicios.php';" />
+                        </li>
+                        <li><input type="submit" class="button special style5 large" value="Eliminar Servicio"
+                                onclick="document.servicesbtn.action = 'EliminarServicios.php';" />
+                        </li>
+
+                    </form>
+                    <hr>
+                </ul>
+            </div>
+            <div class='container'>
+                <div id='content'>
+                    <article class='box post'>
+                    <br>
+                        <?php
+                        $HeaderC = "SELECT * FROM InfoServicios";
+                        $HeaderR = $Base->query($HeaderC);
+                        if($HeaderR->num_rows!=0)
                         {
-                            if($Ejecucion)
+                            if($HeaderR)
                             {
-                                $i=1;
-                                while ($fila = $Ejecucion->fetch_assoc())
-                                {
-                                    $Datos[$i] = $fila;
-                                    $i++;
-                                }
+                                $fila = $HeaderR->fetch_assoc();
+                                $Servicios -> GenerarHeaderServicios($fila['HeaderTitulo'],$fila['DescripcionHeader']);
                             }  
                         }
                         else 
                         {
-                            $Datos[1] = array('idServicios' => '','Nombre' => '','Descripcion' => '','urlIMG' =>'none');
-                            $Datos[2] = array('idServicios' => '','Nombre' => '','Descripcion' => '','urlIMG' =>'none');
-                            $Datos[3] = array('idServicios' => '','Nombre' => 'Oops!','Descripcion' => '','urlIMG' =>'none');
-                            $Datos[4] = array('idServicios' => '','Nombre' => 'Aún no hay servicios registrados en la Base de Datos','Descripcion' => '','urlIMG' =>'none');
-                            $Datos[5] = array('idServicios' => '','Nombre' => '','Descripcion' => '','urlIMG' =>'none');
-                            $Datos[6] = array('idServicios' => '','Nombre' => '','Descripcion' => '','urlIMG' =>'none');
-                        }
-                        $Base->close();
-                        ?>
-                        <script type="text/javascript">
-                        var arrayJS = <?php echo json_encode($Datos);?>;
-                        for (var i = 0; i < arrayJS.length; i++) {
-                            console.log("<br>" + arrayJS[i]);
-                        }
-                        </script>
+                            $Servicios -> GenerarHeaderServicios('Oops!','Aún no hay información ingresada para esta sección.');
+                        } 
+		                ?>
 
-                        <form name="PantallaSer" id="PantallaSer">
-                            <select name="Pantalla" id="Pantalla" size="8" onchange="OnlyID(arrayJS[this.value]['idServicios'],arrayJS[this.value]['Nombre'],arrayJS[this.value]['urlIMG'])">
+                        <div class='feature-list'>
+                            <div class='row'>
                                 <?php 
-                            for ($i=1; $i <= sizeof($Datos) ; $i++) 
-                            { 
-                                echo "<option value='".$i."'>";
-                                if($Datos[$i]['urlIMG']!="none"){echo "Servicio $i:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";}
-                                else{}
-                                echo $Datos[$i]['Nombre']."</option>";
-                            }
-                            ?>
-                            </select>
-                        </form>
-                        <hr>
-                        <section>
-                            <form class="service" id="Delete" name="Delete" method="post"
-                                action="RespuestaServicios.php" enctype="multipart/form-data">
-                                    <div class="col-12">
-                                        <ul class="actions">
-                                            <li><input type="submit" class="style6" value="Eliminar Servicio" id="eliminarS" name="eliminarS" disabled onclick="confirmar()" /></li>
-                                            <li><input type="submit" class="style2" value="Cancelar"
-                                                    onclick="document.Delete.action = 'ServiciosAd.php'; cancel=true;" />
-                                            </li>
-                                            <input type="hidden" id="IdServicios" name="IdServicios" value="-1" readonly required>
-                                            <input type="hidden" id="name" name="name" value="-1" readonly required>
-                                        </ul>
-                                    </div>
-
-                                </div>
-                            </form>
-                        </section>
+                                $Consulta = "Select * from Servicios order by Nombre asc";
+                                $Ejecucion = $Base->query($Consulta);
+                                if($Ejecucion->num_rows!=0)
+                                {
+                                    if($Ejecucion)
+                                    {
+                                        while ($fila = $Ejecucion->fetch_assoc())
+                                        {
+                                            $Servicios -> ExtraerBase($fila);
+		                            	    $Servicios -> GenerarServicio();
+                                        }
+                                    }  
+                                }
+                                else 
+                                {
+                                    echo "<header class='col-12 style1'><br><hr>";
+                                    echo "<p>Oops! Parece que aún no hay servicios registrados.</p><hr></header>";
+                                }
+                                
+                                $Base -> close();          
+		                        ?>
+                            </div>
+                        </div>
+                        <ul class='actions special'>
+                            <li><a href='#' class='button style1 large'>Organiza tu Reunión</a></li>
+                        </ul>
                     </article>
                 </div>
-
             </div>
         </div>
-
-        <!-- Highlights -->
 
         <!-- Footer -->
         <section id="footer" class="wrapper">
@@ -238,9 +240,6 @@
     <script src="assets/js/breakpoints.min.js"></script>
     <script src="assets/js/util.js"></script>
     <script src="assets/js/main.js"></script>
-    <script src="assets/js/ConfirmarSalir.js"></script>
-    <script src="assets/js/RellenarInputs.js?<?php echo time().".0"; ?>"></script>
-    <script src="assets/js/Seguro.js?<?php echo time().".0"; ?>"></script>
 
 </body>
 

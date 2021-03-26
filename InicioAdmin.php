@@ -1,11 +1,10 @@
 <!DOCTYPE HTML>
 <html>
-
 <head>
-    <title>Servicios - Wine & Champagne Eventos</title>
+    <title>Inicio - Wine & Champagne Eventos</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-    <link rel="stylesheet" href="assets/css/main.css?<?php echo time().".0"; ?>" media="all" />
+    <link rel="stylesheet" href="assets/css/main.css" />
 </head>
 
 <body class="no-sidebar is-preload">
@@ -29,7 +28,7 @@
                         <ul>
                             <li><a href="EditarHeader.php">Editar Header</a></li>
                             <li>
-                                <a href="">Editar Servicios</a>
+                                <a>Editar Servicios</a>
                                 <ul>
                                     <li><a href="AgregarServicios.php">Agregar Servicio</a></li>
                                     <li><a href="ActualizarServicios.php">Actualizar Servicio</a></li>
@@ -38,100 +37,128 @@
                             </li>
                         </ul>
                     </li>
-                    <li><a href="Eventos.php">EVENTOS</a></li>
+                    <li><a href="EventosAdmin.php">EVENTOS</a></li>
                     <li><a href="AcercadeAdmin.php">QUIENES SOMOS</a></li>
-                    <li class="current"><a href="Base.html">CONTACTANOS</a></li>
+                    <li class="current"><a href="#">CONTACTANOS</a></li>
                 </ul>
             </nav>
 
         </section>
 
         <!-- Main -->
-        <div id="main" class="wrapper style2">
-            <div class="title">Eliminar Servicios</div>
-            <div class="container">
-                <!-- Content -->
-                <div id="content">
-                    <article class="box post">
-                        <header class="style1">
-                            <h2>Eliminar Servicios de la Web</h2>
-                            <p>Seleccione el Servicio que desea eliminar:</p>
-                        </header>
-                        <?php 
-                        require 'class/servicios.php';
-                        $Servicios = new Servicio();
-                        $Base = new mysqli('localhost','root','','mydb',3307);
-                        $Base -> set_charset("utf8");
-                        $Consulta = "Select * from Servicios order by Nombre asc";
-                        $Ejecucion = $Base->query($Consulta);
-                        if($Ejecucion->num_rows!=0)
-                        {
-                            if($Ejecucion)
-                            {
-                                $i=1;
-                                while ($fila = $Ejecucion->fetch_assoc())
-                                {
-                                    $Datos[$i] = $fila;
-                                    $i++;
-                                }
-                            }  
-                        }
-                        else 
-                        {
-                            $Datos[1] = array('idServicios' => '','Nombre' => '','Descripcion' => '','urlIMG' =>'none');
-                            $Datos[2] = array('idServicios' => '','Nombre' => '','Descripcion' => '','urlIMG' =>'none');
-                            $Datos[3] = array('idServicios' => '','Nombre' => 'Oops!','Descripcion' => '','urlIMG' =>'none');
-                            $Datos[4] = array('idServicios' => '','Nombre' => 'Aún no hay servicios registrados en la Base de Datos','Descripcion' => '','urlIMG' =>'none');
-                            $Datos[5] = array('idServicios' => '','Nombre' => '','Descripcion' => '','urlIMG' =>'none');
-                            $Datos[6] = array('idServicios' => '','Nombre' => '','Descripcion' => '','urlIMG' =>'none');
-                        }
-                        $Base->close();
-                        ?>
-                        <script type="text/javascript">
-                        var arrayJS = <?php echo json_encode($Datos);?>;
-                        for (var i = 0; i < arrayJS.length; i++) {
-                            console.log("<br>" + arrayJS[i]);
-                        }
-                        </script>
+                <div id="main" class="wrapper style2">
+                    <div class="title">INICIO</div>
+                    <div class="container">
 
-                        <form name="PantallaSer" id="PantallaSer">
-                            <select name="Pantalla" id="Pantalla" size="8" onchange="OnlyID(arrayJS[this.value]['idServicios'],arrayJS[this.value]['Nombre'],arrayJS[this.value]['urlIMG'])">
-                                <?php 
-                            for ($i=1; $i <= sizeof($Datos) ; $i++) 
-                            { 
-                                echo "<option value='".$i."'>";
-                                if($Datos[$i]['urlIMG']!="none"){echo "Servicio $i:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";}
-                                else{}
-                                echo $Datos[$i]['Nombre']."</option>";
-                            }
-                            ?>
-                            </select>
-                        </form>
-                        <hr>
-                        <section>
-                            <form class="service" id="Delete" name="Delete" method="post"
-                                action="RespuestaServicios.php" enctype="multipart/form-data">
-                                    <div class="col-12">
-                                        <ul class="actions">
-                                            <li><input type="submit" class="style6" value="Eliminar Servicio" id="eliminarS" name="eliminarS" disabled onclick="confirmar()" /></li>
-                                            <li><input type="submit" class="style2" value="Cancelar"
-                                                    onclick="document.Delete.action = 'ServiciosAd.php'; cancel=true;" />
-                                            </li>
-                                            <input type="hidden" id="IdServicios" name="IdServicios" value="-1" readonly required>
-                                            <input type="hidden" id="name" name="name" value="-1" readonly required>
-                                        </ul>
-                                    </div>
+                        <!-- Content -->
+                            <div id="content">
+                                <article class="box post">
+                                    <header class="style1">
+                                        <h2>Creando experiencias inolvidables</h2>
+                                        <p>Nuestra empresa de eventos radica en comercializar un servicio integral cinco estrellas de eventos para empresas y particulares creando experiencias y generando emociones para ti.</p>
+                                    </header>
+                                    <a href="#" class="image featured">
+                                        <?php $ruta = "images/pic01.jpg"; ?>
+                                        <img src="<?php echo $ruta; ?>" alt="" />
+                                    </a>
+                                    <h2>¿Por qué elegirnos?</h2>
+                                    <p>Son muchos los diferentes criterios por los que nos guiamos para decidir y escoger. En esta empresa de eventos valoramos la gran capacidad de nuestras celebraciones para aportar a los asistentes la posibilidad de encontrar un lugar en el que experimentar y sentir de manera diferente, en el que también puedas relacionarte con los demás, aprender, descubrir y compartir vivencias.</p>
+                                    <p>Todos nuestros eventos, sin excepción, captan la atención de los invitados, pues cada uno de ellos es diferente y único, y en cada uno de ellos se sienten y se tienen diferentes experiencias y sensaciones.</p>
+                                    <p>Esto es posible gracias a el gran equipo de profesionales que se encuentra detrás de cada acontecimiento, un equipo que se caracteriza por su pasión, especialización, entusiasmo, experiencia y vocación en todo lo que organiza nuestra empresa de eventos</p>
+                                </article>
+                            </div>
 
-                                </div>
-                            </form>
-                        </section>
-                    </article>
+                    </div>
                 </div>
 
+
+        <!-- SERVICIOS -->
+        <?php
+            require 'class/servicios.php';
+            $Servicios = new Servicio();
+            $Base = new mysqli('localhost','root','','mydb',3307);
+            $Base -> set_charset("utf8");
+
+        ?>
+
+        <section id="highlights" class="wrapper style2">
+        
+        <div id='main' class='wrapper style2'>
+            <div class='container'>
+                <div id='content'>
+                    <article class='box post'>
+                        <?php 
+                            $HeaderC = "SELECT * FROM InfoServicios";
+                            $HeaderR = $Base->query($HeaderC);
+                            if($HeaderR->num_rows!=0)
+                            {
+                                if($HeaderR)
+                                {
+                                    $fila = $HeaderR->fetch_assoc();
+                                    $Servicios -> GenerarHeaderServicios($fila['HeaderTitulo'],$fila['DescripcionHeader']);
+                                }  
+                            }
+                            else 
+                            {
+                                $Servicios -> GenerarHeaderServicios('Oops!','Aún no hay información ingresada para esta sección.');
+                            } 
+                        ?>
+                        <div class='feature-list'>
+                            <div class='row'>
+                                <?php 
+                                    $Consulta = "Select * from Servicios order by Nombre asc limit 4";
+                                    $Ejecucion = $Base->query($Consulta);
+                                    if($Ejecucion)
+                                    {
+                                        while ($fila = $Ejecucion->fetch_assoc())
+                                        {
+                                            $Servicios -> ExtraerBase($fila);
+                                            $Servicios -> GenerarServicio();
+                                        }
+                                    }
+                                    $Base->close();
+                                ?>
+                            </div>
+                        </div>
+                        <ul class='actions special'>
+                            <li><a href='ServiciosAdmin.php' class='button style1 large'>Conoce más</a></li>
+                        </ul>
+                    </article>
+                </div>
             </div>
         </div>
+    
+</section>
 
-        <!-- Highlights -->
+                <!-- EVENTOS -->
+        <?php
+            $Base = new mysqli('localhost','root','','mydb',3307);
+            $Base -> set_charset("utf8");
+        ?>
+                <section id="highlights" class="wrapper style3">
+                    <div class="title">NUESTROS EVENTOS</div>
+                    <div class="container">
+                        <div class="row aln-center">
+                            <?php 
+                                include( 'class/InicioEventos.php');
+                                $Consulta = "Select * from fotoseventos limit 3";
+                                $Ejecucion = $conexion->query($Consulta);
+                                if($Ejecucion)
+                                {
+                                    while ($fila = $Ejecucion->fetch_assoc())
+                                    {
+                                        echo "<div class='col-4 col-12-medium'><section class='highlight'><a href='#'' class='image featured'><img src='data:image/jpeg;base64,". base64_encode($fila['UrlFoto'])."' style='width:100%;'></a></section></div>";
+                                    }
+                                }
+                            ?> 
+                        </div>
+                        <h3><a>Algunos recuerdos</a></h3>
+                            <p>Estas fotos fueron tomadas en los eventos organizados por nosotros. Si te ha gustado puedes seguir conociendo acerca de nuestros eventos. ¡No te arrepentirás!</p>
+                        <ul class='actions special'>
+                            <li><a href='EventosAdmin.php' class='button style1 large'>Conoce más</a></li>
+                        </ul>
+                    </div>
+                </section>
 
         <!-- Footer -->
         <section id="footer" class="wrapper">
@@ -238,9 +265,6 @@
     <script src="assets/js/breakpoints.min.js"></script>
     <script src="assets/js/util.js"></script>
     <script src="assets/js/main.js"></script>
-    <script src="assets/js/ConfirmarSalir.js"></script>
-    <script src="assets/js/RellenarInputs.js?<?php echo time().".0"; ?>"></script>
-    <script src="assets/js/Seguro.js?<?php echo time().".0"; ?>"></script>
 
 </body>
 

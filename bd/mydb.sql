@@ -3,9 +3,11 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3307
--- Tiempo de generación: 26-03-2021 a las 18:55:21
+-- Tiempo de generación: 21-03-2021 a las 20:48:04
 -- Versión del servidor: 10.4.17-MariaDB
 -- Versión de PHP: 8.0.0
+CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8 ;
+USE `mydb` ;
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -105,6 +107,8 @@ INSERT INTO `enlaces` (`IDEnlaces`, `Nombre`, `Enlace`) VALUES
 CREATE TABLE `eventos` (
   `idEventos` int(11) NOT NULL,
   `IdTipoEvento` int(11) NOT NULL,
+  `IdEmpresa` int(11) NOT NULL,
+  `Id_Usuario` int(11) NOT NULL,
   `Nombre` varchar(45) DEFAULT NULL,
   `fecha` date DEFAULT NULL,
   `Lugar` varchar(200) DEFAULT NULL,
@@ -123,16 +127,6 @@ CREATE TABLE `infoservicios` (
   `HeaderTitulo` varchar(50) DEFAULT NULL,
   `DescripcionHeader` varchar(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Volcado de datos para la tabla `infoservicios`
---
-
-INSERT INTO `infoservicios` (`idEmpresa`, `HeaderTitulo`, `DescripcionHeader`) VALUES
-(1, 'Esto es un Header', 'Bienvenido'),
-(2, 'Probando', 'Bienvenido 2');
-
--- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `servicios`
@@ -211,7 +205,9 @@ ALTER TABLE `enlaces`
 --
 ALTER TABLE `eventos`
   ADD PRIMARY KEY (`idEventos`),
-  ADD KEY `IdTipoEvento` (`IdTipoEvento`);
+  ADD KEY `IdTipoEvento` (`IdTipoEvento`),
+  ADD KEY `IdEmpresa` (`IdEmpresa`),
+  ADD KEY `Id_Usuario` (`Id_Usuario`);
 
 --
 -- Indices de la tabla `infoservicios`
@@ -223,6 +219,7 @@ ALTER TABLE `infoservicios`
 -- Indices de la tabla `servicios`
 --
 ALTER TABLE `servicios`
+  ADD PRIMARY KEY (`idServicios`),
   ADD KEY `IdEmpresa` (`IdEmpresa`),
   ADD KEY `Id_Usuario` (`Id_Usuario`);
 
@@ -270,7 +267,9 @@ ALTER TABLE `detalle_empresa_enlaces`
 -- Filtros para la tabla `eventos`
 --
 ALTER TABLE `eventos`
-  ADD CONSTRAINT `eventos_ibfk_1` FOREIGN KEY (`IdTipoEvento`) REFERENCES `tipoevento` (`idTipoEvento`);
+  ADD CONSTRAINT `eventos_ibfk_1` FOREIGN KEY (`IdTipoEvento`) REFERENCES `tipoevento` (`idTipoEvento`),
+  ADD CONSTRAINT `eventosempresa_ibfk_1` FOREIGN KEY (`IdEmpresa`) REFERENCES `empresa` (`idEmpresa`),
+  ADD CONSTRAINT `eventousuarios_ibfk_2` FOREIGN KEY (`Id_Usuario`) REFERENCES `usuario` (`idUsuario`);
 
 --
 -- Filtros para la tabla `servicios`
@@ -278,6 +277,10 @@ ALTER TABLE `eventos`
 ALTER TABLE `servicios`
   ADD CONSTRAINT `servicios_ibfk_1` FOREIGN KEY (`IdEmpresa`) REFERENCES `empresa` (`idEmpresa`),
   ADD CONSTRAINT `servicios_ibfk_2` FOREIGN KEY (`Id_Usuario`) REFERENCES `usuario` (`idUsuario`);
+
+ALTER TABLE `infoservicios`
+  ADD CONSTRAINT `infoservicios_ibfk_1` FOREIGN KEY (`IdEmpresa`) REFERENCES `empresa` (`idEmpresa`);
+
 
 --
 -- Filtros para la tabla `usuario`
