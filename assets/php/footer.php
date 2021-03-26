@@ -1,6 +1,6 @@
 <?php require 'class/enlace.class.php'; ?>
-<?php 
-require 'class/empresa.class.php'; 
+<?php
+require_once 'class/empresa.class.php';
 $mysqli = new mysqli('localhost', 'root', '', 'mydb', 3307)  or die($mysqli->error);
 ?>
 <!-- Footer -->
@@ -8,8 +8,18 @@ $mysqli = new mysqli('localhost', 'root', '', 'mydb', 3307)  or die($mysqli->err
     <div class="title">CONTACTANOS</div>
     <div class="container">
         <header class="style1">
-            <h2><?php $empresa->Showcontacttitle() ?></h2>
-            <p><?php $empresa->Showcontactdesc() ?></p>
+            <h2><?php
+                $contacttitle = "SELECT `ContactTitle` FROM `empresa` WHERE 1";
+                $peticion = $mysqli->query($contacttitle);
+                $filaemprcontact = $peticion->fetch_assoc();
+                echo $filaemprcontact['ContactTitle'];
+                ?></h2>
+            <p><?php
+                $ContactDesc = "SELECT `ContactDesc` FROM `empresa` WHERE 1";
+                $peticion = $mysqli->query($ContactDesc);
+                $filaemprcontact = $peticion->fetch_assoc();
+                echo $filaemprcontact['ContactDesc'];
+                ?></p>
         </header>
         <div class="row">
             <div class="col-6 col-12-medium">
@@ -44,7 +54,12 @@ $mysqli = new mysqli('localhost', 'root', '', 'mydb', 3307)  or die($mysqli->err
                             <section>
                                 <h3 class="icon solid fa-home">Dirección</h3>
                                 <p>
-                                    <?php $empresa->ShowDireccion() ?>
+                                    <?php
+                                    $Direccion = "SELECT `Direccion` FROM `empresa` WHERE 1";
+                                    $peticion = $mysqli->query($Direccion);
+                                    $filaemprcontact = $peticion->fetch_assoc();
+                                    echo $filaemprcontact['Direccion'];
+                                    ?>
                                 </p>
                             </section>
                         </div>
@@ -53,13 +68,12 @@ $mysqli = new mysqli('localhost', 'root', '', 'mydb', 3307)  or die($mysqli->err
                                 <h3 class="icon solid fa-comment">Redes Sociales</h3>
                                 <p>
                                     <?php
-                                    
                                     $inner = "SELECT enlaces.IDEnlaces, enlaces.Nombre,enlaces.Enlace FROM enlaces INNER JOIN detalle_empresa_enlaces ON enlaces.IDEnlaces=detalle_empresa_enlaces.IDEnlaces INNER JOIN empresa ON detalle_empresa_enlaces.IDEmpresa=empresa.idEmpresa";
                                     $resultado = $mysqli->query($inner);
                                     //pre_r($resultado->fetch_assoc());
                                     while ($selector = $resultado->fetch_assoc()) :
                                     ?>
-                                    <a href="<?php echo $selector['Enlace'] ?>"><?php echo $selector['Nombre'] ?></a><br/>
+                                        <a href="<?php echo $selector['Enlace'] ?>"><?php echo $selector['Nombre'] ?></a><br />
                                     <?php endwhile; ?>
                                 </p>
                             </section>
@@ -68,7 +82,15 @@ $mysqli = new mysqli('localhost', 'root', '', 'mydb', 3307)  or die($mysqli->err
                             <section>
                                 <h3 class="icon solid fa-envelope">Correo Electronico</h3>
                                 <p>
-                                    <a href="#"><?php $empresa->ShowEmail() ?></a>
+                                    <a href="#">
+                                        <?php
+                                        $Email = "SELECT `Email` FROM `empresa` WHERE 1";
+                                        $peticion = $mysqli->query($Email);
+                                        $filaemprcontact = $peticion->fetch_assoc();
+                                        echo $filaemprcontact['Email'];
+
+                                        ?>
+                                    </a>
                                 </p>
                             </section>
                         </div>
@@ -76,7 +98,13 @@ $mysqli = new mysqli('localhost', 'root', '', 'mydb', 3307)  or die($mysqli->err
                             <section>
                                 <h3 class="icon solid fa-phone">Telefono</h3>
                                 <p>
-                                    <?php $empresa->ShowTelefono() ?>
+                                    <?php
+                                    $Telefono = "SELECT `Telefono` FROM `empresa` WHERE 1";
+                                    $peticion = $mysqli->query($Telefono);
+                                    $filaemprcontact = $peticion->fetch_assoc();
+                                    echo implode('-', str_split($filaemprcontact['Telefono'], 4));
+
+                                    ?>
                                 </p>
                             </section>
                         </div>

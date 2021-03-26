@@ -1,9 +1,23 @@
+<?php
+require_once 'class/empresa.class.php';
+$mysqli = new mysqli('localhost', 'root', '', 'mydb', 3307)  or die($mysqli->error);
+?>
 <!-- Header -->
 <section id="header" class="wrapper">
     <!-- Logo -->
     <div id="logo">
-        <h1><a href="index.html"><?php $empresa->ShowNombre()?></a></h1>
-        <p><?php $empresa->ShowSlogan()?></p>
+        <h1><a href="index.html"><?php
+                $Nombre = "SELECT `Nombre` FROM `empresa` WHERE 1";
+                $peticion = $mysqli->query($Nombre);
+                $filaemprcontact = $peticion->fetch_assoc();
+                echo $filaemprcontact['Nombre'];
+                ?></a></h1>
+        <p><?php
+                $Slogan = "SELECT `Slogan` FROM `empresa` WHERE 1";
+                $peticion = $mysqli->query($Slogan);
+                $filaemprcontact = $peticion->fetch_assoc();
+                echo $filaemprcontact['Slogan'];
+                ?></p>
         <?php
         if ($admin) {
         ?>

@@ -55,7 +55,7 @@
 	}
 
 	//Llenando la clase
-	require 'class/empresa.class.php';
+	require_once 'class/empresa.class.php';
 	//Conexion
 	$Base = new mysqli('localhost', 'root', '', 'mydb', 3307);
 	$Base->set_charset("utf8");
@@ -85,7 +85,8 @@
 	?>
 	<div id="page-wrapper">
 		<?php
-		includeWithVariables('./assets/php/header.php', array('admin' => $admin, 'empresa' => $empresa));
+		require './assets/php/header.php';
+		//includeWithVariables(, array('admin' => $admin, 'empresa' => $empresa));
 		?>
 		<!-- Main -->
 		<div id="main" class="wrapper style2">
@@ -206,7 +207,7 @@
 			</div>
 		</section>
 		<?php
-		includeWithVariables('./assets/php/footer.php', array('admin' => $admin, 'empresa' => $empresa));
+		require './assets/php/footer.php';
 		?>
 	</div>
 	<!-- Scripts -->

@@ -1,6 +1,5 @@
 <!DOCTYPE HTML>
 <html>
-
 <head>
     <title>ORGANIZADORA DE EVENTOS</title>
     <meta charset="utf-8" />
@@ -92,7 +91,8 @@
     ?>
     <div id="page-wrapper">
         <?php
-        includeWithVariables('./assets/php/header.php', array('admin' => $admin, 'empresa' => $empresa));
+        require './assets/php/header.php';
+        //includeWithVariables('./assets/php/header.php', array('admin' => $admin, 'empresa' => $empresa));
         ?>
         <!-- Main -->
         <div id="main" class="wrapper style2">
@@ -142,7 +142,7 @@
                                                 </div>
                                                 <div class="col-xs-12 col-md-6">
                                                     <label for="telefono">Telefono</label>
-                                                    <input class="empresa" value="<?php $empresa->ShowTelefono() ?>" type="text" name="telefono" id="nombreEmp" maxlength="6" placeholder="Ingrese el Número telefonico" onchange="cancel = true;" />
+                                                    <input class="empresa" value="<?php $empresa->ShowTelefono() ?>" type="text" name="telefono" id="nombreEmp" maxlength="8" placeholder="Ingrese el Número telefonico" onchange="cancel = true;" />
                                                 </div>
                                                 <div class="col-xs-12 col-md-6">
                                                     <label for="direccion">Dirección</label>
@@ -396,7 +396,7 @@
             </div>
         </section>
         <?php
-        includeWithVariables('./assets/php/footer.php', array('admin' => $admin, 'empresa' => $empresa));
+        require './assets/php/footer.php';
         ?>
     </div>
     <!-- Scripts -->
@@ -507,5 +507,4 @@
         gtag('config', 'UA-85082661-5');
     </script>
 </body>
-
 </html>
