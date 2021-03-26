@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3307
--- Tiempo de generación: 21-03-2021 a las 20:48:04
+-- Tiempo de generación: 26-03-2021 a las 18:55:21
 -- Versión del servidor: 10.4.17-MariaDB
 -- Versión de PHP: 8.0.0
 
@@ -20,6 +20,27 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `mydb`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `detalle_empresa_enlaces`
+--
+
+CREATE TABLE `detalle_empresa_enlaces` (
+  `IDEnlaces` int(5) NOT NULL,
+  `IDEmpresa` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `detalle_empresa_enlaces`
+--
+
+INSERT INTO `detalle_empresa_enlaces` (`IDEnlaces`, `IDEmpresa`) VALUES
+(3, 1),
+(33, 1),
+(38, 1),
+(40, 1);
 
 -- --------------------------------------------------------
 
@@ -51,7 +72,29 @@ CREATE TABLE `empresa` (
 --
 
 INSERT INTO `empresa` (`idEmpresa`, `Nombre`, `TituloDescripcion`, `LogoDesc`, `Descripcion`, `EventosTitle`, `EventosDesc`, `UbicTitle`, `UbicDesc`, `ContactTitle`, `ContactDesc`, `Slogan`, `Telefono`, `Direccion`, `Email`, `Logo_Url`) VALUES
-(1, 'WINE & CHAMPAGNE EVENTOS', 'UNA EMPRESA GENIAL', 'fas fa-adjust', 'Eget mattis at, laoreet vel et velit aliquam diam ante, aliquet sit amet vulputate et magna feugiat laoreet vel velit lorem. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ipsum ducimus sit impedit, consequuntur, enim cumque magnam doloribus laboriosam quidem alias, cum veniam ut deserunt. Culpa assumenda doloribus error perferendis dolor. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Itaque dolores totam blanditiis temporibus, aut neque? Enim laboriosam vero molestiae voluptatum magni, exercitationem ducimus illum porro eaque sunt adipisci velit quasi.', '¡MOMENTOS INOLVIDABLES!', 'Eget mattis at, laoreet vel amet sed velit aliquam diam ante, dolor aliquet sit amet vulputate mattis amet laoreet lorem. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perspiciatis numquam voluptatibus, sapiente sed sint enim deserunt omnis, necessitatibus impedit cupiditate est, magni tempore molestias repellat sequi ipsum error praesentium quod. Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur, obcaecati beatae commodi labore earum mollitia provident, rerum officia autem at, libero est in atque quia eaque minus quos ipsam! Aliquid! Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officia qui, dolorem aperiam quasi in, accusamus beatae vitae ducimus saepe asperiores sapiente possimus iste minus delectus ipsa maxime necessitatibus explicabo autem.', '¡ESTAMOS CERCA!!!!!!!', 'Eget mattis at, laoreet vel amet sed velit aliquam diam ante, dolor aliquet sit amet vulputate mattis amet laoreet lorem. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ducimus voluptates est dolorem totam corrupti suscipit laudantium at, incidunt ipsa. Reprehenderit voluptates tempore similique illo hic nihil corrupti facilis, ad eius!\r\n\r\nEget mattis at, laoreet vel amet sed velit aliquam diam ante, dolor aliquet sit amet vulputate mattis amet laoreet lorem. Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate ad est porro minima nemo. Voluptatibus non architecto odit molestiae rem, sint eveniet veniam autem impedit ad inventore alias facere reiciendis. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus incidunt natus magnam, blanditiis sequi eum ut recusandae sed hic voluptatibus neque tempora, numquam expedita aliquam enim molestias facilis corrupti dolore?', '¿Interesado?¡Contactanos!', 'Atenderemos en nuestras redes sociales', '¡B I E N V E N I D O S!', '724055', 'Cima 4, Pasaje el Copinol, #173', 'vallecesco@gmail.com', '##');
+(1, 'WINE & CHAMPAGNE EVENTOS', 'UNA EMPRESA GENIAL', 'fas fa-adjust', 'Eget mattis at, laoreet vel et velit aliquam diam ante, aliquet sit amet vulputate et magna feugiat laoreet vel velit lorem. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ipsum ducimus sit impedit, consequuntur, enim cumque magnam doloribus laboriosam quidem alias, cum veniam ut deserunt. Culpa assumenda doloribus error perferendis dolor. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Itaque dolores totam blanditiis temporibus, aut neque? Enim laboriosam vero molestiae voluptatum magni, exercitationem ducimus illum porro eaque sunt adipisci velit quasi.', '¡MOMENTOS INOLVIDABLES!', 'Eget mattis at, laoreet vel amet sed velit aliquam diam ante, dolor aliquet sit amet vulputate mattis amet laoreet lorem. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perspiciatis numquam voluptatibus, sapiente sed sint enim deserunt omnis, necessitatibus impedit cupiditate est, magni tempore molestias repellat sequi ipsum error praesentium quod. Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur, obcaecati beatae commodi labore earum mollitia provident, rerum officia autem at, libero est in atque quia eaque minus quos ipsam! Aliquid! Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officia qui, dolorem aperiam quasi in, accusamus beatae vitae ducimus saepe asperiores sapiente possimus iste minus delectus ipsa maxime necessitatibus explicabo autem.', '¡ESTAMOS CERCA!!!!!!!', 'Eget mattis at, laoreet vel amet sed velit aliquam diam ante, dolor aliquet sit amet vulputate mattis amet laoreet lorem. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ducimus voluptates est dolorem totam corrupti suscipit laudantium at, incidunt ipsa. Reprehenderit voluptates tempore similique illo hic nihil corrupti facilis, ad eius!\r\n\r\nEget mattis at, laoreet vel amet sed velit aliquam diam ante, dolor aliquet sit amet vulputate mattis amet laoreet lorem. Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate ad est porro minima nemo. Voluptatibus non architecto odit molestiae rem, sint eveniet veniam autem impedit ad inventore alias facere reiciendis. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus incidunt natus magnam, blanditiis sequi eum ut recusandae sed hic voluptatibus neque tempora, numquam expedita aliquam enim molestias facilis corrupti dolore?', '¿Interesado?¡Contactanos!', 'Atenderemos en nuestras redes sociales', '¡B I E N V E N I D O S!', '78724055', 'Cima 4, Pasaje el Copinol, #173', 'vallecesco@gmail.com', '##');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `enlaces`
+--
+
+CREATE TABLE `enlaces` (
+  `IDEnlaces` int(5) NOT NULL,
+  `Nombre` varchar(20) NOT NULL,
+  `Enlace` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `enlaces`
+--
+
+INSERT INTO `enlaces` (`IDEnlaces`, `Nombre`, `Enlace`) VALUES
+(3, 'Twitter', 'https://twitter.com/compose/tweet/media'),
+(33, 'GitHub', 'https://github.com/'),
+(38, 'Facebook', 'https://m.facebook.com/home.php'),
+(40, 'LinkedIn', 'https://www.linkedin.com/feed/');
 
 -- --------------------------------------------------------
 
@@ -145,10 +188,23 @@ CREATE TABLE `usuario` (
 --
 
 --
+-- Indices de la tabla `detalle_empresa_enlaces`
+--
+ALTER TABLE `detalle_empresa_enlaces`
+  ADD KEY `IDEmpresa` (`IDEmpresa`),
+  ADD KEY `detalle_empresa_enlaces_ibfk_2` (`IDEnlaces`);
+
+--
 -- Indices de la tabla `empresa`
 --
 ALTER TABLE `empresa`
   ADD PRIMARY KEY (`idEmpresa`);
+
+--
+-- Indices de la tabla `enlaces`
+--
+ALTER TABLE `enlaces`
+  ADD PRIMARY KEY (`IDEnlaces`);
 
 --
 -- Indices de la tabla `eventos`
@@ -190,8 +246,25 @@ ALTER TABLE `usuario`
   ADD KEY `Id_tipo_usuario` (`Id_tipo_usuario`);
 
 --
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `enlaces`
+--
+ALTER TABLE `enlaces`
+  MODIFY `IDEnlaces` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+
+--
 -- Restricciones para tablas volcadas
 --
+
+--
+-- Filtros para la tabla `detalle_empresa_enlaces`
+--
+ALTER TABLE `detalle_empresa_enlaces`
+  ADD CONSTRAINT `detalle_empresa_enlaces_ibfk_1` FOREIGN KEY (`IDEmpresa`) REFERENCES `empresa` (`idEmpresa`),
+  ADD CONSTRAINT `detalle_empresa_enlaces_ibfk_2` FOREIGN KEY (`IDEnlaces`) REFERENCES `enlaces` (`IDEnlaces`);
 
 --
 -- Filtros para la tabla `eventos`
