@@ -32,7 +32,7 @@
 	echo "<p>El permiso es : $permiso</p>";
 	echo "<p>permiso de admin:" . (bool)$admin . "</p>";
 
-	function includeWithVariables($filePath, $variables = array(), $print = true)
+	/*function includeWithVariables($filePath, $variables = array(), $print = true)
 	{
 		$output = NULL;
 		if (file_exists($filePath)) {
@@ -52,7 +52,7 @@
 			print $output;
 		}
 		return $output;
-	}
+	}*/
 
 	//Llenando la clase
 	require_once 'class/empresa.class.php';
