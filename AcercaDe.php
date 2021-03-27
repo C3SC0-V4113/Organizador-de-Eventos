@@ -2,7 +2,7 @@
 <html>
 
 <head>
-	<title>ORGANIZADORA DE EVENTOS</title>
+	<title>Sobre Nosotros - Wine & Champagne Eventos</title>
 	<meta charset="utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
@@ -86,7 +86,6 @@
 	<div id="page-wrapper">
 		<?php
 		require './assets/php/header.php';
-		//includeWithVariables(, array('admin' => $admin, 'empresa' => $empresa));
 		?>
 		<!-- Main -->
 		<div id="main" class="wrapper style2">
