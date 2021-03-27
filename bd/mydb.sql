@@ -86,6 +86,22 @@ CREATE TABLE `enlaces` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
+-- Indices de la tabla `enlaces`
+--
+ALTER TABLE `enlaces`
+  ADD PRIMARY KEY (`IDEnlaces`);
+
+--
+
+--
+-- AUTO_INCREMENT de la tabla `enlaces`
+--
+ALTER TABLE `enlaces`
+  MODIFY `IDEnlaces` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+
+--
+
+--
 -- Volcado de datos para la tabla `enlaces`
 --
 
@@ -264,13 +280,6 @@ ALTER TABLE `detalle_empresa_enlaces`
 ALTER TABLE `empresa`
   ADD PRIMARY KEY (`idEmpresa`);
 
---
--- Indices de la tabla `enlaces`
---
-ALTER TABLE `enlaces`
-  ADD PRIMARY KEY (`IDEnlaces`);
-
---
 -- Indices de la tabla `eventos`
 --
 ALTER TABLE `eventos`
@@ -323,13 +332,6 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de las tablas volcadas
 --
 
---
--- AUTO_INCREMENT de la tabla `enlaces`
---
-ALTER TABLE `enlaces`
-  MODIFY `IDEnlaces` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
-
---
 -- AUTO_INCREMENT de la tabla `fotoseventos`
 --
 ALTER TABLE `fotoseventos`

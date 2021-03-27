@@ -64,7 +64,7 @@
                                             echo "<p>El Servicio: $nameS se guardo con éxito en la Base de Datos.</p>";
                                             echo "<ul class='actions special'><form id='back' name='back'><li>
                                             <a href='AgregarServicios.php'><input type='button' class='button special style5 large' value='Agregar otro Servicio'></a>
-                                            <a href='ServiciosAd.php'><input type='button' class='button special style5 large' value='Regresar al la seccion de Servicios'></a>
+                                            <a href='ServiciosAdmin.php'><input type='button' class='button special style5 large' value='Regresar al la seccion de Servicios'></a>
                                             </li></form></ul>";
                                         }
                                         else 
@@ -113,7 +113,7 @@
                                         echo "<h2>¡Datos Actualizados con Éxito!</h2>";
                                             echo "<p>La información del Header de 'Nuestros Servicios' ha sido actualizada con Éxito.</p>";
                                             echo "<ul class='actions special'><form id='back' name='back'><li>
-                                            <a href='ServiciosAd.php'><input type='button' class='button special style5 large' value='Regresar a la seccion de Servicios'></a>
+                                            <a href='ServiciosAdmin.php'><input type='button' class='button special style5 large' value='Regresar a la seccion de Servicios'></a>
                                             </li></form></ul>";
                                     }
                                     else 
@@ -160,7 +160,7 @@
                                                 echo "<ul class='actions special'><form id='back' name='back'>
                                                 <a href='ActualizarServicios.php'><input type='button' class='button special style5 large' value='Actualizar Otro Servicio'></a>
                                                 <li>
-                                                <a href='ServiciosAd.php'><input type='button' class='button special style5 large' value='Regresar al la seccion de Servicios'></a>
+                                                <a href='ServiciosAdmin.php'><input type='button' class='button special style5 large' value='Regresar al la seccion de Servicios'></a>
                                                 </li></form></ul>";
                                             }
                                             else 
@@ -190,7 +190,7 @@
                                     echo "<ul class='actions special'><form id='back' name='back'>
                                     <a href='EliminarServicios.php'><input type='button' class='button special style5 large' value='Eliminar Otro Servicio'></a>
                                     <li>
-                                    <a href='ServiciosAd.php'><input type='button' class='button special style5 large' value='Regresar al la seccion de Servicios'></a>
+                                    <a href='ServiciosAdmin.php'><input type='button' class='button special style5 large' value='Regresar al la seccion de Servicios'></a>
                                     </li></form></ul>";
                                 }
                                 else 

@@ -66,8 +66,8 @@
                                             echo "<h2>¡Proceso Realizado con Éxito!</h2>";
                                             echo "<p>El Evento: '$nameE' se guardo con éxito en la Base de Datos.</p>";
                                             echo "<ul class='actions special'><form id='back' name='back'><li>
-                                            <a href='AgregarEvento.php'><input type='button' class='button special style5 large' value='Agregar otro Servicio'></a>
-                                            <a href='EventosAd.php'><input type='button' class='button special style5 large' value='Regresar al la seccion de Servicios'></a>
+                                            <a href='AgregarEvento.php'><input type='button' class='button special style5 large' value='Agregar otro Evento'></a>
+                                            <a href='EventosAd.php'><input type='button' class='button special style5 large' value='Regresar al la seccion de Evento'></a>
                                             </li></form></ul>";
 
                                             if(isset($_FILES['ImagenesE']))
@@ -128,7 +128,7 @@
                                     echo "<h2>¡Error, faltan argumentos!</h2>";
                                     echo "<p>Vuelva a intentarlo otra vez, esta vez ingrese todos los argumentos solicitados</p>";
                                     echo "<ul class='actions special'><form id='back' name='back'><li>
-                                    <a href='AgregarServicios.php'><input type='button' class='button special style5 large' value='Intentarlo de Nuevo'></a>
+                                    <a href='AgregarEvento.php'><input type='button' class='button special style5 large' value='Intentarlo de Nuevo'></a>
                                     </li></form></ul>";
                                 }
 
@@ -236,9 +236,9 @@
                                                         echo "<h2>¡Evento Actualizado con Éxito!</h2>";
                                                         echo "<p>El Evento '$nameE' fue actualizado con Éxito</p>";
                                                         echo "<ul class='actions special'><form id='back' name='back'>
-                                                        <a href='ActualizarEvento.php'><input type='button' class='button special style5 large' value='Actualizar Otro Servicio'></a>
+                                                        <a href='ActualizarEvento.php'><input type='button' class='button special style5 large' value='Actualizar Otro Evento'></a>
                                                         <li>
-                                                        <a href='EventosAd.php'><input type='button' class='button special style5 large' value='Regresar al la seccion de Servicios'></a>
+                                                        <a href='EventosAd.php'><input type='button' class='button special style5 large' value='Regresar al la seccion de Eventos'></a>
                                                         </li></form></ul>";
                                                 }
                                                 else 
@@ -324,14 +324,14 @@
                                     echo "<h2>¡Evento Eliminado con Éxito!</h2>";
                                     echo "<p>El Evento '$nameE' fue eliminado con Éxito</p>";
                                     echo "<ul class='actions special'><form id='back' name='back'>
-                                    <a href='EliminarEventos.php'><input type='button' class='button special style5 large' value='Eliminar Otro Servicio'></a>
+                                    <a href='EliminarEventos.php'><input type='button' class='button special style5 large' value='Eliminar Otro Evento'></a>
                                     <li>
-                                    <a href='EventosAd.php'><input type='button' class='button special style5 large' value='Regresar al la seccion de Servicios'></a>
+                                    <a href='EventosAd.php'><input type='button' class='button special style5 large' value='Regresar al la seccion de Eventos'></a>
                                     </li></form></ul>";
                                 }
                                 else 
                                 {
-                                    echo "<h2>¡Error, al eliminar el servicio de la base de datos!</h2>";
+                                    echo "<h2>¡Error, al eliminar el evento de la base de datos!</h2>";
                                     echo "<p>Vuelva a intentarlo otra vez, porfavor</p>";
                                     echo "<ul class='actions special'><form id='back' name='back'><li>
                                     <a href='EliminarEventos.php'><input type='button' class='button special style5 large' value='Intentarlo de Nuevo'></a>
