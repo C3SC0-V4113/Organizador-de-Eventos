@@ -115,7 +115,7 @@
                                 {
                                     while ($fila = $Ejecucion->fetch_assoc())
                                     {
-                                        echo "<div class='col-4 col-12-medium'><section class='highlight'><a href='#'' class='image featured'><img src='data:image/jpeg;base64,". base64_encode($fila['UrlFoto'])."' style='width:100%;'></a></section></div>";
+                                        echo "<div class='col-4 col-12-medium'><section class='highlight'><a href='#'' class='image featured'><img src='". ($fila['UrlFoto'])."' style='width:100%;'></a></section></div>";
                                     }
                                 }
                             ?> 
