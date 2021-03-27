@@ -84,7 +84,7 @@
                                         <ul class="actions">
                                             <li><input type="submit" class="style6" value="Eliminar Servicio" id="eliminarS" name="eliminarS" disabled onclick="confirmar('servicio')" /></li>
                                             <li><input type="submit" class="style2" value="Cancelar"
-                                                    onclick="document.Delete.action = 'ServiciosAd.php'; cancel=true;" />
+                                                    onclick="document.Delete.action = 'ServiciosAdmin.php'; cancel=true;" />
                                             </li>
                                             <input type="hidden" id="IdServicios" name="IdServicios" value="-1" readonly required>
                                             <input type="hidden" id="name" name="name" value="-1" readonly required>

@@ -72,7 +72,7 @@
                                             <li><input type="submit" id='guardarS' name="guardarS" class="style5"
                                                     value="Guardar Servicio" onclick="cancel = false;" /></li>
                                             <li><input type="submit" class="style2" value="Cancelar"
-                                                    onclick="cancel = true; document.AddServices.action = 'ServiciosAd.php';" />
+                                                    onclick="cancel = true; document.AddServices.action = 'ServiciosAdmin.php';" />
                                             </li>
                                             <li><input type="reset" class="style2" value="Limpiar Campos"
                                                     onclick="Limpiar()" /></li>

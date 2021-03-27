@@ -42,7 +42,7 @@
                                     <div class="col-12">
                                         <ul class="actions">
                                             <li><input id="actualizarH" name="actualizarH" type="submit" class="style5" value="Actualizar Cambios" onclick ="cancel=false;" /></li>
-                                            <li><a href="ServiciosAd.php"><input type="button" class="style2" value="Cancelar"
+                                            <li><a href="ServiciosAdmin.php"><input type="button" class="style2" value="Cancelar"
                                                     onclick="cancel = true;" /></a>
                                             </li>
                                             <li><input type="reset" class="style2" value="Limpiar Campos"

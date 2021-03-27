@@ -125,7 +125,7 @@
                                             <li><input id="modificarS" name="modificarS" type="submit" class="style5"
                                                     value="Guardar Cambios" onclick="cancel=false;" disabled /></li>
                                             <li><input type="submit" class="style2" value="Cancelar"
-                                                    onclick="cancel = true; document.AddServices.action = 'ServiciosAd.php';" />
+                                                    onclick="cancel = true; document.AddServices.action = 'ServiciosAdmin.php';" />
                                             </li>
                                             <li><input type="reset" class="style2" value="Limpiar Campos"
                                                     onclick="Limpiar()" /></li>

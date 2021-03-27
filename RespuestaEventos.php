@@ -19,7 +19,7 @@
 
         <!-- Main -->
         <div id="main" class="wrapper style2">
-            <div class="title">Agregar Servicios</div>
+            <div class="title">Agregar Eventos</div>
             <div class="container">
                 <!-- Content -->
                 <div id="content">
@@ -255,9 +255,9 @@
                                                 echo "<h2>¡Evento Actualizado con Éxito!</h2>";
                                                         echo "<p>El Evento '$nameE' fue actualizado con Éxito</p>";
                                                         echo "<ul class='actions special'><form id='back' name='back'>
-                                                        <a href='ActualizarEvento.php'><input type='button' class='button special style5 large' value='Actualizar Otro Servicio'></a>
+                                                        <a href='ActualizarEvento.php'><input type='button' class='button special style5 large' value='Actualizar Otro Evento'></a>
                                                         <li>
-                                                        <a href='EventosAd.php'><input type='button' class='button special style5 large' value='Regresar al la seccion de Servicios'></a>
+                                                        <a href='EventosAd.php'><input type='button' class='button special style5 large' value='Regresar al la seccion de Eventos'></a>
                                                         </li></form></ul>";
                                             }
                                             if($idEliminadas!=null)
