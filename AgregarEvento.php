@@ -2,10 +2,17 @@
 <html>
 
 <head>
-    <title>Servicios - Wine & Champagne Eventos</title>
+    <title>Eventos - Wine & Champagne Eventos</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <link rel="stylesheet" href="assets/css/main.css?<?php echo time().".0"; ?>" media="all" />
+
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
+    <link href="dist/css/fontawesome-iconpicker.min.css?<?php echo time().".0"; ?>" rel="stylesheet">
+    
+
+
 </head>
 
 <body class="no-sidebar is-preload">
@@ -16,29 +23,29 @@
 
             <!-- Logo -->
             <div id="logo">
-                <h1><a href="indexAdmin.php">WINE & CHAMPAGNE<br>EVENTOS</a></h1>
+                <h1><a href="index.html">WINE & CHAMPAGNE<br>EVENTOS</a></h1>
                 <p>¡B I E N V E N I D O S!</p>
             </div>
 
             <!-- Nav -->
             <nav id="nav">
                 <ul>
-                    <li><a href="indexAdmin.php">INICIO</a></li>
+                    <li><a href="indexAdmin.html">INICIO</a></li>
                     <li>
                         <a href="ServiciosAd.php">NUESTROS SERVICIOS</a>
+                    </li>
+                    <li><a href="EventosAd.php">EVENTOS</a>
                         <ul>
-                            <li><a href="EditarHeader.php">Editar Header</a></li>
                             <li>
-                                <a href="">Editar Servicios</a>
+                                <a href="EventosAd.php">Editar Eventos</a>
                                 <ul>
-                                    <li><a href="AgregarServicios.php">Agregar Servicio</a></li>
-                                    <li><a href="ActualizarServicios.php">Actualizar Servicio</a></li>
-                                    <li><a href="EliminarServicios.php">Eliminar Servicio</a></li>
+                                    <li><a href="AgregarEvento.php">Agregar Eventos</a></li>
+                                    <li><a href="ActualizarEvento.php">Actualizar Eventos</a></li>
+                                    <li><a href="EliminarEventos.php">Eliminar Eventos</a></li>
                                 </ul>
                             </li>
                         </ul>
                     </li>
-                    <li><a href="BaseEventos.html">EVENTOS</a></li>
                     <li><a href="Base.html">QUIENES SOMOS</a></li>
                     <li class="current"><a href="Base.html">CONTACTANOS</a></li>
                 </ul>
@@ -48,80 +55,80 @@
 
         <!-- Main -->
         <div id="main" class="wrapper style2">
-            <div class="title">Eliminar Servicios</div>
+            <div class="title">Agregar Eventos</div>
             <div class="container">
                 <!-- Content -->
                 <div id="content">
                     <article class="box post">
                         <header class="style1">
-                            <h2>Eliminar Servicios de la Web</h2>
-                            <p>Seleccione el Servicio que desea eliminar:</p>
+                            <h2>Agregar Evento a la Web</h2>
+                            <p>Complete la siguiente Información:</p>
                         </header>
-                        <?php 
-                        require 'class/servicios.php';
-                        $Servicios = new Servicio();
-                        $Base = new mysqli('localhost','root','','mydb',3307);
-                        $Base -> set_charset("utf8");
-                        $Consulta = "Select * from Servicios order by Nombre asc";
-                        $Ejecucion = $Base->query($Consulta);
-                        if($Ejecucion->num_rows!=0)
-                        {
-                            if($Ejecucion)
-                            {
-                                $i=1;
-                                while ($fila = $Ejecucion->fetch_assoc())
-                                {
-                                    $Datos[$i] = $fila;
-                                    $i++;
-                                }
-                            }  
-                        }
-                        else 
-                        {
-                            $Datos[1] = array('idServicios' => '','Nombre' => '','Descripcion' => '','urlIMG' =>'none');
-                            $Datos[2] = array('idServicios' => '','Nombre' => '','Descripcion' => '','urlIMG' =>'none');
-                            $Datos[3] = array('idServicios' => '','Nombre' => 'Oops!','Descripcion' => '','urlIMG' =>'none');
-                            $Datos[4] = array('idServicios' => '','Nombre' => 'Aún no hay servicios registrados en la Base de Datos','Descripcion' => '','urlIMG' =>'none');
-                            $Datos[5] = array('idServicios' => '','Nombre' => '','Descripcion' => '','urlIMG' =>'none');
-                            $Datos[6] = array('idServicios' => '','Nombre' => '','Descripcion' => '','urlIMG' =>'none');
-                        }
-                        $Base->close();
-                        ?>
-                        <script type="text/javascript">
-                        var arrayJS = <?php echo json_encode($Datos);?>;
-                        for (var i = 0; i < arrayJS.length; i++) {
-                            console.log("<br>" + arrayJS[i]);
-                        }
-                        </script>
-
-                        <form name="PantallaSer" id="PantallaSer">
-                            <select name="Pantalla" id="Pantalla" size="8" onchange="OnlyID(arrayJS[this.value]['idServicios'],arrayJS[this.value]['Nombre'],arrayJS[this.value]['urlIMG'])">
-                                <?php 
-                            for ($i=1; $i <= sizeof($Datos) ; $i++) 
-                            { 
-                                echo "<option value='".$i."'>";
-                                if($Datos[$i]['urlIMG']!="none"){echo "Servicio $i:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";}
-                                else{}
-                                echo $Datos[$i]['Nombre']."</option>";
-                            }
-                            ?>
-                            </select>
-                        </form>
-                        <hr>
                         <section>
-                            <form class="service" id="Delete" name="Delete" method="post"
-                                action="RespuestaServicios.php" enctype="multipart/form-data">
-                                    <div class="col-12">
-                                        <ul class="actions">
-                                            <li><input type="submit" class="style6" value="Eliminar Servicio" id="eliminarS" name="eliminarS" disabled onclick="confirmar('servicio')" /></li>
-                                            <li><input type="submit" class="style2" value="Cancelar"
-                                                    onclick="document.Delete.action = 'ServiciosAd.php'; cancel=true;" />
-                                            </li>
-                                            <input type="hidden" id="IdServicios" name="IdServicios" value="-1" readonly required>
-                                            <input type="hidden" id="name" name="name" value="-1" readonly required>
-                                        </ul>
+                            <form id="AddEvent" name="AddEvent" method="post" action="RespuestaEventos.php"
+                                enctype="multipart/form-data">
+                                <div class="row gtr-50">
+                                    <div class="col-6 col-12-small">
+                                        <label for="nombreE">Nombre del Evento</label>
+                                        <input class="event" type="text" name="nombreE" id="nombreE"
+                                            placeholder="Ingrese el Tipo de evento" onchange="cancel = true;"
+                                            required />
+                                    </div>
+                                    <div class="col-6 col-12-small">
+                                        <label for="CliE">Cliente</label>
+                                        <input lass="event" type="text" name="CliE" id="CliE"
+                                            placeholder="Ingrese el Nombre del cliente" onchange="cancel = true;"
+                                            required />
+                                    </div>
+                                    <div class="col-12 col-12-small">
+                                        <label for="descripE">Descripción del Evento</label>
+                                        <textarea class="event" name="descripE" id="descripE" maxlength = "500"
+                                            placeholder="Ingrese la Descripción del Evento" rows="4"
+                                            onchange="cancel = true;" required></textarea>
                                     </div>
 
+                                    <div class="col-6 col-12-small">
+                                        <label for="LugarE">Lugar</label>
+                                        <input lass="event" type="text" name="LugarE" id="LugarE"
+                                            placeholder="Ingrese el lugar donde se realizo el evento"
+                                            onchange="cancel = true;" required />
+                                    </div>
+                                    <div class="col-6 col-12-small">
+
+                                        <label for="TipoE">Seleccione el tipo de evento</label>
+                                        <select name="TipoE" id="TipoE" required>
+                                        <option disabled selected>Seleccione el tipo de Evento</option>
+                                            <?php
+                                            require 'class/Events.php';
+                                            $Methods = new MetodosEventos();
+                                            $Matriz = $Methods->ConsultarTipos();
+                                            echo $Methods ->ImprimirTipos($Matriz);
+                                    ?>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-6 col-12-small">
+                                        <label for="FechaE">Fecha en que se realizó el evento</label>
+                                        <input class="event" type="date" name="FechaE" id="FechaE" value="0000-00-00" />
+                                    </div>
+                                    <div class="col-6 col-12-small">
+                                        <label for="ImgE">Imagenes del Evento</label>
+                                        <p><b style="color:#AB2A3E;">Asegurese que el nombre de sus archivos no tenga espacios en blancos</b></p>
+                                            <div class="form-group">
+                                            <input class="file-input" type="file" name="ImagenesE[]" onchange="cancel = true;" multiple="" />
+                                            </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <ul class="actions">
+                                            <li><input type="submit" id="guardarE" name="guardarE" class="style5" value="Guardar Evento" onclick="cancel=false;" />
+                                            </li>
+                                            <li><a href="EventosAd.php"><input type="button" class="style2" value="Cancelar"
+                                                    onclick="cancel = true; document.AddEvent.action = 'EventosAd.php';" /></a>
+                                            </li>
+                                            <li><input type="reset" class="style2" value="Limpiar Campos"
+                                                    onclick="LimpiarE()" /></li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </form>
                         </section>
@@ -240,7 +247,13 @@
     <script src="assets/js/main.js"></script>
     <script src="assets/js/ConfirmarSalir.js"></script>
     <script src="assets/js/RellenarInputs.js?<?php echo time().".0"; ?>"></script>
-    <script src="assets/js/Seguro.js?<?php echo time().".0"; ?>"></script>
+
+    <script src="//code.jquery.com/jquery-2.2.1.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="dist/js/fontawesome-iconpicker.js?<?php echo time().".0"; ?>"></script>
+
+
+
 
 </body>
 

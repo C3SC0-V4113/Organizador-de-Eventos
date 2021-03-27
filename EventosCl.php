@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Servicios - Wine & Champagne Eventos</title>
+    <title>Eventos - Wine & Champagne Eventos</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <link rel="stylesheet" href="assets/css/main.css?<?php echo time().".0"; ?>" media="all" />
@@ -16,25 +16,29 @@
 
             <!-- Logo -->
             <div id="logo">
-                <h1><a href="indexAdmin.php">WINE & CHAMPAGNE<br>EVENTOS</a></h1>
+                <h1><a href="index.html">WINE & CHAMPAGNE<br>EVENTOS</a></h1>
                 <p>¡B I E N V E N I D O S!</p>
             </div>
 
             <!-- Nav -->
             <nav id="nav">
                 <ul>
-                    <li><a href="indexAdmin.php">INICIO</a></li>
+                    <li><a href="indexAdmin.html">INICIO</a></li>
                     <li>
                         <a href="ServiciosAd.php">NUESTROS SERVICIOS</a>
                         <ul>
                             <li><a href="EditarHeader.php">Editar Header</a></li>
                             <li>
-                                <a href="">Editar Servicios</a>
+                                <a href="">Editar "Tipos de Eventos"</a>
                                 <ul>
                                     <li><a href="AgregarServicios.php">Agregar Servicio</a></li>
                                     <li><a href="ActualizarServicios.php">Actualizar Servicio</a></li>
-                                    <li><a href="EliminarServicios.php">Eliminar Servicio</a></li>
+                                    <li><a href="EliminarServicios.php">Eliminar Servicio</a></li>>
                                 </ul>
+                                <a href="">Editar "Eventos"</a>
+                                    <li><a href="Nuestros_Eventos.php">Agregar "Nuestros Eventos"</a></li>
+                                    <li><a href="Actualizar_Eventos">Actualizar "Nuestros Eventos"</a>
+                                    <li><a href="Eliminar_Eventos">Eliminar "Nuestros Eventos"</a>
                             </li>
                         </ul>
                     </li>
@@ -46,92 +50,71 @@
 
         </section>
 
-        <!-- Main -->
-        <div id="main" class="wrapper style2">
-            <div class="title">Eliminar Servicios</div>
-            <div class="container">
-                <!-- Content -->
-                <div id="content">
-                    <article class="box post">
-                        <header class="style1">
-                            <h2>Eliminar Servicios de la Web</h2>
-                            <p>Seleccione el Servicio que desea eliminar:</p>
-                        </header>
-                        <?php 
-                        require 'class/servicios.php';
-                        $Servicios = new Servicio();
+        <!-- EVENTOS -->
+        <?php       
+			
+		?>
+        <section id="highlights" class="wrapper style2">
+					<div class="title">NUESTROS EVENTOS</div>
+                    
+					<div class="container">
+                <div class="content">
+                <div class="box post">
+                <?php 
+                        require 'class/Events.php';
+                        $EventosM = new MetodosEventos();
+		                $EventosM -> GenerarHeaderEventos('EVENTOS EXTRAORDINARIOS','Para que tus eventos sean únicos y especiales');
                         $Base = new mysqli('localhost','root','','mydb',3307);
                         $Base -> set_charset("utf8");
-                        $Consulta = "Select * from Servicios order by Nombre asc";
-                        $Ejecucion = $Base->query($Consulta);
-                        if($Ejecucion->num_rows!=0)
-                        {
-                            if($Ejecucion)
-                            {
-                                $i=1;
-                                while ($fila = $Ejecucion->fetch_assoc())
-                                {
-                                    $Datos[$i] = $fila;
-                                    $i++;
-                                }
-                            }  
-                        }
-                        else 
-                        {
-                            $Datos[1] = array('idServicios' => '','Nombre' => '','Descripcion' => '','urlIMG' =>'none');
-                            $Datos[2] = array('idServicios' => '','Nombre' => '','Descripcion' => '','urlIMG' =>'none');
-                            $Datos[3] = array('idServicios' => '','Nombre' => 'Oops!','Descripcion' => '','urlIMG' =>'none');
-                            $Datos[4] = array('idServicios' => '','Nombre' => 'Aún no hay servicios registrados en la Base de Datos','Descripcion' => '','urlIMG' =>'none');
-                            $Datos[5] = array('idServicios' => '','Nombre' => '','Descripcion' => '','urlIMG' =>'none');
-                            $Datos[6] = array('idServicios' => '','Nombre' => '','Descripcion' => '','urlIMG' =>'none');
-                        }
-                        $Base->close();
-                        ?>
-                        <script type="text/javascript">
-                        var arrayJS = <?php echo json_encode($Datos);?>;
-                        for (var i = 0; i < arrayJS.length; i++) {
-                            console.log("<br>" + arrayJS[i]);
-                        }
-                        </script>
-
-                        <form name="PantallaSer" id="PantallaSer">
-                            <select name="Pantalla" id="Pantalla" size="8" onchange="OnlyID(arrayJS[this.value]['idServicios'],arrayJS[this.value]['Nombre'],arrayJS[this.value]['urlIMG'])">
-                                <?php 
-                            for ($i=1; $i <= sizeof($Datos) ; $i++) 
-                            { 
-                                echo "<option value='".$i."'>";
-                                if($Datos[$i]['urlIMG']!="none"){echo "Servicio $i:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";}
-                                else{}
-                                echo $Datos[$i]['Nombre']."</option>";
-                            }
-                            ?>
-                            </select>
-                        </form>
-                        <hr>
-                        <section>
-                            <form class="service" id="Delete" name="Delete" method="post"
-                                action="RespuestaServicios.php" enctype="multipart/form-data">
-                                    <div class="col-12">
-                                        <ul class="actions">
-                                            <li><input type="submit" class="style6" value="Eliminar Servicio" id="eliminarS" name="eliminarS" disabled onclick="confirmar('servicio')" /></li>
-                                            <li><input type="submit" class="style2" value="Cancelar"
-                                                    onclick="document.Delete.action = 'ServiciosAd.php'; cancel=true;" />
-                                            </li>
-                                            <input type="hidden" id="IdServicios" name="IdServicios" value="-1" readonly required>
-                                            <input type="hidden" id="name" name="name" value="-1" readonly required>
-                                        </ul>
-                                    </div>
-
-                                </div>
-                            </form>
-                        </section>
-                    </article>
+		                ?>
                 </div>
-
-            </div>
-        </div>
-
-        <!-- Highlights -->
+                </div>
+						<div class="row aln-center">
+                        <?php 
+                                $Consulta = "Select idEventos,IdTipoEvento,Nombre,fecha,Lugar,Cliente,substring(Descripcion,1,95) as Descripcion from Eventos order by idEventos desc";
+                                $Ejecucion = $Base->query($Consulta);
+                                $Consulta2 = "Select * from tipoevento";
+                                $Ejecucion2 = $Base->query($Consulta2);
+                                
+                                if($Ejecucion2->num_rows!=0)
+                                {
+                                    while($tipos = $Ejecucion2->fetch_assoc())
+                                    {
+                                        $todostipos[$tipos['idTipoEvento']]=$tipos;
+                                    }
+                                }
+                                if($Ejecucion->num_rows!=0)
+                                {
+                                    if($Ejecucion)
+                                    {
+                                        while ($fila = $Ejecucion->fetch_assoc())
+                                        {
+                                            $Consulta3 = "Select * from FotosEventos where idEventos='".$fila['idEventos']."' order by idFotos asc LIMIT 1";
+                                            $Ejecucion3 = $Base->query($Consulta3);
+                                            $EventosM -> ExtraerBaseE($fila);
+                                            $EventosM -> ExtraerTipo($todostipos[$fila['IdTipoEvento']]);
+                                            if($Ejecucion3->num_rows!=0)
+                                            {
+                                                while($img = $Ejecucion3->fetch_assoc())
+                                                {
+                                                    $EventosM->ExtraerImg($img);
+                                                }
+                                            }
+		                            	    $EventosM -> GenerarMiniEventos();
+                                        }
+                                    }  
+                                }
+                                else 
+                                {
+                                    echo "<header class='col-12 style1'><br><hr>";
+                                    echo "<p>Oops! Parece que aún no hay servicios registrados.</p><hr></header>";
+                                }
+                                
+                                $Base -> close();          
+		                        ?>
+						</div>
+					</div>
+				</section>
 
         <!-- Footer -->
         <section id="footer" class="wrapper">
@@ -238,9 +221,7 @@
     <script src="assets/js/breakpoints.min.js"></script>
     <script src="assets/js/util.js"></script>
     <script src="assets/js/main.js"></script>
-    <script src="assets/js/ConfirmarSalir.js"></script>
     <script src="assets/js/RellenarInputs.js?<?php echo time().".0"; ?>"></script>
-    <script src="assets/js/Seguro.js?<?php echo time().".0"; ?>"></script>
 
 </body>
 

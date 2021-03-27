@@ -2,10 +2,11 @@
 <html>
 
 <head>
-    <title>Servicios - Wine & Champagne Eventos</title>
+    <title>Eventos - Wine & Champagne Eventos</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <link rel="stylesheet" href="assets/css/main.css?<?php echo time().".0"; ?>" media="all" />
+    
 </head>
 
 <body class="no-sidebar is-preload">
@@ -48,116 +49,36 @@
 
         <!-- Main -->
         <div id="main" class="wrapper style2">
-            <div class="title">Actualizar Servicios</div>
+            <div class="title">NUESTROS EVENTOS</div>
             <div class="container">
                 <!-- Content -->
                 <div id="content">
                     <article class="box post">
-                        <header class="style1">
-                            <h2>Actualizar Servicios de la Web</h2>
-                            <p>Seleccione el Servicio que desea modificar:</p>
-                        </header>
-                        <?php 
-                        $matrizBD = array(
-                            '1'=> array(
-                                'name'=>'Servicio chingon 1',
-                                'descrip'=>'descrip chingona 1',
-                                'url' => 'images/pic01.jpg'),
-                            '2'=> array(
-                                'name'=>'Servicio chido 2',
-                                'descrip'=>'descrip chingona 2',
-                                'url' => 'images/pic02.jpg'),
-                            '3'=> array(
-                                'name'=>'Servicio genial 3',
-                                'descrip'=>'descrip chingona 3',
-                                'url' => 'images/pic03.jpg'),
-                            '4'=> array(
-                                'name'=>'Servicio sabroson 4',
-                                'descrip'=>'descrip chingona 4',
-                                'url' => 'images/pic04.jpg'),
-                            '5'=> array(
-                                'name'=>'Servicio chingon 5',
-                                'descrip'=>'descrip chingona 5',
-                                'url' => 'images/pic05.jpg'),
-                            '6'=> array(
-                                'name'=>'Servicio chido 6',
-                                'descrip'=>'descrip chingona 6',
-                                'url' => 'images/pic06.jpg'),
-                            '7'=> array(
-                                'name'=>'Servicio genial 7',
-                                'descrip'=>'descrip chingona 7',
-                                'url' => 'images/pic07.jpg'),
-                            '8'=> array(
-                                'name'=>'Servicio cool 8',
-                                'descrip'=>'descrip chingona 8',
-                                'url' => 'images/pic08.jpg'),
-                            '9'=> array(
-                                'name'=>'Servicio chingon 9',
-                                'descrip'=>'descrip chingona 9',
-                                'url' => 'images/pic09.jpg'));
-                        ?>
-
-                        <script type="text/javascript">
-                        var arrayJS = <?php echo json_encode($matrizBD);?>;
-                        for (var i = 0; i < arrayJS.length; i++) {
-                            console.log("<br>" + arrayJS[i]);
-                        }
-                        </script>
-
-                        <form name="PantallaSer" id="PantallaSer">
-                            <select name="Pantalla" id="Pantalla" size="8"
-                                onchange="Rellenar(arrayJS[this.value]['name'],arrayJS[this.value]['descrip'],arrayJS[this.value]['url'])">
-                                <?php 
-                            for ($i=1; $i <= sizeof($matrizBD) ; $i++) 
-                            { 
-                              echo "<option value='".$i."'>".$matrizBD[$i]['name']."</option>";
+                    <?php 
+                        require 'class/Events.php';
+                        $EventosM = new MetodosEventos();
+                        $Base = new mysqli('localhost','root','','mydb',3307);
+                        $Base -> set_charset("utf8");
+                        $id = isset($_GET['id']) ? $_GET['id']:-1;
+                        $tipo = isset($_GET['tipo']) ? $_GET['tipo']:-1;
+                        $Consulta = "Select Nombre,fecha,Lugar,Cliente,Descripcion from Eventos where idEventos=$id";
+                        $Ejecucion = $Base->query($Consulta);
+                        $Datos = $Ejecucion->fetch_assoc();
+                        $Imagenes = "Select * from FotosEventos where idEventos=$id";
+                        $EjeI=$Base->query($Imagenes);
+                        $VectorImagenes=null;
+                        if($EjeI->num_rows!=0)
+                        {
+                            $i=0;
+                            while($img=$EjeI->fetch_assoc())
+                            {
+                                $VectorImagenes[$i]=$img;
+                                $i++;
                             }
-                            ?>
-                            </select>
-                        </form>
-                        <hr>
-                        <section>
-                            <header class="style2">
-                                <h2>Modifique el Servicio:</h2>
-                            </header>
-                            <form class="service" id="AddServices" name="AddServices" method="post"
-                                action="./Guardar en Base" enctype="multipart/form-data">
-                                <div class="row gtr-50">
-                                    <div class="col-6 col-12-small">
-                                        <label for="nombreS">Nombre del Servicio</label>
-                                        <input class="service" type="text" name="nombreS" id="nombreS"
-                                            placeholder="Ingrese el Nombre del Servicio" onchange="cancel = true;"
-                                            disabled />
-                                    </div>
-                                    <div class="col-6 col-12-small">
-                                        <label for="descripS">Archivo de Imagen del Servicio</label>
-                                        <input class="file-input" name="urlS" id="urlS" type="file"
-                                            onchange="cancel = true;CambiarImagen();" disabled />
-                                    </div>
-                                    <div class="col-6 col-12-small">
-                                        <label for="descripS">Descripción del Servicio</label>
-                                        <textarea class="service" name="descripS" id="descripS"
-                                            placeholder="Ingrese la Descripción del Servicio" rows="4"
-                                            onchange="cancel = true;" disabled></textarea>
-                                    </div>
-                                    <div class="col-6 col-12-small">
-                                        <label for="descripS">Imagen del Servicio</label>
-                                        <input class="img" name="imagenS" id="imagenS" type="image"
-                                            src="images/Defecto.jpg" onchange="cancel = true; " disabled />
-                                    </div>
-                                    <div class="col-12">
-                                        <ul class="actions">
-                                            <li><input type="submit" class="style5" value="Guardar Cambios" /></li>
-                                            <li><input type="submit" class="style2" value="Cancelar"
-                                                    onclick="cancel = true; document.AddServices.action = 'ServiciosAd.php';" />
-                                            </li>
-                                            <li><input type="reset" class="style2" value="Limpiar Campos" onclick="Limpiar()" /></li>
-                                        </ul>
-                                    </div>
-
-                                </div>
-                            </form>
-                        </section>
+                        }
+                        $EventosM->MostrarEvento($Datos['Nombre'],$Datos['Lugar'],$tipo,$Datos['Descripcion'],$VectorImagenes,$Datos['Cliente']);
+                        $Base -> close();          
+		                ?>
                     </article>
                 </div>
 
@@ -271,6 +192,7 @@
     <script src="assets/js/breakpoints.min.js"></script>
     <script src="assets/js/util.js"></script>
     <script src="assets/js/main.js"></script>
+    <script src="assets/js/carousel.js?<?php echo time().".0"; ?>"></script>
     <script src="assets/js/ConfirmarSalir.js"></script>
     <script src="assets/js/RellenarInputs.js?<?php echo time().".0"; ?>"></script>
 

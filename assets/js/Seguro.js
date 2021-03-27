@@ -1,6 +1,10 @@
- function confirmar()
+ function confirmar(palabra)
   {
-      if(confirm('¿Esta seguro que desea eliminar este servicio?'))
-      {document.Delete.submit();}
+      if(confirm('¿Esta seguro que desea eliminar este '+ palabra +'?'))
+      {
+          document.Delete.submit();
+        }
+      else{
+      }
     
   }
