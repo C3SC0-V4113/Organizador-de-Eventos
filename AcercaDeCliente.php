@@ -12,7 +12,6 @@
 
 <body class="no-sidebar is-preload">
 	<?php
-
 	/*function includeWithVariables($filePath, $variables = array(), $print = true)
 	{
 		$output = NULL;
@@ -66,7 +65,7 @@
 	?>
 	<div id="page-wrapper">
 		<?php
-		require './assets/php/headerCli.php';
+		require './assets/php/header.php';
 		?>
 		<!-- Main -->
 		<div id="main" class="wrapper style2">
@@ -98,13 +97,6 @@
 								</div>
 							</div>
 						</div>
-						<ul class="actions special">
-								<form id="empresabtn" name="empresabtn">
-									<li>
-										<a href="./ActualizarEmpresa.php"> <input type="button" class="button special style5 large" value="Editar Informacion"></a>
-									</li>
-								</form>
-							</ul>
 					</article>
 				</div>
 
@@ -138,13 +130,6 @@
 					</div>
 				</div>
 			</div>
-			<ul class="actions special">
-					<form id="empresabtn" name="empresabtn">
-						<li>
-							<a href="./ActualizarEmpresa.php"> <input type="button" class="button special style5 large" value="Editar Informacion"></a>
-						</li>
-					</form>
-				</ul>
 		</section>
 		<!--Ubicacion-->
 		<section id="highlights" class="wrapper style4">
@@ -159,17 +144,10 @@
 						<div id="map"></div>
 					</div>
 				</div>
-				<ul class="actions special">
-						<form id="empresabtn" name="empresabtn">
-							<li>
-								<a href="./ActualizarEmpresa.php"> <input type="button" class="button special style5 large" value="Editar Informacion"></a>
-							</li>
-						</form>
-					</ul>
 			</div>
 		</section>
 		<?php
-		require './assets/php/footerCli.php';
+		require './assets/php/footer.php';
 		?>
 	</div>
 	<!-- Scripts -->

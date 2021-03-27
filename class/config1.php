@@ -25,9 +25,9 @@
     if ($_POST['Usuario'] != '' && $_POST['contraseña'] != '' && $Pass == $results['contraseña'] && $_POST['Usuario'] == $results['Usuario']) {
       $_SESSION['idUsuario'] = $results['idUsuario'];
       if ($results['Id_tipo_usuario'] == 1) {
-        header('Location: ../WelcomeA.php');
+        header('Location: ../InicioAdmin.php');
       }elseif ($results['Id_tipo_usuario'] == 2) {
-        header('Location: ../WelcomeC.php');
+        header('Location: ../InicioCliente.php');
       }
 
     }else{

@@ -11,7 +11,7 @@
     <div id="page-wrapper">
 
     <?php
-		require './assets/php/header.php';
+		require './assets/php/headerCli.php';
 		?>
 
         <!-- SERVICIOS -->
@@ -67,7 +67,7 @@
             </div>
         </div>
 		<?php
-		require './assets/php/footer.php';
+		require './assets/php/footerCli.php';
 		?>
 
     </div>

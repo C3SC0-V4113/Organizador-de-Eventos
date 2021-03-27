@@ -12,7 +12,7 @@
     <div id="page-wrapper">
 
     <?php
-		require './assets/php/header.php';
+		require './assets/php/headerCli.php';
 		?>
 
         <!-- Main -->
@@ -109,7 +109,7 @@
                             <?php 
                                 include( 'class/InicioEventos.php');
                                 $Consulta = "Select * from fotoseventos limit 3";
-                                $Ejecucion = $conexion->query($Consulta);
+                                //$Ejecucion = $conexion->query($Consulta);
                                 if($Ejecucion)
                                 {
                                     while ($fila = $Ejecucion->fetch_assoc())
@@ -128,7 +128,7 @@
                 </section>
 
                 <?php
-		require './assets/php/footer.php';
+		require './assets/php/footerCli.php';
 		?>
 
     </div>
