@@ -50,7 +50,19 @@ $mysqli = new mysqli('localhost', 'root', '', 'mydb', 3307)  or die($mysqli->err
                     </li>
                 </ul>
             </li>
-            <li><a href="EventosAdmin.php">EVENTOS</a></li>
+            <li>
+                <a href="EventosAd.php">EVENTOS</a>
+                <ul>
+                <li><a href="AgregarEvento.php">Agregar Evento</a></li>
+                    <li>
+                        <a>Editar Eventos</a>
+                        <ul>
+                            <li><a href="ActualizarEventos.php">Actualizar Evento</a></li>
+                            <li><a href="EliminarEventos.php">Eliminar Evento</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
             <li><a href="AcercaDe.php">QUIENES SOMOS</a></li>
             <li class="current"><a href="#">CONTACTANOS</a></li>
         </ul>

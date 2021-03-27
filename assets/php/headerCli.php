@@ -39,7 +39,7 @@ $mysqli = new mysqli('localhost', 'root', '', 'mydb', 3307)  or die($mysqli->err
                     </li>
                 </ul>-->
             </li>
-            <li><a href="EventosCliente.php">EVENTOS</a></li>
+            <li><a href="EventosCl.php">EVENTOS</a></li>
             <li><a href="AcercaDeCliente.php">QUIENES SOMOS</a></li>
             <li class="current"><a href="#">CONTACTANOS</a></li>
         </ul>

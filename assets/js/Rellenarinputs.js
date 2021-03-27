@@ -18,6 +18,11 @@ function Rellenar(Name, Descrip, url)
  * no, no lo hizo
  */
 
+
+/**
+ * Cambio para que esta cosa tenga historia y 
+ * deje de fregarme la existencia
+ */
 function Limpiar()
 {
     InName = document.getElementById("nombreE");
