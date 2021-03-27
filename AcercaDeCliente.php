@@ -7,7 +7,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 	<link rel="stylesheet" href="assets/css/main.css" />
-	<link rel="stylesheet" href="assets/css/main.css?<?php echo time() . ".0"; ?>" />
+    <link rel="stylesheet" href="assets/css/main.css?<?php echo time() . ".0"; ?>" media="all" />
 	<link rel="stylesheet" href="assets/css/contraste.css">
 </head>
 
@@ -114,21 +114,21 @@
 							<p class="descrip"><?php $empresa->Showeventosdesc(); ?></p>
 						</section>
 					</div>
-					<div class="col-4 col-12-medium">
-						<section class="highlight">
-							<a href="#" class="image featured"><img src="images/pic02.jpg" alt="" /></a>
-						</section>
-					</div>
-					<div class="col-4 col-12-medium">
-						<section class="highlight">
-							<a href="#" class="image featured"><img src="images/pic03.jpg" alt="" /></a>
-						</section>
-					</div>
-					<div class="col-4 col-12-medium">
-						<section class="highlight">
-							<a href="#" class="image featured"><img src="images/pic04.jpg" alt="" /></a>
-						</section>
-					</div>
+					<div class="row aln-center">
+                            <?php 
+                                include( 'class/InicioEventos.php');
+                                $Consulta = "Select * from fotoseventos limit 3";
+                                $Ejecucion = $conexion->query($Consulta);
+                                if($Ejecucion)
+                                {
+                                    while ($fila = $Ejecucion->fetch_assoc())
+                                    {
+                                        //echo "<div class='col-4 col-12-medium'><section class='highlight'><a href='#'' class='image featured'><img src='data:image/jpeg;base64,". base64_encode($fila['UrlFoto'])."' style='width:100%;'></a></section></div>";
+                                        echo "<div class='col-4 col-12-medium'><section class='highlight'><a href='#'' class='image featured'><img src='". ($fila['UrlFoto'])."' style='width:100%;'></a></section></div>";
+                                    }
+                                }
+                            ?> 
+                    </div>
 				</div>
 			</div>
 		</section>
