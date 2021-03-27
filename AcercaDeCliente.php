@@ -65,7 +65,7 @@
 	?>
 	<div id="page-wrapper">
 		<?php
-		require './assets/php/header.php';
+		require './assets/php/headerCli.php';
 		?>
 		<!-- Main -->
 		<div id="main" class="wrapper style2">
@@ -147,7 +147,7 @@
 			</div>
 		</section>
 		<?php
-		require './assets/php/footer.php';
+		require './assets/php/footerCli.php';
 		?>
 	</div>
 	<!-- Scripts -->

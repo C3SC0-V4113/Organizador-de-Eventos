@@ -59,9 +59,6 @@
 		                        ?>
                             </div>
                         </div>
-                        <ul class='actions special'>
-                            <li><a href='#' class='button style1 large'>Organiza tu Reunión</a></li>
-                        </ul>
                     </article>
                 </div>
             </div>
