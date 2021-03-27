@@ -6,6 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <link rel="stylesheet" href="assets/css/main.css?<?php echo time().".0"; ?>" media="all" />
+    <link rel="stylesheet" href="assets/css/main2.css">
 </head>
 
 <body class="no-sidebar is-preload">
@@ -28,15 +29,19 @@
                 </header>
                 <ul class="actions special">
                     <form id="servicesbtn" name="servicesbtn">
-                        <li><input type="submit" class="button special style5 large " value="Agregar Eventos"
-                                onclick="document.servicesbtn.action = 'AgregarEvento.php';" />
-                        </li>
-                        <li><input type="submit" class="button special style5 large" value="Actualizar Eventos"
-                                onclick="document.servicesbtn.action = 'ActualizarEvento.php';" />
-                        </li>
-                        <li><input type="submit" class="button special style5 large" value="Eliminar Eventos"
-                                onclick="document.servicesbtn.action = 'EliminarEventos.php';" />
-                        </li>
+                        <a href="./AgregarEvento.php">
+                        <li><input type="button" class="button special style5 large " value="Agregar Eventos"
+                                 />
+                        </li></a>
+                        <a href="./ActualizarEvento.php">
+                        <li><input type="button" class="button special style5 large" value="Actualizar Eventos"
+                                 />
+                        </li></a>
+                        <a href="./EliminarEventos.php">
+                        <li><input type="button" class="button special style5 large" value="Eliminar Eventos"
+                                />
+                        </li></a>
+
 
                     </form>
                     <hr>

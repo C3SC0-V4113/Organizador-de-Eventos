@@ -130,6 +130,14 @@ CREATE TABLE `infoservicios` (
   `DescripcionHeader` varchar(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+
+CREATE TABLE `FotosEventos` (
+  `idFotos` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `idEventos` int(11) NOT NULL,
+  `UrlFoto`longtext DEFAULT NULL,
+  PRIMARY KEY (`idFotos`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+
 --
 -- Estructura de tabla para la tabla `servicios`
 --
@@ -232,6 +240,13 @@ ALTER TABLE `infoservicios`
 
 --
 -- Indices de la tabla `servicios`
+--
+
+--
+
+
+
+-- Estructura de tabla para la tabla `servicios`
 --
 ALTER TABLE `servicios`
   ADD PRIMARY KEY (`idServicios`),

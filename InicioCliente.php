@@ -5,6 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <link rel="stylesheet" href="assets/css/main.css" />
+    <link rel="stylesheet" href="assets/css/main2.css">
     
 </head>
 
@@ -109,7 +110,7 @@
                             <?php 
                                 include( 'class/InicioEventos.php');
                                 $Consulta = "Select * from fotoseventos limit 3";
-                                //$Ejecucion = $conexion->query($Consulta);
+                                $Ejecucion = $conexion->query($Consulta);
                                 if($Ejecucion)
                                 {
                                     while ($fila = $Ejecucion->fetch_assoc())

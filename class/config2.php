@@ -15,7 +15,7 @@
     $pass = $_POST['contraseña1'];
     $Cpass = $_POST['contraseña2'];
     if ($pass != $Cpass) {
-      echo "<script language='javascript'> window.alert('Las contraseñas no coinciden.'); window.location.href='../Login.php' </script>";
+      echo "<script language='javascript'> window.alert('Las contraseñas no coinciden.'); window.location.href='../index.php' </script>";
     }else {
       $s = "SELECT * FROM usuario WHERE Usuario = '$user'";
 
@@ -24,12 +24,12 @@
       $num = mysqli_num_rows($result);
 
       if ($num == 1) {
-        echo "<script language='javascript'> window.alert('El nombre de usuario ya fue registrado.'); window.location.href='../Login.php' </script>";
+        echo "<script language='javascript'> window.alert('El nombre de usuario ya fue registrado.'); window.location.href='../index.php' </script>";
       }else {
         $cod = md5($pass);
         $reg = "INSERT INTO `usuario` (Usuario, Id_tipo_usuario ,contraseña) values ('$user', '2' , '$cod')";
         mysqli_query($conn,$reg); //cambiar conn por la variable de conxión de la bd
-        echo "<script language='javascript'> window.alert('Su usuario fue registrado exitosamente.'); window.location.href='../Login.php' </script>";
+        echo "<script language='javascript'> window.alert('Su usuario fue registrado exitosamente.'); window.location.href='../index.php' </script>";
       }
     }
 
