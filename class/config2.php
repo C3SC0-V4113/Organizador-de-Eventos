@@ -5,8 +5,9 @@
   $username = 'root';
   $password = '';
   $database = 'mydb';
+  $port=3307;
 
-  if(!$conn = mysqli_connect($server,$username,$password,$database)){
+  if(!$conn = mysqli_connect($server,$username,$password,$database,$port)){
     die("fallo al conectar.");
   }
 
@@ -26,7 +27,7 @@
         echo "<script language='javascript'> window.alert('El nombre de usuario ya fue registrado.'); window.location.href='../Login.php' </script>";
       }else {
         $cod = md5($pass);
-        $reg = "INSERT INTO usuario (Usuario, Id_tipo_usuario ,contraseña) values ('$user', '2' , '$cod')";
+        $reg = "INSERT INTO `usuario` (Usuario, Id_tipo_usuario ,contraseña) values ('$user', '2' , '$cod')";
         mysqli_query($conn,$reg); //cambiar conn por la variable de conxión de la bd
         echo "<script language='javascript'> window.alert('Su usuario fue registrado exitosamente.'); window.location.href='../Login.php' </script>";
       }

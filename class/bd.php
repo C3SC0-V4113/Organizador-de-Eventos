@@ -7,11 +7,12 @@
 		private $password = "";
 		private $db = "mydb";
 		private $conect;
+		private $port=3307;
 	
 
 	public function __construct()
 	{
-		$connectionString = "mysql:host=".$this->host.";dbname=".$this->db.";charset-utf8";
+		$connectionString = "mysql:host=".$this->host.";dbname=".$this->db.";port=".$this->port.";charset-utf8";
 		try
 		 {
 			$this->conect = new PDO($connectionString,$this->user,$this->password);

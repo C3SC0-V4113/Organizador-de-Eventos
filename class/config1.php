@@ -6,10 +6,11 @@
   $username = 'root';
   $password = '';
   $database = 'mydb';
+  $port=3307;
 
   try {
-    $conn = new PDO("mysql:host=$server;dbname=$database;",$username,$password);
-  } catch (PDOEcception $e) {
+    $conn = new PDO("mysql:host=$server;dbname=$database;port=$port;",$username,$password);
+  } catch (PDOException $e) {
     die('connection failed: '.$e -> getMessage());
   }
  // codigo
@@ -24,9 +25,9 @@
     if ($_POST['Usuario'] != '' && $_POST['contraseña'] != '' && $Pass == $results['contraseña'] && $_POST['Usuario'] == $results['Usuario']) {
       $_SESSION['idUsuario'] = $results['idUsuario'];
       if ($results['Id_tipo_usuario'] == 1) {
-        header('Location: WelcomeA.php');
+        header('Location: ../WelcomeA.php');
       }elseif ($results['Id_tipo_usuario'] == 2) {
-        header('Location: WelcomeC.php');
+        header('Location: ../WelcomeC.php');
       }
 
     }else{
