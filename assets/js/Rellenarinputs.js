@@ -11,6 +11,13 @@ function Rellenar(Name, Descrip, url)
     InDescrip.innerHTML = Descrip;
 }
 
+/**No se que hacer
+ * Pero esto
+ * talvez
+ * funcione
+ * no, no lo hizo
+ */
+
 function Limpiar()
 {
     InName = document.getElementById("nombreE");

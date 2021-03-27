@@ -82,7 +82,7 @@
                                 action="RespuestaServicios.php" enctype="multipart/form-data">
                                     <div class="col-12">
                                         <ul class="actions">
-                                            <li><input type="submit" class="style6" value="Eliminar Servicio" id="eliminarS" name="eliminarS" disabled onclick="confirmar()" /></li>
+                                            <li><input type="submit" class="style6" value="Eliminar Servicio" id="eliminarS" name="eliminarS" disabled onclick="confirmar('servicio')" /></li>
                                             <li><input type="submit" class="style2" value="Cancelar"
                                                     onclick="document.Delete.action = 'ServiciosAd.php'; cancel=true;" />
                                             </li>

@@ -113,8 +113,10 @@ CREATE TABLE `eventos` (
   `fecha` date DEFAULT NULL,
   `Lugar` varchar(200) DEFAULT NULL,
   `Cliente` varchar(45) DEFAULT NULL,
-  `Contactos` varchar(45) DEFAULT NULL
+  `Descripcion` varchar(500) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
 
 -- --------------------------------------------------------
 
@@ -149,9 +151,19 @@ CREATE TABLE `servicios` (
 
 CREATE TABLE `tipoevento` (
   `idTipoEvento` int(11) NOT NULL,
-  `Nombre` varchar(45) DEFAULT NULL,
-  `Descripcion` varchar(200) DEFAULT NULL
+  `Nombre` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+INSERT INTO tipoevento (idTipoEvento,Nombre) VALUES
+(1,'Boda'),
+(2,'Entrega de Premios'),
+(3,'Fiestas'),
+(4,'Graduaciones'),
+(5,'Inaguraciones'),
+(6,'Ruedas de Presa'),
+(7,'Convenciones'),
+(8,'Eventos Deportivos');
+
 
 -- --------------------------------------------------------
 
@@ -171,7 +183,7 @@ CREATE TABLE `tipo_usuario` (
 --
 
 CREATE TABLE `usuario` (
-  `idUsuario` int(11) NOT NULL,
+  `idUsuario` int(11),
   `Usuario` varchar(45) DEFAULT NULL,
   `Id_tipo_usuario` int(11) NOT NULL,
   `contraseña` varchar(20) DEFAULT NULL
@@ -214,6 +226,9 @@ ALTER TABLE `eventos`
 --
 ALTER TABLE `infoservicios`
   ADD PRIMARY KEY (`idEmpresa`);
+
+  ALTER TABLE `FotosEventos`
+  ADD KEY `idEventos` (`idEventos`);
 
 --
 -- Indices de la tabla `servicios`
@@ -289,6 +304,10 @@ ALTER TABLE `usuario`
   ADD CONSTRAINT `usuario_ibfk_1` FOREIGN KEY (`Id_tipo_usuario`) REFERENCES `tipo_usuario` (`idTipo_Usuario`);
 COMMIT;
 
+ALTER TABLE `FotosEventos`
+  ADD CONSTRAINT `fotoe_ibfk_1` FOREIGN KEY (`idEventos`) REFERENCES `eventos` (`idEventos`);
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+INSERT INTO tipo_usuario (idTipo_Usuario,Tipo_Usuario) values(1,'admin');
