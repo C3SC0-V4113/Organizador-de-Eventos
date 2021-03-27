@@ -3,11 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3307
--- Tiempo de generación: 21-03-2021 a las 20:48:04
+-- Tiempo de generación: 27-03-2021 a las 07:43:35
 -- Versión del servidor: 10.4.17-MariaDB
 -- Versión de PHP: 8.0.0
-CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8 ;
-USE `mydb` ;
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -40,7 +38,6 @@ CREATE TABLE `detalle_empresa_enlaces` (
 
 INSERT INTO `detalle_empresa_enlaces` (`IDEnlaces`, `IDEmpresa`) VALUES
 (3, 1),
-(33, 1),
 (38, 1),
 (40, 1);
 
@@ -94,7 +91,6 @@ CREATE TABLE `enlaces` (
 
 INSERT INTO `enlaces` (`IDEnlaces`, `Nombre`, `Enlace`) VALUES
 (3, 'Twitter', 'https://twitter.com/compose/tweet/media'),
-(33, 'GitHub', 'https://github.com/'),
 (38, 'Facebook', 'https://m.facebook.com/home.php'),
 (40, 'LinkedIn', 'https://www.linkedin.com/feed/');
 
@@ -107,16 +103,12 @@ INSERT INTO `enlaces` (`IDEnlaces`, `Nombre`, `Enlace`) VALUES
 CREATE TABLE `eventos` (
   `idEventos` int(11) NOT NULL,
   `IdTipoEvento` int(11) NOT NULL,
-  `IdEmpresa` int(11) NOT NULL,
-  `Id_Usuario` int(11) NOT NULL,
   `Nombre` varchar(45) DEFAULT NULL,
   `fecha` date DEFAULT NULL,
   `Lugar` varchar(200) DEFAULT NULL,
   `Cliente` varchar(45) DEFAULT NULL,
-  `Descripcion` varchar(500) DEFAULT NULL
+  `Contactos` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
 
 -- --------------------------------------------------------
 
@@ -129,6 +121,16 @@ CREATE TABLE `infoservicios` (
   `HeaderTitulo` varchar(50) DEFAULT NULL,
   `DescripcionHeader` varchar(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `infoservicios`
+--
+
+INSERT INTO `infoservicios` (`idEmpresa`, `HeaderTitulo`, `DescripcionHeader`) VALUES
+(1, 'Esto es un Header', 'Bienvenido'),
+(2, 'Probando', 'Bienvenido 2');
+
+-- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `servicios`
@@ -151,19 +153,9 @@ CREATE TABLE `servicios` (
 
 CREATE TABLE `tipoevento` (
   `idTipoEvento` int(11) NOT NULL,
-  `Nombre` varchar(45) DEFAULT NULL
+  `Nombre` varchar(45) DEFAULT NULL,
+  `Descripcion` varchar(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-INSERT INTO tipoevento (idTipoEvento,Nombre) VALUES
-(1,'Boda'),
-(2,'Entrega de Premios'),
-(3,'Fiestas'),
-(4,'Graduaciones'),
-(5,'Inaguraciones'),
-(6,'Ruedas de Presa'),
-(7,'Convenciones'),
-(8,'Eventos Deportivos');
-
 
 -- --------------------------------------------------------
 
@@ -176,6 +168,14 @@ CREATE TABLE `tipo_usuario` (
   `Tipo_Usuario` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Volcado de datos para la tabla `tipo_usuario`
+--
+
+INSERT INTO `tipo_usuario` (`idTipo_Usuario`, `Tipo_Usuario`) VALUES
+(1, 'admin'),
+(2, 'cliente');
+
 -- --------------------------------------------------------
 
 --
@@ -183,11 +183,19 @@ CREATE TABLE `tipo_usuario` (
 --
 
 CREATE TABLE `usuario` (
-  `idUsuario` int(11),
+  `idUsuario` int(11) NOT NULL,
   `Usuario` varchar(45) DEFAULT NULL,
   `Id_tipo_usuario` int(11) NOT NULL,
-  `contraseña` varchar(20) DEFAULT NULL
+  `contraseña` varchar(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `usuario`
+--
+
+INSERT INTO `usuario` (`idUsuario`, `Usuario`, `Id_tipo_usuario`, `contraseña`) VALUES
+(1, 'admin', 1, '98eb470b2b60482e259d28648895d9e1'),
+(8, 'cliente', 2, '89f624dc5f553676c8b05de3701e6178');
 
 --
 -- Índices para tablas volcadas
@@ -217,9 +225,7 @@ ALTER TABLE `enlaces`
 --
 ALTER TABLE `eventos`
   ADD PRIMARY KEY (`idEventos`),
-  ADD KEY `IdTipoEvento` (`IdTipoEvento`),
-  ADD KEY `IdEmpresa` (`IdEmpresa`),
-  ADD KEY `Id_Usuario` (`Id_Usuario`);
+  ADD KEY `IdTipoEvento` (`IdTipoEvento`);
 
 --
 -- Indices de la tabla `infoservicios`
@@ -227,16 +233,12 @@ ALTER TABLE `eventos`
 ALTER TABLE `infoservicios`
   ADD PRIMARY KEY (`idEmpresa`);
 
-  ALTER TABLE `FotosEventos`
-  ADD KEY `idEventos` (`idEventos`);
-
 --
 -- Indices de la tabla `servicios`
 --
 ALTER TABLE `servicios`
-  ADD PRIMARY KEY (`idServicios`),
   ADD KEY `IdEmpresa` (`IdEmpresa`),
-  ADD KEY `Id_Usuario` (`Id_Usuario`);
+  ADD KEY `servicios_ibfk_2` (`Id_Usuario`);
 
 --
 -- Indices de la tabla `tipoevento`
@@ -268,6 +270,12 @@ ALTER TABLE `enlaces`
   MODIFY `IDEnlaces` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
+-- AUTO_INCREMENT de la tabla `usuario`
+--
+ALTER TABLE `usuario`
+  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
 -- Restricciones para tablas volcadas
 --
 
@@ -282,9 +290,7 @@ ALTER TABLE `detalle_empresa_enlaces`
 -- Filtros para la tabla `eventos`
 --
 ALTER TABLE `eventos`
-  ADD CONSTRAINT `eventos_ibfk_1` FOREIGN KEY (`IdTipoEvento`) REFERENCES `tipoevento` (`idTipoEvento`),
-  ADD CONSTRAINT `eventosempresa_ibfk_1` FOREIGN KEY (`IdEmpresa`) REFERENCES `empresa` (`idEmpresa`),
-  ADD CONSTRAINT `eventousuarios_ibfk_2` FOREIGN KEY (`Id_Usuario`) REFERENCES `usuario` (`idUsuario`);
+  ADD CONSTRAINT `eventos_ibfk_1` FOREIGN KEY (`IdTipoEvento`) REFERENCES `tipoevento` (`idTipoEvento`);
 
 --
 -- Filtros para la tabla `servicios`
@@ -293,10 +299,6 @@ ALTER TABLE `servicios`
   ADD CONSTRAINT `servicios_ibfk_1` FOREIGN KEY (`IdEmpresa`) REFERENCES `empresa` (`idEmpresa`),
   ADD CONSTRAINT `servicios_ibfk_2` FOREIGN KEY (`Id_Usuario`) REFERENCES `usuario` (`idUsuario`);
 
-ALTER TABLE `infoservicios`
-  ADD CONSTRAINT `infoservicios_ibfk_1` FOREIGN KEY (`IdEmpresa`) REFERENCES `empresa` (`idEmpresa`);
-
-
 --
 -- Filtros para la tabla `usuario`
 --
@@ -304,10 +306,6 @@ ALTER TABLE `usuario`
   ADD CONSTRAINT `usuario_ibfk_1` FOREIGN KEY (`Id_tipo_usuario`) REFERENCES `tipo_usuario` (`idTipo_Usuario`);
 COMMIT;
 
-ALTER TABLE `FotosEventos`
-  ADD CONSTRAINT `fotoe_ibfk_1` FOREIGN KEY (`idEventos`) REFERENCES `eventos` (`idEventos`);
-
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-INSERT INTO tipo_usuario (idTipo_Usuario,Tipo_Usuario) values(1,'admin');
