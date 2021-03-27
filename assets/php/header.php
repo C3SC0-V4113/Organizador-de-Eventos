@@ -18,19 +18,13 @@ $mysqli = new mysqli('localhost', 'root', '', 'mydb', 3307)  or die($mysqli->err
             $filaemprcontact = $peticion->fetch_assoc();
             echo $filaemprcontact['Slogan'];
             ?></p>
-        <?php
-        if ($admin) {
-        ?>
-            <ul class="actions special">
+                        <ul class="actions special">
                 <form id="servicesbtn" name="servicesbtn">
                     <li>
                         <a href="./ActualizarEmpresa.php"> <input type="button" class="button special style5 large" value="Editar Informacion"></a>
                     </li>
                 </form>
             </ul>
-        <?php
-        }
-        ?>
     </div>
     <!-- Nav -->
     <nav id="nav">
@@ -57,7 +51,7 @@ $mysqli = new mysqli('localhost', 'root', '', 'mydb', 3307)  or die($mysqli->err
                     <li>
                         <a>Editar Eventos</a>
                         <ul>
-                            <li><a href="ActualizarEventos.php">Actualizar Evento</a></li>
+                            <li><a href="ActualizarEvento.php">Actualizar Evento</a></li>
                             <li><a href="EliminarEventos.php">Eliminar Evento</a></li>
                         </ul>
                     </li>

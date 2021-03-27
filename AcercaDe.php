@@ -8,6 +8,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 	<link rel="stylesheet" href="assets/css/main.css" />
 	<link rel="stylesheet" href="assets/css/main.css?<?php echo time() . ".0"; ?>" />
+	<link rel="stylesheet" href="assets/css/contraste.css">
 </head>
 
 <body class="no-sidebar is-preload">
@@ -66,7 +67,7 @@
 	?>
 	<div id="page-wrapper">
 		<?php
-		require './assets/php/headerCli.php';
+		require './assets/php/header.php';
 		?>
 		<!-- Main -->
 		<div id="main" class="wrapper style2">
@@ -169,7 +170,7 @@
 			</div>
 		</section>
 		<?php
-		require './assets/php/footerCli.php';
+		require './assets/php/footer.php';
 		?>
 	</div>
 	<!-- Scripts -->

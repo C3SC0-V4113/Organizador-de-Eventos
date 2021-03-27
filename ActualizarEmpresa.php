@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <link rel="stylesheet" href="assets/css/main.css" />
     <link rel="stylesheet" href="assets/css/main.css?<?php echo time() . ".0"; ?>" />
+    <link rel="stylesheet" href="assets/css/contraste.css">
 
     <!-- picker-->
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
@@ -17,27 +18,7 @@
 <?php session_start(); ?>
 
 <body class="no-sidebar is-preload">
-    <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
-        <select name="opciones" id="opciones">
-            <option>Admin</option>
-            <option>Cliente</option>
-        </select>
-        <input type="submit" name="enviar" id="enviar" value="Cambiar Rol">
-    </form>
     <?php
-    $admin = true;
-    $permiso;
-    if (isset($_POST['enviar'])) {
-        $permiso = (isset($_POST['opciones'])) ? $_POST['opciones'] : '';
-        if ($permiso == 'Admin') {
-            $admin = true;
-        } else {
-            $admin = false;
-        }
-    }
-    echo "<p>El permiso es : $permiso</p>";
-    echo "<p>permiso de admin:" . (bool)$admin . "</p>";
-
     /*function includeWithVariables($filePath, $variables = array(), $print = true)
     {
         $output = NULL;

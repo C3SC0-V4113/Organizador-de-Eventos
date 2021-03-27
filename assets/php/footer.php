@@ -110,19 +110,13 @@ $mysqli = new mysqli('localhost', 'root', '', 'mydb', 3307)  or die($mysqli->err
                         </div>
                     </div>
                 </section>
-                <?php
-                if ($admin) {
-                ?>
-                    <ul class="actions special">
-                        <form id="servicesbtn" name="servicesbtn">
-                            <li>
-                                <a href="./ActualizarEmpresa.php"> <input type="button" class="button special style5 large" value="Editar Informacion"></a>
-                            </li>
-                        </form>
-                    </ul>
-                <?php
-                }
-                ?>
+                <ul class="actions special">
+                    <form id="servicesbtn" name="servicesbtn">
+                        <li>
+                            <a href="./ActualizarEmpresa.php"> <input type="button" class="button special style5 large" value="Editar Informacion"></a>
+                        </li>
+                    </form>
+                </ul>
             </div>
         </div>
         <div id="copyright">
