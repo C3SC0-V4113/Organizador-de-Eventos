@@ -85,7 +85,6 @@
                                         else 
                                         {
                                             $Id =1;
-                                            echo $Id;
                                         }
                                         $Insert = "INSERT INTO Eventos (idEventos, IdTipoEvento, IdEmpresa, Id_Usuario, Nombre, fecha,Lugar,Cliente,Descripcion)";
                                         $Insert .= "VALUES (?,?,?,?,?,?,?,?,?)";
