@@ -35,7 +35,7 @@ $mysqli = new mysqli('localhost', 'root', '', 'mydb', 3307)  or die($mysqli->err
                             </div>
                             <div class="col-12">
                                 <textarea name="contact-message" id="contact-message" placeholder="Mensaje" rows="4"></textarea>
-                                
+                                <input type="hidden" id="url" name="url" value="">
                             </div>
                             <div class="col-12">
                                 <ul class="actions">
