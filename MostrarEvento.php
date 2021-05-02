@@ -61,7 +61,7 @@
                         $Base -> set_charset("utf8");
                         $id = isset($_GET['id']) ? $_GET['id']:-1;
                         $tipo = isset($_GET['tipo']) ? $_GET['tipo']:-1;
-                        $Consulta = "Select Nombre,fecha,Lugar,Cliente,Descripcion from Eventos where idEventos=$id";
+                        $Consulta = "Select Nombre,fecha,NombreLugar,NombreCliente,Descripcion from Eventos INNER join cliente ON eventos.idCliente = cliente.idCliente INNER JOIN lugares on eventos.idLugar = lugares.idLugar where idEventos=$id";
                         $Ejecucion = $Base->query($Consulta);
                         $Datos = $Ejecucion->fetch_assoc();
                         $Imagenes = "Select * from FotosEventos where idEventos=$id";
@@ -76,7 +76,7 @@
                                 $i++;
                             }
                         }
-                        $EventosM->MostrarEvento($Datos['Nombre'],$Datos['Lugar'],$tipo,$Datos['Descripcion'],$VectorImagenes,$Datos['Cliente']);
+                        $EventosM->MostrarEvento($Datos['Nombre'],$Datos['NombreLugar'],$tipo,$Datos['Descripcion'],$VectorImagenes,$Datos['NombreCliente'],$Datos['fecha']);
                         $Base -> close();          
 		                ?>
                     </article>

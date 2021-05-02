@@ -10,7 +10,7 @@
             <div class="col-6 col-12-medium">
                 <!-- Contact Form -->
                 <section>
-                    <form method="post" action="#">
+                    <form method="post" action="class/Contactanos.php" onsubmit="Locacion(window.location.pathname)">
                         <div class="row gtr-50">
                             <div class="col-6 col-12-small">
                                 <input type="text" name="name" id="contact-name" placeholder="Nombre Completo" />
@@ -20,6 +20,7 @@
                             </div>
                             <div class="col-12">
                                 <textarea name="message" id="contact-message" placeholder="Mensaje" rows="4"></textarea>
+                                <input type="hidden" id="url" name="url" value="" readonly required>
                             </div>
                             <div class="col-12">
                                 <ul class="actions">

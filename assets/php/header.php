@@ -1,3 +1,9 @@
+<?php
+require_once 'class/empresa.class.php';
+$mysqli = new mysqli('localhost', 'root', '', 'mydb', 3307)  or die($mysqli->error);
+
+?>
+<script src="assets/js/RellenarInputs.js?<?php echo time().".0"; ?>"></script>
 <!-- Header -->
 <section id="header" class="wrapper">
     <!-- Logo -->

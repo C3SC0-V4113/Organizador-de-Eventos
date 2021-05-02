@@ -85,12 +85,12 @@
                         }
                         else 
                         {
-                            $Datos[1] = array('idEventos' => '','Nombre' => '','Descripcion' => '','Lugar' =>'none','fecha'=>"none",'Cliente'=>"none");
-                            $Datos[2] = array('idEventos' => '','Nombre' => '','Descripcion' => '','Lugar' =>'none','fecha'=>"none",'Cliente'=>"none");
-                            $Datos[3] = array('idEventos' => '','Nombre' => 'Oops!','Descripcion' => '','Lugar' =>'none','fecha'=>"none",'Cliente'=>"none");
-                            $Datos[4] = array('idEventos' => '','Nombre' => 'Aún no hay servicios registrados en la Base de Datos','Descripcion' => '','Lugar' =>'none','fecha'=>"none",'Cliente'=>"none");
-                            $Datos[5] = array('idEventos' => '','Nombre' => '','Descripcion' => '','Lugar' =>'none','fecha'=>"none",'Cliente'=>"none");
-                            $Datos[6] = array('idEventos' => '','Nombre' => '','Descripcion' => '','Lugar' =>'none','fecha'=>"none",'Cliente'=>"none");
+                            $Datos[1] = array('idEventos' => '','Nombre' => '','Descripcion' => '','idLugar' =>'none','fecha'=>"none",'idCliente'=>"none");
+                            $Datos[2] = array('idEventos' => '','Nombre' => '','Descripcion' => '','idLugar' =>'none','fecha'=>"none",'idCliente'=>"none");
+                            $Datos[3] = array('idEventos' => '','Nombre' => 'Oops!','Descripcion' => '','idLugar' =>'none','fecha'=>"none",'idCliente'=>"none");
+                            $Datos[4] = array('idEventos' => '','Nombre' => 'Aún no hay servicios registrados en la Base de Datos','Descripcion' => '','Lugar' =>'none','fecha'=>"none",'idCliente'=>"none");
+                            $Datos[5] = array('idEventos' => '','Nombre' => '','Descripcion' => '','idLugar' =>'none','fecha'=>"none",'idCliente'=>"none");
+                            $Datos[6] = array('idEventos' => '','Nombre' => '','Descripcion' => '','idLugar' =>'none','fecha'=>"none",'idCliente'=>"none");
                         }
                         ?>
                         <script type="text/javascript">
@@ -101,12 +101,12 @@
                         </script>
                         <form name="PantallaSer" id="PantallaSer">
                             <select name="Pantalla" id="Pantalla" size="7"
-                                onchange="EliminarEvento(arrayJS[this.value]['idEventos'],arrayJS[this.value]['Cliente'],arrayJS[this.value]['Nombre'])">
+                                onchange="EliminarEvento(arrayJS[this.value]['idEventos'],arrayJS[this.value]['idCliente'],arrayJS[this.value]['Nombre'])">
                                 <?php 
                             for ($i=1; $i <= sizeof($Datos) ; $i++) 
                             { 
                               echo "<option value='".$i."'>";
-                              if($Datos[$i]['Lugar']!="none"){echo "Evento $i:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";}
+                              if($Datos[$i]['idLugar']!="none"){echo "Evento $i:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";}
                               else{}
                               echo $Datos[$i]['Nombre']."</option>";
                             }

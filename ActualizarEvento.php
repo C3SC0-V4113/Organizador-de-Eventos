@@ -85,12 +85,12 @@
                         }
                         else 
                         {
-                            $Datos[1] = array('idEventos' => '','Nombre' => '','Descripcion' => '','Lugar' =>'none','fecha'=>"none",'Cliente'=>"none");
-                            $Datos[2] = array('idEventos' => '','Nombre' => '','Descripcion' => '','Lugar' =>'none','fecha'=>"none",'Cliente'=>"none");
-                            $Datos[3] = array('idEventos' => '','Nombre' => 'Oops!','Descripcion' => '','Lugar' =>'none','fecha'=>"none",'Cliente'=>"none");
-                            $Datos[4] = array('idEventos' => '','Nombre' => 'Aún no hay servicios registrados en la Base de Datos','Descripcion' => '','Lugar' =>'none','fecha'=>"none",'Cliente'=>"none");
-                            $Datos[5] = array('idEventos' => '','Nombre' => '','Descripcion' => '','Lugar' =>'none','fecha'=>"none",'Cliente'=>"none");
-                            $Datos[6] = array('idEventos' => '','Nombre' => '','Descripcion' => '','Lugar' =>'none','fecha'=>"none",'Cliente'=>"none");
+                            $Datos[1] = array('idEventos' => '','Nombre' => '','Descripcion' => '','idLugar' =>'none','fecha'=>"none",'idCliente'=>"none");
+                            $Datos[2] = array('idEventos' => '','Nombre' => '','Descripcion' => '','idLugar' =>'none','fecha'=>"none",'idCliente'=>"none");
+                            $Datos[3] = array('idEventos' => '','Nombre' => 'Oops!','Descripcion' => '','idLugar' =>'none','fecha'=>"none",'idCliente'=>"none");
+                            $Datos[4] = array('idEventos' => '','Nombre' => 'Aún no hay servicios registrados en la Base de Datos','Descripcion' => '','Lugar' =>'none','fecha'=>"none",'idCliente'=>"none");
+                            $Datos[5] = array('idEventos' => '','Nombre' => '','Descripcion' => '','idLugar' =>'none','fecha'=>"none",'idCliente'=>"none");
+                            $Datos[6] = array('idEventos' => '','Nombre' => '','Descripcion' => '','idLugar' =>'none','fecha'=>"none",'idCliente'=>"none");
                         }
 
                         $CImg = "SELECT * from FotosEventos";
@@ -124,13 +124,13 @@
                         </script>
                         <form name="PantallaSer" id="PantallaSer">
                             <select name="Pantalla" id="Pantalla" size="7"
-                                onchange="RellenarE(arrayJS[this.value]['Nombre'],arrayJS[this.value]['Descripcion'],arrayJS[this.value]['Cliente'],arrayJS[this.value]['idEventos'],arrayJS[this.value]['fecha'],arrayJS[this.value]['Lugar'],arrayJS[this.value]['IdTipoEvento']);Generar(arrayImagenes,arrayJS[this.value]['idEventos']);">
+                                onchange="RellenarE(arrayJS[this.value]['Nombre'],arrayJS[this.value]['Descripcion'],arrayJS[this.value]['idCliente'],arrayJS[this.value]['idEventos'],arrayJS[this.value]['fecha'],arrayJS[this.value]['idLugar'],arrayJS[this.value]['IdTipoEvento']);Generar(arrayImagenes,arrayJS[this.value]['idEventos']);">
                                 <?php 
                                 $desc = sizeof($Datos);
                             for ($i=1; $i <= sizeof($Datos) ; $i++) 
                             { 
                               echo "<option value='".$i."'>";
-                              if($Datos[$i]['Lugar']!="none"){echo "Evento $desc:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";}
+                              if($Datos[$i]['idLugar']!="none"){echo "Evento $desc:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";}
                               else{}
                               echo $Datos[$i]['Nombre']."</option>";
                               $desc--;
@@ -154,32 +154,38 @@
                                             disabled />
                                     </div>
                                     <div class="col-6 col-12-small">
-                                        <label for="CliE">Cliente</label>
-                                        <input lass="event" type="text" name="CliE" id="CliE"
-                                            placeholder="Ingrese el Nombre del cliente" onchange="cancel = true;"
-                                            required disabled />
+                                        <label for="CliE">Seleccione el cliente al que pertenece el evento</label>
+                                        <select name="CliE" id="CliE" required disabled>
+                                        <option disabled selected>Seleccione el Cliente</option>
+                                            <?php
+                                            $Matriz = $Eventos->ConsultarClientes();
+                                            echo $Eventos ->ImprimirClientes($Matriz);
+                                    ?>
+                                    </select>
                                     </div>
                                     <div class="col-12 col-12-small">
                                         <label for="descripE">Descripción del Evento</label>
-                                        <textarea class="event" name="descripE" id="descripE" maxlength="500"
+                                        <textarea class="event" name="descripE" id="descripE" maxlength = "500"
                                             placeholder="Ingrese la Descripción del Evento" rows="4"
                                             onchange="cancel = true;" required disabled></textarea>
                                     </div>
-
                                     <div class="col-4 col-12-small">
-                                        <label for="LugarE">Lugar</label>
-                                        <input lass="event" type="text" name="LugarE" id="LugarE"
-                                            placeholder="Ingrese el lugar donde se realizo el evento"
-                                            onchange="cancel = true;" required disabled />
+                                        <label for="LugarE">Seleccione el lugar donde se realizó el evento</label>
+                                        <select name="LugarE" id="LugarE" required disabled>
+                                        <option disabled selected>Seleccione el lugar del Evento</option>
+                                            <?php
+                                            $Matriz = $Eventos->ConsultarLugares();
+                                            echo $Eventos ->ImprimirLugares($Matriz);
+                                    ?>
+                                    </select>
                                     </div>
                                     <div class="col-4 col-12-small">
-
                                         <label for="TipoE">Seleccione el tipo de evento</label>
-                                        <select name="TipoE" id="TipoE" required disabled class="opciones">
-                                            <option disabled selected>Seleccione el tipo de Evento</option>
+                                        <select name="TipoE" id="TipoE" required disabled>
+                                        <option disabled selected>Seleccione el tipo de Evento</option>
                                             <?php
-                                            $Matriz = $Eventos->ConsultarTipos();
-                                            echo $Eventos ->ImprimirTipos($Matriz);
+                                            $Matriz2 = $Eventos->ConsultarTipos();
+                                            echo $Eventos ->ImprimirTipos($Matriz2);
                                     ?>
                                         </select>
                                     </div>

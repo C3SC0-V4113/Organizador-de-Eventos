@@ -6,6 +6,9 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <link rel="stylesheet" href="assets/css/main.css?<?php echo time().".0"; ?>" media="all" />
+    <?php
+    session_start();
+    ?>
 </head>
 <body class="no-sidebar is-preload" onload="Header(arrayJS['HeaderTitulo'],arrayJS['DescripcionHeader'])">
     <div id="page-wrapper">

@@ -10,9 +10,9 @@
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
     <link href="dist/css/fontawesome-iconpicker.min.css?<?php echo time().".0"; ?>" rel="stylesheet">
-    
-
-
+    <?php
+    session_start();
+    ?>
 </head>
 
 <body class="no-sidebar is-preload">
@@ -74,11 +74,17 @@
                                             placeholder="Ingrese el Tipo de evento" onchange="cancel = true;"
                                             required />
                                     </div>
-                                    <div class="col-6 col-12-small">
-                                        <label for="CliE">Cliente</label>
-                                        <input lass="event" type="text" name="CliE" id="CliE"
-                                            placeholder="Ingrese el Nombre del cliente" onchange="cancel = true;"
-                                            required />
+                                   <div class="col-6 col-12-small">
+                                        <label for="CliE">Seleccione el cliente al que pertenece el evento</label>
+                                        <select name="CliE" id="CliE" required>
+                                        <option disabled selected>Seleccione el Cliente</option>
+                                            <?php
+                                            require 'class/Events.php';
+                                            $Methods = new MetodosEventos();
+                                            $Matriz = $Methods->ConsultarClientes();
+                                            echo $Methods ->ImprimirClientes($Matriz);
+                                    ?>
+                                    </select>
                                     </div>
                                     <div class="col-12 col-12-small">
                                         <label for="descripE">Descripción del Evento</label>
@@ -86,28 +92,28 @@
                                             placeholder="Ingrese la Descripción del Evento" rows="4"
                                             onchange="cancel = true;" required></textarea>
                                     </div>
-
-                                    <div class="col-6 col-12-small">
-                                        <label for="LugarE">Lugar</label>
-                                        <input lass="event" type="text" name="LugarE" id="LugarE"
-                                            placeholder="Ingrese el lugar donde se realizo el evento"
-                                            onchange="cancel = true;" required />
+                                    <div class="col-4 col-12-small">
+                                        <label for="LugarE">Seleccione el lugar donde se realizó el evento</label>
+                                        <select name="LugarE" id="LugarE" required>
+                                        <option disabled selected>Seleccione el lugar del Evento</option>
+                                            <?php
+                                            $Matriz = $Methods->ConsultarLugares();
+                                            echo $Methods ->ImprimirLugares($Matriz);
+                                    ?>
+                                    </select>
                                     </div>
-                                    <div class="col-6 col-12-small">
-
+                                    <div class="col-4 col-12-small">
                                         <label for="TipoE">Seleccione el tipo de evento</label>
                                         <select name="TipoE" id="TipoE" required>
                                         <option disabled selected>Seleccione el tipo de Evento</option>
                                             <?php
-                                            require 'class/Events.php';
-                                            $Methods = new MetodosEventos();
-                                            $Matriz = $Methods->ConsultarTipos();
-                                            echo $Methods ->ImprimirTipos($Matriz);
+                                            $Matriz2 = $Methods->ConsultarTipos();
+                                            echo $Methods ->ImprimirTipos($Matriz2);
                                     ?>
                                         </select>
                                     </div>
 
-                                    <div class="col-6 col-12-small">
+                                    <div class="col-4 col-12-small">
                                         <label for="FechaE">Fecha en que se realizó el evento</label>
                                         <input class="event" type="date" name="FechaE" id="FechaE" value="0000-00-00" />
                                     </div>
