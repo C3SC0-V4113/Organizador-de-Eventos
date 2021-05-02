@@ -13,6 +13,7 @@ i.mostrar
 }
 
 
+
 * {box-sizing:border-box}
 
 /* Slideshow container */
@@ -2668,7 +2669,7 @@ form input[type="text"].service,
 	}
 
 		#highlights .highlight h3 {
-			color:#1C2530;
+			color:#ffff;
 			margin: 0 0 0.75em 0;
 			font-size: 1em;
 			letter-spacing: 0.05em;

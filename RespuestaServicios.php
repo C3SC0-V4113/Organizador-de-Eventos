@@ -14,7 +14,7 @@
 <body class="no-sidebar is-preload">
     <div id="page-wrapper">
 
-        <?php
+    <?php
 		require './assets/php/header.php';
 		?>
 
@@ -146,7 +146,7 @@
 
         <!-- Highlights -->
 
-        <?php
+		<?php
 		require './assets/php/footer.php';
 		?>
 

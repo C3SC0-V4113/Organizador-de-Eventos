@@ -17,6 +17,8 @@ class empresa{
     private $email;
     private $logURL;
 
+    
+
     function __construct($id,$nombre,$titulodesc,$logodesc,$descripcion,$eventostitle,$eventosdesc,$ubictitle,$ubicdesc,$contacttitle,$contactdesc,$slogan,$telefono,$direccion,$email,$logURL) {
         $this->id=$id;
         $this->nombre=$nombre;

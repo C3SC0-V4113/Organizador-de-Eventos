@@ -1,6 +1,5 @@
 <!DOCTYPE HTML>
 <html>
-
 <head>
     <title>ORGANIZADORA DE EVENTOS</title>
     <meta charset="utf-8" />
@@ -8,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <link rel="stylesheet" href="assets/css/main.css" />
     <link rel="stylesheet" href="assets/css/main.css?<?php echo time() . ".0"; ?>" />
+    <link rel="stylesheet" href="assets/css/contraste.css">
 
     <!-- picker-->
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
@@ -15,29 +15,11 @@
     <link href="dist/css/fontawesome-iconpicker.min.css?<?php echo time() . ".0"; ?>" rel="stylesheet">
 </head>
 
-<body class="no-sidebar is-preload">
-    <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
-        <select name="opciones" id="opciones">
-            <option>Admin</option>
-            <option>Cliente</option>
-        </select>
-        <input type="submit" name="enviar" id="enviar" value="Cambiar Rol">
-    </form>
-    <?php
-    $admin = true;
-    $permiso;
-    if (isset($_POST['enviar'])) {
-        $permiso = (isset($_POST['opciones'])) ? $_POST['opciones'] : '';
-        if ($permiso == 'Admin') {
-            $admin = true;
-        } else {
-            $admin = false;
-        }
-    }
-    echo "<p>El permiso es : $permiso</p>";
-    echo "<p>permiso de admin:" . (bool)$admin . "</p>";
+<?php session_start(); ?>
 
-    function includeWithVariables($filePath, $variables = array(), $print = true)
+<body class="no-sidebar is-preload">
+    <?php
+    /*function includeWithVariables($filePath, $variables = array(), $print = true)
     {
         $output = NULL;
         if (file_exists($filePath)) {
@@ -57,7 +39,7 @@
             print $output;
         }
         return $output;
-    }
+    }*/
 
     //Llenando la clase
     require 'class/empresa.class.php';
@@ -90,7 +72,8 @@
     ?>
     <div id="page-wrapper">
         <?php
-        includeWithVariables('./assets/php/header.php', array('admin' => $admin, 'empresa' => $empresa));
+        require './assets/php/header.php';
+        //includeWithVariables('./assets/php/header.php', array('admin' => $admin, 'empresa' => $empresa));
         ?>
         <!-- Main -->
         <div id="main" class="wrapper style2">
@@ -140,7 +123,7 @@
                                                 </div>
                                                 <div class="col-xs-12 col-md-6">
                                                     <label for="telefono">Telefono</label>
-                                                    <input class="empresa" value="<?php $empresa->ShowTelefono() ?>" type="text" name="telefono" id="nombreEmp" maxlength="6" placeholder="Ingrese el Número telefonico" onchange="cancel = true;" />
+                                                    <input class="empresa" value="<?php $empresa->ShowTelefono() ?>" type="text" name="telefono" id="nombreEmp" maxlength="8" placeholder="Ingrese el Número telefonico" onchange="cancel = true;" />
                                                 </div>
                                                 <div class="col-xs-12 col-md-6">
                                                     <label for="direccion">Dirección</label>
@@ -180,7 +163,7 @@
                                             $email = (isset($_POST['email'])) ? $_POST['email'] : $empresa->ShowEmail();
                                             $titleContact = (isset($_POST['TitleContact'])) ? $_POST['TitleContact'] : $empresa->Showcontacttitle();
                                             $DescContact = (isset($_POST['DescContact'])) ? $_POST['DescContact'] : $empresa->Showcontactdesc();
-                                            $actualizacion = $empresa->ActualizarGen($nombre, $slogan, $icono, $DescTitle, $DescEmp, $telefono, $direccion, $email,$titleContact,$DescContact);
+                                            $actualizacion = $empresa->ActualizarGen($nombre, $slogan, $icono, $DescTitle, $DescEmp, $telefono, $direccion, $email, $titleContact, $DescContact);
 
                                             if ($Base->query($actualizacion) === TRUE) {
                                                 echo '<div class="alert alert-success" role="alert">Actualizado Correctamente</div>';
@@ -191,6 +174,109 @@
                                         ?>
                                     </section>
                                 </div>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+
+            </div>
+            <header class="style1">
+                <h1>Control de Redes</h1>
+            </header>
+            <!--Redes Sociales-->
+            <div class="container">
+                <!-- Content -->
+                <div id="content">
+                    <article class="box post">
+                        <div class="feature-list">
+                            <div class="row">
+                                <section>
+                                    <div class="col-xs-12">
+                                        <?php require 'class/enlace.class.php'; ?>
+                                        <form action="class/enlace.class.php" method="post">
+                                            <div class="row gtr-50">
+                                            <input type="hidden" name="idss" id="idss" value="<?php echo $id ?>">
+                                                <div class="col-xs-12 col-md-6">
+                                                    <label for="nombreredes">Ingrese el nombre de la red</label>
+                                                    <input type="text" class="redes" value="<?php echo $nombre; ?>" name="nombreredes" id="nombreredes">
+                                                </div>
+                                                <div class="col-xs-12 col-md-6">
+                                                    <label for="urlred">Ingrese la dirección</label>
+                                                    <input type="text" class="redes" value="<?php echo $urls; ?>" name="urlred" id="urlred">
+                                                </div>
+                                                <div class="col-xs-12" id="tabla">
+                                                    <?php
+                                                    function pre_r($array)
+                                                    {
+                                                        echo '<pre>';
+                                                        print_r($array);
+                                                        echo '</pre>';
+                                                    }
+
+                                                    $mysqli = new mysqli('localhost', 'root', '', 'mydb', 3307)  or die($mysqli->error);
+                                                    $inner = "SELECT enlaces.IDEnlaces, enlaces.Nombre,enlaces.Enlace
+                                                    FROM enlaces
+                                                    INNER JOIN detalle_empresa_enlaces
+                                                    ON enlaces.IDEnlaces=detalle_empresa_enlaces.IDEnlaces
+                                                    INNER JOIN empresa
+                                                    ON detalle_empresa_enlaces.IDEmpresa=empresa.idEmpresa";
+                                                    $resultado = $mysqli->query($inner);
+                                                    //pre_r($resultado->fetch_assoc());
+                                                    ?>
+                                                    <table class="table">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Nombre</th>
+                                                                <th>Enlace</th>
+                                                                <th colspan="2">Acciones</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <?php
+                                                            while ($selector = $resultado->fetch_assoc()) :
+                                                            ?>
+                                                                <tr>
+                                                                    <td>
+                                                                        <?php echo $selector['Nombre'] ?>
+                                                                    </td>
+                                                                    <td>
+                                                                        <?php echo $selector['Enlace'] ?>
+                                                                    </td>
+                                                                    <td>
+                                                                        <a href="ActualizarEmpresa.php?edit=<?php echo $selector['IDEnlaces']; ?>" class="btn btn-info">Editar</a>
+                                                                        <a href="ActualizarEmpresa.php?delete=<?php echo $selector['IDEnlaces']; ?>" class="btn btn-danger">Eliminar</a>
+                                                                    </td>
+                                                                </tr>
+                                                            <?php endwhile; ?>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <div>
+                                                    <ul class="actions">
+                                                        <?php
+                                                        if ($update == true) :
+                                                        ?>
+                                                            <li><input type="submit" id='actualizarRedes' name="actualizarRedes" class="style5" value="Actualizar Datos" onclick="cancel = false;" /></li>
+                                                        <?php else : ?>
+                                                            <li><input type="submit" id='guardarRedes' name="guardarRedes" class="style5" value="Guardar Cambios" onclick="cancel = false;" /></li>
+                                                        <?php endif; ?>
+                                                        <li><input type="reset" class="style2" value="Limpiar Campos" onclick="Limpiar()" /></li>
+                                                    </ul>
+                                                </div>
+                                                <?php
+                                                if (isset($_SESSION['mensaje'])) :
+                                                ?>
+                                                    <div class="alert col-xs-12 alert-<?php echo $_SESSION['msg_type'] ?>">
+                                                        <?php
+                                                        echo $_SESSION['mensaje'];
+                                                        unset($_SESSION['mensaje']);
+                                                        ?>
+                                                    </div>
+                                                <?Php endif; ?>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </section>
                             </div>
                         </div>
                     </article>
@@ -212,10 +298,12 @@
                                     </label>
                                     <input class="empresa" value="<?php $empresa->Showeventostitle() ?>" type="text" name="titleEvent" id="titleEvent" maxlength="25" placeholder="Ingrese el Titulo" onchange="cancel = true;" />
                                 </div>
-                                    <div class="col-xs-12">
-                                                    <label for="descEvent"><p class="descrip">Descripción de Empresa</p></label>
-                                                    <textarea class="empresa" name="descEvent" id="descEvent" placeholder="Ingrese la descripción" rows="4" onchange="cancel = true;"><?php $empresa->Showeventosdesc() ?></textarea>
-                                                </div>
+                                <div class="col-xs-12">
+                                    <label for="descEvent">
+                                        <p class="descrip">Descripción de Empresa</p>
+                                    </label>
+                                    <textarea class="empresa" name="descEvent" id="descEvent" placeholder="Ingrese la descripción" rows="4" onchange="cancel = true;"><?php $empresa->Showeventosdesc() ?></textarea>
+                                </div>
                                 <div class="col-xs-12">
                                     <ul class="actions">
                                         <li><input type="submit" id='guardarEvent' name="guardarEvent" class="style5" value="Guardar Cambios" onclick="cancel = false;" /></li>
@@ -229,7 +317,7 @@
                             $titulo = (isset($_POST['titleEvent'])) ? $_POST['titleEvent'] : $empresa->Showeventostitle();
                             $desc = (isset($_POST['descEvent'])) ? $_POST['descEvent'] : $empresa->Showeventosdesc();
 
-                            $actualizacion = $empresa->ActualizarHighlights($titulo,$desc);
+                            $actualizacion = $empresa->ActualizarHighlights($titulo, $desc);
 
                             if ($Base->query($actualizacion) === TRUE) {
                                 echo '<div class="alert alert-success" role="alert">Actualizado Correctamente</div>';
@@ -256,10 +344,12 @@
                                     </label>
                                     <input class="empresa" value="<?php $empresa->Showubictitle() ?>" type="text" name="titleUbic" id="titleUbic" maxlength="25" placeholder="Ingrese el Titulo" onchange="cancel = true;" />
                                 </div>
-                                    <div class="col-xs-12">
-                                                    <label for="descUbi"><p class="descrip">Descripción de Ubicación</p></label>
-                                                    <textarea class="empresa" name="descUbi" id="descUbi" placeholder="Ingrese la descripción" rows="4" onchange="cancel = true;"><?php $empresa->Showubicdesc() ?></textarea>
-                                                </div>
+                                <div class="col-xs-12">
+                                    <label for="descUbi">
+                                        <p class="descrip">Descripción de Ubicación</p>
+                                    </label>
+                                    <textarea class="empresa" name="descUbi" id="descUbi" placeholder="Ingrese la descripción" rows="4" onchange="cancel = true;"><?php $empresa->Showubicdesc() ?></textarea>
+                                </div>
                                 <div class="col-xs-12">
                                     <ul class="actions">
                                         <li><input type="submit" id='guardarUbic' name="guardarUbic" class="style5" value="Guardar Cambios" onclick="cancel = false;" /></li>
@@ -273,7 +363,7 @@
                             $tituloU = (isset($_POST['titleUbic'])) ? $_POST['titleUbic'] : $empresa->Showubictitle();
                             $descU = (isset($_POST['descUbi'])) ? $_POST['descUbi'] : $empresa->Showubicdesc();
 
-                            $actualizacionU = $empresa->ActualizarUbicacion($tituloU,$descU);
+                            $actualizacionU = $empresa->ActualizarUbicacion($tituloU, $descU);
 
                             if ($Base->query($actualizacionU) === TRUE) {
                                 echo '<div class="alert alert-success" role="alert">Actualizado Correctamente</div>';
@@ -287,7 +377,7 @@
             </div>
         </section>
         <?php
-        includeWithVariables('./assets/php/footer.php', array('admin' => $admin, 'empresa' => $empresa));
+        require './assets/php/footer.php';
         ?>
     </div>
     <!-- Scripts -->
@@ -398,5 +488,4 @@
         gtag('config', 'UA-85082661-5');
     </script>
 </body>
-
 </html>

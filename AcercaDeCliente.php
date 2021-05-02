@@ -2,37 +2,18 @@
 <html>
 
 <head>
-	<title>ORGANIZADORA DE EVENTOS</title>
+	<title>Sobre Nosotros - Wine & Champagne Eventos</title>
 	<meta charset="utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 	<link rel="stylesheet" href="assets/css/main.css" />
-	<link rel="stylesheet" href="assets/css/main.css?<?php echo time() . ".0"; ?>" />
+    <link rel="stylesheet" href="assets/css/main.css?<?php echo time() . ".0"; ?>" media="all" />
+	<link rel="stylesheet" href="assets/css/contraste.css">
 </head>
 
 <body class="no-sidebar is-preload">
-	<form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
-		<select name="opciones" id="opciones">
-			<option>Admin</option>
-			<option>Cliente</option>
-		</select>
-		<input type="submit" name="enviar" id="enviar" value="Cambiar Rol">
-	</form>
 	<?php
-	$admin = false;
-	$permiso;
-	if (isset($_POST['enviar'])) {
-		$permiso = (isset($_POST['opciones'])) ? $_POST['opciones'] : '';
-		if ($permiso == 'Admin') {
-			$admin = true;
-		} else {
-			$admin = false;
-		}
-	}
-	echo "<p>El permiso es : $permiso</p>";
-	echo "<p>permiso de admin:" . (bool)$admin . "</p>";
-
-	function includeWithVariables($filePath, $variables = array(), $print = true)
+	/*function includeWithVariables($filePath, $variables = array(), $print = true)
 	{
 		$output = NULL;
 		if (file_exists($filePath)) {
@@ -52,10 +33,10 @@
 			print $output;
 		}
 		return $output;
-	}
+	}*/
 
 	//Llenando la clase
-	require 'class/empresa.class.php';
+	require_once 'class/empresa.class.php';
 	//Conexion
 	$Base = new mysqli('localhost', 'root', '', 'mydb', 3307);
 	$Base->set_charset("utf8");
@@ -85,7 +66,7 @@
 	?>
 	<div id="page-wrapper">
 		<?php
-		includeWithVariables('./assets/php/header.php', array('admin' => $admin, 'empresa' => $empresa));
+		require './assets/php/headerCli.php';
 		?>
 		<!-- Main -->
 		<div id="main" class="wrapper style2">
@@ -117,19 +98,6 @@
 								</div>
 							</div>
 						</div>
-						<?php
-						if ($admin) {
-						?>
-							<ul class="actions special">
-								<form id="empresabtn" name="empresabtn">
-									<li>
-										<a href="./ActualizarEmpresa.php"> <input type="button" class="button special style5 large" value="Editar Informacion"></a>
-									</li>
-								</form>
-							</ul>
-						<?php
-						}
-						?>
 					</article>
 				</div>
 
@@ -146,36 +114,23 @@
 							<p class="descrip"><?php $empresa->Showeventosdesc(); ?></p>
 						</section>
 					</div>
-					<div class="col-4 col-12-medium">
-						<section class="highlight">
-							<a href="#" class="image featured"><img src="images/pic02.jpg" alt="" /></a>
-						</section>
-					</div>
-					<div class="col-4 col-12-medium">
-						<section class="highlight">
-							<a href="#" class="image featured"><img src="images/pic03.jpg" alt="" /></a>
-						</section>
-					</div>
-					<div class="col-4 col-12-medium">
-						<section class="highlight">
-							<a href="#" class="image featured"><img src="images/pic04.jpg" alt="" /></a>
-						</section>
-					</div>
+					<div class="row aln-center">
+                            <?php 
+                                include( 'class/InicioEventos.php');
+                                $Consulta = "Select * from fotoseventos limit 3";
+                                $Ejecucion = $conexion->query($Consulta);
+                                if($Ejecucion)
+                                {
+                                    while ($fila = $Ejecucion->fetch_assoc())
+                                    {
+                                        //echo "<div class='col-4 col-12-medium'><section class='highlight'><a href='#'' class='image featured'><img src='data:image/jpeg;base64,". base64_encode($fila['UrlFoto'])."' style='width:100%;'></a></section></div>";
+                                        echo "<div class='col-4 col-12-medium'><section class='highlight'><a href='#'' class='image featured'><img src='". ($fila['UrlFoto'])."' style='width:100%;'></a></section></div>";
+                                    }
+                                }
+                            ?> 
+                    </div>
 				</div>
 			</div>
-			<?php
-			if ($admin) {
-			?>
-				<ul class="actions special">
-					<form id="empresabtn" name="empresabtn">
-						<li>
-							<a href="./ActualizarEmpresa.php"> <input type="button" class="button special style5 large" value="Editar Informacion"></a>
-						</li>
-					</form>
-				</ul>
-			<?php
-			}
-			?>
 		</section>
 		<!--Ubicacion-->
 		<section id="highlights" class="wrapper style4">
@@ -190,23 +145,10 @@
 						<div id="map"></div>
 					</div>
 				</div>
-				<?php
-				if ($admin) {
-				?>
-					<ul class="actions special">
-						<form id="empresabtn" name="empresabtn">
-							<li>
-								<a href="./ActualizarEmpresa.php"> <input type="button" class="button special style5 large" value="Editar Informacion"></a>
-							</li>
-						</form>
-					</ul>
-				<?php
-				}
-				?>
 			</div>
 		</section>
 		<?php
-		includeWithVariables('./assets/php/footer.php', array('admin' => $admin, 'empresa' => $empresa));
+		require './assets/php/footerCli.php';
 		?>
 	</div>
 	<!-- Scripts -->

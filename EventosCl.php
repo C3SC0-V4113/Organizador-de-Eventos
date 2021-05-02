@@ -12,44 +12,9 @@
 <body class="no-sidebar is-preload" >
     <div id="page-wrapper">
 
-        <!-- Header -->
-        <section id="header" class="wrapper">
-
-            <!-- Logo -->
-            <div id="logo">
-                <h1><a href="index.html">WINE & CHAMPAGNE<br>EVENTOS</a></h1>
-                <p>¡B I E N V E N I D O S!</p>
-            </div>
-
-            <!-- Nav -->
-            <nav id="nav">
-                <ul>
-                    <li><a href="indexAdmin.html">INICIO</a></li>
-                    <li>
-                        <a href="ServiciosAd.php">NUESTROS SERVICIOS</a>
-                        <ul>
-                            <li><a href="EditarHeader.php">Editar Header</a></li>
-                            <li>
-                                <a href="">Editar "Tipos de Eventos"</a>
-                                <ul>
-                                    <li><a href="AgregarServicios.php">Agregar Servicio</a></li>
-                                    <li><a href="ActualizarServicios.php">Actualizar Servicio</a></li>
-                                    <li><a href="EliminarServicios.php">Eliminar Servicio</a></li>>
-                                </ul>
-                                <a href="">Editar "Eventos"</a>
-                                    <li><a href="Nuestros_Eventos.php">Agregar "Nuestros Eventos"</a></li>
-                                    <li><a href="Actualizar_Eventos">Actualizar "Nuestros Eventos"</a>
-                                    <li><a href="Eliminar_Eventos">Eliminar "Nuestros Eventos"</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li><a href="BaseEventos.html">EVENTOS</a></li>
-                    <li><a href="Base.html">QUIENES SOMOS</a></li>
-                    <li class="current"><a href="Base.html">CONTACTANOS</a></li>
-                </ul>
-            </nav>
-
-        </section>
+    <?php
+		require './assets/php/headerCli.php';
+		?>
 
         <!-- EVENTOS -->
         <?php       
@@ -335,7 +300,6 @@
 						</div>
 					</div>
 				</section>
-                
                 <?php
 		require './assets/php/footerCli.php';
 		?>

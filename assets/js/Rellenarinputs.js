@@ -157,7 +157,7 @@ function RellenarE(Name, Descrip, Cliente, IdE,fecha,lugar,tipo)
         InDescrip.innerHTML = Descrip;
         InCli.value=Cliente;
         Fecha.value=fecha;
-        InLugar.value= lugar;
+        InLugar.value=lugar;
         InTipo.value = tipo;
         InID.value = IdE;
     }

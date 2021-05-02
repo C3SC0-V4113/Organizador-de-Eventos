@@ -22,6 +22,10 @@
 <body class="no-sidebar is-preload">
     <div id="page-wrapper">
 
+    <?php
+		require './assets/php/headerCli.php';
+		?>
+
         <!-- Main -->
         <div id="main" class="wrapper style2">
          <!--Sep-->
@@ -77,7 +81,10 @@
          <!--Sep-->
         <!-- Highlights -->
         <!-- Footer -->
-
+        <br><br><br><br><br><br>
+		<?php
+		require './assets/php/footerCli.php';
+		?>
 
     </div>
 
