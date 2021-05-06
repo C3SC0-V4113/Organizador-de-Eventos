@@ -59,6 +59,19 @@ $mysqli = new mysqli('localhost', 'root', '', 'mydb', 3307)  or die($mysqli->err
                     </li>
                 </ul>
             </li>
+            <li>
+                <a href="EditarLugar.php">LUGARES</a>
+                <ul>
+                    <li>
+                        <a>Editar Lugares</a>
+                        <ul>
+                            <li><a href="AgregarL.php">Agregar Lugar</a></li>
+                            <li><a href="ActualizarLugar.php">Actualizar Lugar</a></li>
+                            <li><a href="EliminarL.php">Eliminar Lugar</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
             <li><a href="AcercaDe.php">QUIENES SOMOS</a></li>
             <li class="current"><a href="#">CONTACTANOS</a></li>
         </ul>

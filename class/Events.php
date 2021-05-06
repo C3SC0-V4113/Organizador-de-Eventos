@@ -293,7 +293,7 @@ public function ExtraerBaseE($fila)
         </script>';
     }
 
-    public function MostrarEvento($Nombre,$Lugar,$Tipo,$Descripcion,$Imagenes,$Cliente,$fechita)
+    public function MostrarEvento($Nombre,$Lugar,$Tipo,$Descripcion,$Imagenes,$Cliente,$fechita,$Dir)
     {
         $fecha = substr($fechita, 0, 10);
         $numeroDia = date('d', strtotime($fecha));
@@ -306,7 +306,7 @@ public function ExtraerBaseE($fila)
         $espanol =  $numeroDia." de ".$nombreMes." de ".$anio;
         echo '<header class="style1">
         <h2>'.$Nombre.'</h2><hr>
-        <p id="arriba" style="text-align:left;"><i class="mostrar icon fas fa-map-marker-alt"></i><b> &nbsp;&nbsp;Lugar del Evento:</b> '.$Lugar.'
+        <p id="arriba" style="text-align:left;"><i class="mostrar icon fas fa-map-marker-alt"></i><b> &nbsp;&nbsp;Lugar del Evento:</b> <abbr title="'.$Dir.'">'.$Lugar.'</abbr>
         &nbsp|&nbsp <i class="mostrar icon fas fa-user"></i><b>&nbsp;&nbsp; Cliente:</b> '.$Cliente.'
         &nbsp|&nbsp <i class="mostrar icon fas fa-calendar-alt"></i><b>&nbsp;&nbsp; Fecha del Evento:</b> '.$espanol.'
         &nbsp|&nbsp&nbsp;<i class="mostrar icon fas fa-caret-right"></i><b>&nbsp;&nbsp;<b> Tipo de Evento:</b> '.$Tipo.'</p>

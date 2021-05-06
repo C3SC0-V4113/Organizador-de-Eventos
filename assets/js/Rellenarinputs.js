@@ -246,3 +246,53 @@ function EliminarEvento(ID,Cliente,Nombre)
 
     }
 }
+
+function RellenarL(Direc, Name, IdL)
+{
+    InName = document.getElementById("nombreL");
+    InDir = document.getElementById("DirecL");
+    InID= document.getElementById("idLugar");
+    Boton = document.getElementById("modificarL");
+    
+    if(name != 'none' )
+    {
+        InName.disabled = false;
+        InDir.disabled = false;
+        Boton.disabled = false;
+
+    
+        InName.value = Name;
+        InDir.value=Direc;
+        InID.value = IdL;
+    }
+    else
+    {
+
+    }
+    
+
+}
+function EliminarLugar(ID,Nombre,Direc)
+{
+    InID= document.getElementById("idLugar");
+    Boton = document.getElementById("EliminarL");
+    InName = document.getElementById("nombreL");
+    if(Nombre != 'none' )
+    {
+        InID.value = ID;
+        Boton.disabled = false;
+        InName.value = Nombre;
+    }
+    else
+    {
+
+    }
+}
+function LimpiarL()
+{
+    InName = document.getElementById("nombreL");
+    InDir = document.getElementById("DirecL");
+    InName.value = '';
+    InDir.value = '';
+    
+}
