@@ -42,7 +42,7 @@ $mysqli = new mysqli('localhost', 'root', '', 'mydb', 3307)  or die($mysqli->err
             </li>
             <li><a href="EventosCl.php">EVENTOS</a></li>
             <li><a href="AcercaDeCliente.php">QUIENES SOMOS</a></li>
-            <li class="current"><a href="#">CONTACTANOS</a></li>
+            <li class="current"><a href="ReservacionesCliente.php">RESERVACIONES</a></li>
         </ul>
     </nav>
 </section>
