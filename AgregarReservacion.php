@@ -69,8 +69,11 @@
                                     </div>
 
                                     <div class="col-4 col-12-small">
-                                        <label for="FechaReserva">Fecha en que se realizará el evento</label>
+                                        <label for="FechaReserva">Fecha en que se realizará el evento <span id="adver">*</span></label>
                                         <input class="event" type="date" name="FechaReserva" id="FechaReserva" value="0000-00-00" />
+                                    </div>
+                                    <div class="col-12">
+                                    <p id="adver">*Debe elegir una fecha con almenos tres meses de anticipación</p>
                                     </div>
                                     <div class="col-12">
                                         <?php
@@ -157,6 +160,7 @@
     <script src="assets/js/ConfirmarSalir.js"></script>
     <script src="assets/js/RellenarInputs.js?<?php echo time() . ".0"; ?>"></script>
     <script src="assets/js/total.js"></script>
+    <script src="assets/js/calendario.js"></script>
     <script src="//code.jquery.com/jquery-2.2.1.min.js"></script>
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="dist/js/fontawesome-iconpicker.js?<?php echo time() . ".0"; ?>"></script>

@@ -1,9 +1,9 @@
 var selector=document.getElementById("Pantalla");
 var escondido=document.getElementById("TotalEscondido");
 var text=document.getElementById("totalNo");
+text.innerText="Total de: $0";
 
 selector.addEventListener("change",function(){
-    text.innerText="Total de: $0";
     SeleccionarValores(selector)
 });
 
