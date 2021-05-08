@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3307
--- Tiempo de generación: 27-03-2021 a las 10:25:03
+-- Tiempo de generación: 08-05-2021 a las 01:59:56
 -- Versión del servidor: 10.4.17-MariaDB
 -- Versión de PHP: 8.0.0
 
@@ -24,6 +24,28 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `cliente`
+--
+
+CREATE TABLE `cliente` (
+  `idCliente` int(11) NOT NULL,
+  `idUsuario` int(11) NOT NULL,
+  `NombreCliente` varchar(50) DEFAULT NULL,
+  `Telefono` varchar(9) DEFAULT NULL,
+  `Correo` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `cliente`
+--
+
+INSERT INTO `cliente` (`idCliente`, `idUsuario`, `NombreCliente`, `Telefono`, `Correo`) VALUES
+(1, 4, 'Pana', '7872-4055', 'frankjose00@gmail.com'),
+(2, 5, 'Miguel', '2525-2525', 'vallecesco@gmai.com');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `detalle_empresa_enlaces`
 --
 
@@ -39,7 +61,8 @@ CREATE TABLE `detalle_empresa_enlaces` (
 INSERT INTO `detalle_empresa_enlaces` (`IDEnlaces`, `IDEmpresa`) VALUES
 (3, 1),
 (33, 1),
-(38, 1);
+(38, 1),
+(41, 1);
 
 -- --------------------------------------------------------
 
@@ -86,29 +109,14 @@ CREATE TABLE `enlaces` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Indices de la tabla `enlaces`
---
-ALTER TABLE `enlaces`
-  ADD PRIMARY KEY (`IDEnlaces`);
-
---
-
---
--- AUTO_INCREMENT de la tabla `enlaces`
---
-ALTER TABLE `enlaces`
-  MODIFY `IDEnlaces` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
-
---
-
---
 -- Volcado de datos para la tabla `enlaces`
 --
 
 INSERT INTO `enlaces` (`IDEnlaces`, `Nombre`, `Enlace`) VALUES
 (3, 'Twitter', 'https://twitter.com/compose/tweet/media'),
 (33, 'GitHub', 'https://github.com/'),
-(38, 'Facebook', 'https://m.facebook.com/home.php');
+(38, 'Facebook', 'https://m.facebook.com/home.php'),
+(41, 'LinkedIn', 'https://www.linkedin.com/feed/');
 
 -- --------------------------------------------------------
 
@@ -123,8 +131,8 @@ CREATE TABLE `eventos` (
   `Id_Usuario` int(11) NOT NULL,
   `Nombre` varchar(45) DEFAULT NULL,
   `fecha` date DEFAULT NULL,
-  `Lugar` varchar(200) DEFAULT NULL,
-  `Cliente` varchar(45) DEFAULT NULL,
+  `idLugar` int(11) NOT NULL,
+  `idCliente` int(11) DEFAULT NULL,
   `Descripcion` varchar(500) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -132,9 +140,8 @@ CREATE TABLE `eventos` (
 -- Volcado de datos para la tabla `eventos`
 --
 
-INSERT INTO `eventos` (`idEventos`, `IdTipoEvento`, `IdEmpresa`, `Id_Usuario`, `Nombre`, `fecha`, `Lugar`, `Cliente`, `Descripcion`) VALUES
-(2, 3, 1, 1, 'Papyrus', '2016-06-27', 'Snowdin', 'Cool Dude', 'Veremos si esto es de su talla'),
-(4, 3, 1, 1, 'Cumpleaños', '2020-09-06', 'Pollo campero', 'Karla', 'Cumpleaños para toda la familia y Amigos');
+INSERT INTO `eventos` (`idEventos`, `IdTipoEvento`, `IdEmpresa`, `Id_Usuario`, `Nombre`, `fecha`, `idLugar`, `idCliente`, `Descripcion`) VALUES
+(1, 3, 1, 1, 'Papyrus Undertale', '2021-05-03', 1, 1, 'Fiesta con tematica de Papyrus, el querido personaje de Undertale');
 
 -- --------------------------------------------------------
 
@@ -153,8 +160,8 @@ CREATE TABLE `fotoseventos` (
 --
 
 INSERT INTO `fotoseventos` (`idFotos`, `idEventos`, `UrlFoto`) VALUES
-(1, 2, 'ImagenesSubidas/3f8b4f4dcc6c8f205506cec38e95a48f1c8fc39b_hq.jpg'),
-(3, 4, 'ImagenesSubidas/fiesta-de-cumpleanos-655x368.jpg');
+(4, 1, 'ImagenesSubidas/cWKXDINwG9Fx0CePOrHXxLdGy8LnFKiJhchyCS7LuQU.jpg'),
+(6, 1, 'ImagenesSubidas/video-game-undertale-frisk-undertale-papyrus-undertale-wallpaper-preview.jpg');
 
 -- --------------------------------------------------------
 
@@ -173,7 +180,38 @@ CREATE TABLE `infoservicios` (
 --
 
 INSERT INTO `infoservicios` (`idEmpresa`, `HeaderTitulo`, `DescripcionHeader`) VALUES
-(1, 'Nuestros bellos y rikonilos Servicios', 'Esto llegara a la historia');
+(1, 'SERVICIOS DE CALIDAD Y PRECISIÓN', 'Estos servicios deben funcionar o me darán ganas de matarme :3');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `lugares`
+--
+
+CREATE TABLE `lugares` (
+  `idLugar` int(11) NOT NULL,
+  `NombreLugar` varchar(100) NOT NULL,
+  `DirecccionLugar` varchar(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `lugares`
+--
+
+INSERT INTO `lugares` (`idLugar`, `NombreLugar`, `DirecccionLugar`) VALUES
+(1, 'Hotel Sheraton', 'No se, en el hotel Sheraton we'),
+(2, 'Centro Militar', 'Yo que se we, cerca del Sheraton');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `reservas`
+--
+
+CREATE TABLE `reservas` (
+  `idReserva` int(11) NOT NULL,
+  `FechaReservada` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -186,17 +224,20 @@ CREATE TABLE `servicios` (
   `Nombre` varchar(45) DEFAULT NULL,
   `Descripcion` varchar(300) DEFAULT NULL,
   `urlIMG` longtext DEFAULT NULL,
-  `IdEmpresa` int(11) NOT NULL,
-  `Id_Usuario` int(11) NOT NULL
+  `Precio` decimal(15,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+-- --------------------------------------------------------
+
 --
--- Volcado de datos para la tabla `servicios`
+-- Estructura de tabla para la tabla `serviciosdeeventos`
 --
 
-INSERT INTO `servicios` (`idServicios`, `Nombre`, `Descripcion`, `urlIMG`, `IdEmpresa`, `Id_Usuario`) VALUES
-(1, 'Probando los Servicios', 'Somos de una boda cuqui', 'fas fa-archive', 1, 1),
-(2, 'Segundo Servicio', 'Vamoooos', 'fas fa-ambulance', 1, 1);
+CREATE TABLE `serviciosdeeventos` (
+  `idSDE` int(11) NOT NULL,
+  `idEvento` int(11) NOT NULL,
+  `idServicio` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -261,11 +302,20 @@ CREATE TABLE `usuario` (
 
 INSERT INTO `usuario` (`idUsuario`, `Usuario`, `Id_tipo_usuario`, `contraseña`) VALUES
 (1, 'admin', 1, '98eb470b2b60482e259d28648895d9e1'),
-(3, 'cliente', 2, '89f624dc5f553676c8b05de3701e6178');
+(3, 'cliente', 2, '89f624dc5f553676c8b05de3701e6178'),
+(4, 'aver', 2, 'a70c993d481c091b54727a9d75547b30'),
+(5, 'yosoy', 2, '449dbee947bc2f5d4b788d4235670c0d');
 
 --
 -- Índices para tablas volcadas
 --
+
+--
+-- Indices de la tabla `cliente`
+--
+ALTER TABLE `cliente`
+  ADD PRIMARY KEY (`idCliente`),
+  ADD KEY `ForaneaUsuario` (`idUsuario`);
 
 --
 -- Indices de la tabla `detalle_empresa_enlaces`
@@ -280,13 +330,22 @@ ALTER TABLE `detalle_empresa_enlaces`
 ALTER TABLE `empresa`
   ADD PRIMARY KEY (`idEmpresa`);
 
+--
+-- Indices de la tabla `enlaces`
+--
+ALTER TABLE `enlaces`
+  ADD PRIMARY KEY (`IDEnlaces`);
+
+--
 -- Indices de la tabla `eventos`
 --
 ALTER TABLE `eventos`
   ADD PRIMARY KEY (`idEventos`),
   ADD KEY `IdTipoEvento` (`IdTipoEvento`),
   ADD KEY `IdEmpresa` (`IdEmpresa`),
-  ADD KEY `Id_Usuario` (`Id_Usuario`);
+  ADD KEY `Id_Usuario` (`Id_Usuario`),
+  ADD KEY `fkidCliente` (`idCliente`),
+  ADD KEY `keylugarr` (`idLugar`) USING BTREE;
 
 --
 -- Indices de la tabla `fotoseventos`
@@ -302,12 +361,30 @@ ALTER TABLE `infoservicios`
   ADD PRIMARY KEY (`idEmpresa`);
 
 --
+-- Indices de la tabla `lugares`
+--
+ALTER TABLE `lugares`
+  ADD PRIMARY KEY (`idLugar`);
+
+--
+-- Indices de la tabla `reservas`
+--
+ALTER TABLE `reservas`
+  ADD PRIMARY KEY (`idReserva`);
+
+--
 -- Indices de la tabla `servicios`
 --
 ALTER TABLE `servicios`
-  ADD PRIMARY KEY (`idServicios`),
-  ADD KEY `IdEmpresa` (`IdEmpresa`),
-  ADD KEY `Id_Usuario` (`Id_Usuario`);
+  ADD PRIMARY KEY (`idServicios`);
+
+--
+-- Indices de la tabla `serviciosdeeventos`
+--
+ALTER TABLE `serviciosdeeventos`
+  ADD PRIMARY KEY (`idSDE`),
+  ADD KEY `ForaneaReserva` (`idEvento`),
+  ADD KEY `ForaneaServicio` (`idServicio`);
 
 --
 -- Indices de la tabla `tipoevento`
@@ -332,20 +409,57 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de las tablas volcadas
 --
 
+--
+-- AUTO_INCREMENT de la tabla `cliente`
+--
+ALTER TABLE `cliente`
+  MODIFY `idCliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de la tabla `enlaces`
+--
+ALTER TABLE `enlaces`
+  MODIFY `IDEnlaces` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+
+--
 -- AUTO_INCREMENT de la tabla `fotoseventos`
 --
 ALTER TABLE `fotoseventos`
-  MODIFY `idFotos` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `idFotos` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT de la tabla `lugares`
+--
+ALTER TABLE `lugares`
+  MODIFY `idLugar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de la tabla `reservas`
+--
+ALTER TABLE `reservas`
+  MODIFY `idReserva` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `serviciosdeeventos`
+--
+ALTER TABLE `serviciosdeeventos`
+  MODIFY `idSDE` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Restricciones para tablas volcadas
 --
+
+--
+-- Filtros para la tabla `cliente`
+--
+ALTER TABLE `cliente`
+  ADD CONSTRAINT `fk_Usuario` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`idUsuario`);
 
 --
 -- Filtros para la tabla `detalle_empresa_enlaces`
@@ -360,7 +474,9 @@ ALTER TABLE `detalle_empresa_enlaces`
 ALTER TABLE `eventos`
   ADD CONSTRAINT `eventos_ibfk_1` FOREIGN KEY (`IdTipoEvento`) REFERENCES `tipoevento` (`idTipoEvento`),
   ADD CONSTRAINT `eventosempresa_ibfk_1` FOREIGN KEY (`IdEmpresa`) REFERENCES `empresa` (`idEmpresa`),
-  ADD CONSTRAINT `eventousuarios_ibfk_2` FOREIGN KEY (`Id_Usuario`) REFERENCES `usuario` (`idUsuario`);
+  ADD CONSTRAINT `eventousuarios_ibfk_2` FOREIGN KEY (`Id_Usuario`) REFERENCES `usuario` (`idUsuario`),
+  ADD CONSTRAINT `fkflu` FOREIGN KEY (`idLugar`) REFERENCES `lugares` (`idLugar`),
+  ADD CONSTRAINT `fkidCliente` FOREIGN KEY (`idCliente`) REFERENCES `cliente` (`idCliente`);
 
 --
 -- Filtros para la tabla `fotoseventos`
@@ -375,11 +491,11 @@ ALTER TABLE `infoservicios`
   ADD CONSTRAINT `infoservicios_ibfk_1` FOREIGN KEY (`idEmpresa`) REFERENCES `empresa` (`idEmpresa`);
 
 --
--- Filtros para la tabla `servicios`
+-- Filtros para la tabla `serviciosdeeventos`
 --
-ALTER TABLE `servicios`
-  ADD CONSTRAINT `servicios_ibfk_1` FOREIGN KEY (`IdEmpresa`) REFERENCES `empresa` (`idEmpresa`),
-  ADD CONSTRAINT `servicios_ibfk_2` FOREIGN KEY (`Id_Usuario`) REFERENCES `usuario` (`idUsuario`);
+ALTER TABLE `serviciosdeeventos`
+  ADD CONSTRAINT `ResEvento` FOREIGN KEY (`idEvento`) REFERENCES `eventos` (`idEventos`),
+  ADD CONSTRAINT `ResServicio` FOREIGN KEY (`idServicio`) REFERENCES `servicios` (`idServicios`);
 
 --
 -- Filtros para la tabla `usuario`

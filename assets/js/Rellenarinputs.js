@@ -102,11 +102,12 @@ function EliminarImagen(idfoto,num)
     Father.insertAdjacentHTML('afterbegin',"<input type='hidden' id='eliminado"+num+"' name='eliminado"+num+"' value='"+idfoto+"' readonly required>")
 }
 
-function RellenarS(Name, Descrip, Icono, ID)
+function RellenarS(Name, Descrip, Icono,Precio, ID)
 {
     InName = document.getElementById("nombreS");
     InURL = document.getElementById("Icono");
     InID= document.getElementById("IdServicios");
+    InPrecio=document.getElementById("PresioS");
     EtiquetaI = document.getElementById("iconos");
     InDescrip = document.getElementById("descripS");
     Boton = document.getElementById("modificarS");
@@ -120,6 +121,7 @@ function RellenarS(Name, Descrip, Icono, ID)
         EtiquetaI.className = Icono;
         InName.value = Name;
         InDescrip.innerHTML = Descrip;
+        InPrecio.value=Precio;
         InURL.value = Icono;
         InID.value = ID;
     }
