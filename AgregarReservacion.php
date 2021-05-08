@@ -1,5 +1,6 @@
 <!DOCTYPE HTML>
 <html>
+
 <head>
     <title>Eventos - Wine & Champagne Eventos</title>
     <meta charset="utf-8" />
@@ -13,6 +14,7 @@
     session_start();
     ?>
 </head>
+
 <body class="no-sidebar is-preload">
     <div id="page-wrapper">
 
@@ -70,7 +72,7 @@
                                         <label for="FechaReserva">Fecha en que se realizará el evento</label>
                                         <input class="event" type="date" name="FechaReserva" id="FechaReserva" value="0000-00-00" />
                                     </div>
-                                    <div class="col-12">                        
+                                    <div class="col-12">
                                         <?php
                                         require 'class/servicios.php';
                                         $Servicios = new Servicio();
@@ -108,16 +110,18 @@
                                             <select multiple name="Pantalla" id="Pantalla" size="7" onchange="RellenarS(arrayJS[this.value]['Nombre'],arrayJS[this.value]['Descripcion'],arrayJS[this.value]['urlIMG'],arrayJS[this.value]['Precio'],arrayJS[this.value]['idServicios'])">
                                                 <?php
                                                 for ($i = 1; $i <= sizeof($Datos); $i++) {
-                                                    echo "<option value='" . $i . "'>";
+                                                    echo "<option value='" . $Datos[$i]['Precio'] . "'>";
                                                     if ($Datos[$i]['urlIMG'] != "none") {
-                                                        echo "Precio $".$Datos[$i]['Precio'].":&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+                                                        echo "Precio $" . $Datos[$i]['Precio'] . ":&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
                                                     } else {
                                                     }
                                                     echo $Datos[$i]['Nombre'] . "</option>";
                                                 }
                                                 ?>
                                             </select>
+                                            <input type="hidden" value="" name="TotalEscondido" id="TotalEscondido">
                                         </form>
+                                        <h3 id="totalNo"></h3>
                                     </div>
                                     <div class="col-12">
                                         <ul class="actions">
@@ -152,6 +156,7 @@
     <script src="assets/js/main.js"></script>
     <script src="assets/js/ConfirmarSalir.js"></script>
     <script src="assets/js/RellenarInputs.js?<?php echo time() . ".0"; ?>"></script>
+    <script src="assets/js/total.js"></script>
     <script src="//code.jquery.com/jquery-2.2.1.min.js"></script>
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="dist/js/fontawesome-iconpicker.js?<?php echo time() . ".0"; ?>"></script>
