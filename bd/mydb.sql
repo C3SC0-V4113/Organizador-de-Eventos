@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3307
--- Tiempo de generación: 08-05-2021 a las 01:59:56
+-- Tiempo de generación: 09-05-2021 a las 08:04:20
 -- Versión del servidor: 10.4.17-MariaDB
 -- Versión de PHP: 8.0.0
 
@@ -133,15 +133,17 @@ CREATE TABLE `eventos` (
   `fecha` date DEFAULT NULL,
   `idLugar` int(11) NOT NULL,
   `idCliente` int(11) DEFAULT NULL,
-  `Descripcion` varchar(500) DEFAULT NULL
+  `Descripcion` varchar(500) DEFAULT NULL,
+  `Visibilidad` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `eventos`
 --
 
-INSERT INTO `eventos` (`idEventos`, `IdTipoEvento`, `IdEmpresa`, `Id_Usuario`, `Nombre`, `fecha`, `idLugar`, `idCliente`, `Descripcion`) VALUES
-(1, 3, 1, 1, 'Papyrus Undertale', '2021-05-03', 1, 1, 'Fiesta con tematica de Papyrus, el querido personaje de Undertale');
+INSERT INTO `eventos` (`idEventos`, `IdTipoEvento`, `IdEmpresa`, `Id_Usuario`, `Nombre`, `fecha`, `idLugar`, `idCliente`, `Descripcion`, `Visibilidad`) VALUES
+(1, 3, 1, 1, 'Papyrus Undertale', '2021-05-03', 1, 1, 'Fiesta con tematica de Papyrus, el querido personaje de Undertale', 0),
+(2, 3, 1, 1, 'Cumpleaños con Spiderman', '2020-12-07', 2, 2, 'Fiesta de un niño de 5 años con tematica de Spiderman', 1);
 
 -- --------------------------------------------------------
 
@@ -161,7 +163,10 @@ CREATE TABLE `fotoseventos` (
 
 INSERT INTO `fotoseventos` (`idFotos`, `idEventos`, `UrlFoto`) VALUES
 (4, 1, 'ImagenesSubidas/cWKXDINwG9Fx0CePOrHXxLdGy8LnFKiJhchyCS7LuQU.jpg'),
-(6, 1, 'ImagenesSubidas/video-game-undertale-frisk-undertale-papyrus-undertale-wallpaper-preview.jpg');
+(6, 1, 'ImagenesSubidas/video-game-undertale-frisk-undertale-papyrus-undertale-wallpaper-preview.jpg'),
+(7, 2, 'ImagenesSubidas/spidey.jpg'),
+(8, 2, 'ImagenesSubidas/spider-man-remastered-ps5-esquire-4-1605525077.jpg'),
+(9, 2, 'ImagenesSubidas/hipertextual-4-trajes-spider-man-lejos-casa-nuevo-trailer-2019196176.jpg');
 
 -- --------------------------------------------------------
 
@@ -227,6 +232,15 @@ CREATE TABLE `servicios` (
   `Precio` decimal(15,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Volcado de datos para la tabla `servicios`
+--
+
+INSERT INTO `servicios` (`idServicios`, `Nombre`, `Descripcion`, `urlIMG`, `Precio`) VALUES
+(1, 'Sillas Plegables', '100 Sillas Plegables para cualquier tipo de Evento', 'fas fa-align-justify', '150.00'),
+(2, 'Servicio de Edecanes', 'Personal de 6 edecanes para presentar el evento, y ayudar con tareas pequeñas', 'fas fa-users', '1000.00'),
+(3, 'Limosina', 'Renta por un dia de Limosina para ir hasta a 4 sitios en el horario indicado', 'fas fa-car', '250.00');
+
 -- --------------------------------------------------------
 
 --
@@ -235,7 +249,7 @@ CREATE TABLE `servicios` (
 
 CREATE TABLE `serviciosdeeventos` (
   `idSDE` int(11) NOT NULL,
-  `idEvento` int(11) NOT NULL,
+  `idReserva` int(11) NOT NULL,
   `idServicio` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -383,7 +397,7 @@ ALTER TABLE `servicios`
 --
 ALTER TABLE `serviciosdeeventos`
   ADD PRIMARY KEY (`idSDE`),
-  ADD KEY `ForaneaReserva` (`idEvento`),
+  ADD KEY `ForaneaReserva` (`idReserva`),
   ADD KEY `ForaneaServicio` (`idServicio`);
 
 --
@@ -425,7 +439,7 @@ ALTER TABLE `enlaces`
 -- AUTO_INCREMENT de la tabla `fotoseventos`
 --
 ALTER TABLE `fotoseventos`
-  MODIFY `idFotos` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `idFotos` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `lugares`
@@ -494,7 +508,7 @@ ALTER TABLE `infoservicios`
 -- Filtros para la tabla `serviciosdeeventos`
 --
 ALTER TABLE `serviciosdeeventos`
-  ADD CONSTRAINT `ResEvento` FOREIGN KEY (`idEvento`) REFERENCES `eventos` (`idEventos`),
+  ADD CONSTRAINT `ResReserva` FOREIGN KEY (`idReserva`) REFERENCES `reservas` (`idReserva`),
   ADD CONSTRAINT `ResServicio` FOREIGN KEY (`idServicio`) REFERENCES `servicios` (`idServicios`);
 
 --
