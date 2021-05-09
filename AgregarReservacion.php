@@ -34,20 +34,19 @@
                             <p>Complete la siguiente Información:</p>
                         </header>
                         <section>
-                            <form id="AddEvent" name="AddEvent" method="post" action="RespuestaEventos.php" enctype="multipart/form-data">
+                            <form id="AddReserva" name="AddReserva" method="post" action="RespuestaReserva.php" enctype="multipart/form-data">
                                 <div class="row gtr-50">
                                     <div class="col-6 col-12-small">
-                                        <label for="nombreE">Nombre del Evento</label>
-                                        <input class="event" type="text" name="nombreE" id="nombreE" placeholder="Ingrese el Tipo de evento" onchange="cancel = true;" required />
+                                        <label for="nombreR">Nombre del Evento</label>
+                                        <input class="event" type="text" name="nombreR" id="nombreR" placeholder="Ingrese el Tipo de evento" onchange="cancel = true;" required />
                                     </div>
-
                                     <div class="col-12 col-12-small">
-                                        <label for="descripE">Descripción del Evento</label>
-                                        <textarea class="event" name="descripE" id="descripE" maxlength="500" placeholder="Ingrese la Descripción del Evento" rows="4" onchange="cancel = true;" required></textarea>
+                                        <label for="descripR">Descripción del Evento</label>
+                                        <textarea class="event" name="descripR" id="descripR" maxlength="500" placeholder="Ingrese la Descripción del Evento" rows="4" onchange="cancel = true;" required></textarea>
                                     </div>
                                     <div class="col-4 col-12-small">
-                                        <label for="LugarE">Seleccione el lugar donde se realizó el evento</label>
-                                        <select name="LugarE" id="LugarE" required>
+                                        <label for="LugarR">Seleccione el lugar donde se realizó el evento</label>
+                                        <select name="LugarR" id="LugarR" required>
                                             <option disabled selected>Seleccione el lugar del Evento</option>
                                             <?php
                                             require 'class/Events.php';
@@ -58,8 +57,8 @@
                                         </select>
                                     </div>
                                     <div class="col-4 col-12-small">
-                                        <label for="TipoE">Seleccione el tipo de evento</label>
-                                        <select name="TipoE" id="TipoE" required>
+                                        <label for="TipoR">Seleccione el tipo de evento</label>
+                                        <select name="TipoR" id="TipoR" required>
                                             <option disabled selected>Seleccione el tipo de Evento</option>
                                             <?php
                                             $Matriz2 = $Methods->ConsultarTipos();
@@ -67,7 +66,6 @@
                                             ?>
                                         </select>
                                     </div>
-
                                     <div class="col-4 col-12-small">
                                         <label for="FechaReserva">Fecha en que se realizará el evento <span id="adver">*</span></label>
                                         <input class="event" type="date" name="FechaReserva" id="FechaReserva" value="0000-00-00" />
@@ -128,9 +126,9 @@
                                     </div>
                                     <div class="col-12">
                                         <ul class="actions">
-                                            <li><input type="submit" id="guardarE" name="guardarE" class="style5" value="Guardar Evento" onclick="cancel=false;" />
+                                            <li><input type="submit" id="guardarE" name="guardarE" class="style5" value="Guardar Reservacion" onclick="cancel=false;" />
                                             </li>
-                                            <li><a href="EventosAd.php"><input type="button" class="style2" value="Cancelar" onclick="cancel = true; document.AddEvent.action = 'EventosAd.php';" /></a>
+                                            <li><a href="EventosAd.php"><input type="button" class="style2" value="Cancelar" onclick="cancel = true; document.AddReserva.action = 'EventosAd.php';" /></a>
                                             </li>
                                             <li><input type="reset" class="style2" value="Limpiar Campos" onclick="LimpiarE()" /></li>
                                         </ul>

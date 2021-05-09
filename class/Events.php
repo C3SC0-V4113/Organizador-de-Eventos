@@ -1,12 +1,12 @@
 <?php
 class MetodosEventos
 {
-    private $nombreE;
-    private $descripcionE;
-    private $fecha;
-    private $lugar;
-    private $cliente;
-    private $tipo;
+    protected $nombreE;
+    protected $descripcionE;
+    protected $fecha;
+    protected $lugar;
+    protected $cliente;
+    protected $tipo;
     private $urlfoto;
     private $idEvento;
 
