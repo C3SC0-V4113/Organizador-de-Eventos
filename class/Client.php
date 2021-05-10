@@ -9,8 +9,7 @@ $port=3307;
 if(!$conn = mysqli_connect($server,$username,$password,$database,$port)){
   die("fallo al conectar.");
 }
-
-
+    $conn->set_charset('utf8');
     $user = $_SESSION['Usuario'];
     $pass = $_SESSION['password'];
     $cod = md5($pass);
