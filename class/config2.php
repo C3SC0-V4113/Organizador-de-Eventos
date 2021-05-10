@@ -8,6 +8,7 @@
   if(!$conn = mysqli_connect($server,$username,$password,$database,$port)){
     die("fallo al conectar.");
   }
+  $conn->set_charset('utf8');
   if($_POST['password1'] == $_POST['password2']){
      $user = $_POST['Usuario1'];
      $pass = $_POST['password1'];

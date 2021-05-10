@@ -14,6 +14,7 @@
     die('connection failed: '.$e -> getMessage());
   }
  // codigo
+ $conn->exec("set names utf8");
  if(!empty($_POST['Usuario']) && !empty($_POST['contraseña'])){
    $records = $conn->prepare('SELECT * FROM Usuario WHERE Usuario =:Usuario');
    $records -> bindParam(':Usuario',$_POST['Usuario']);
