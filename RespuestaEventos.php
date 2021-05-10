@@ -43,7 +43,8 @@
                                 $fechaE = date("Y-m-d",strtotime($fechaE));
                                 $Usuario = isset($_SESSION['IdUsuario']) ? trim($_SESSION['IdUsuario']):-1;
                                 $Empresa = isset($_SESSION['IdEmpresa']) ? trim($_SESSION['IdEmpresa']):-1;
-                                
+                                echo $Usuario,$Empresa;
+                                print_r($_SESSION);
                                 if($nameE!=-1 && $CliE!=-1 && $descripE!=-1 && $LugarE!=-1 && $TipoE!=-1 && $fechaE!=-1)
                                 {
                                     $Id= $Eventos->IDEvento();

@@ -133,7 +133,6 @@
          <!--Sep-->
         <!-- Highlights -->
         <!-- Footer -->
-        <br><br><br><br><br><br>
         <section id="footer" class="wrapper">
             <div class="title">CONTACTANOS</div>
             <div class="container">

@@ -24,8 +24,9 @@
    $message = '';
 
    if ($_POST['Usuario'] != '' && $_POST['contraseña'] != '' && $Pass == $results['contraseña'] && $_POST['Usuario'] == $results['Usuario']) {
-     $_SESSION['idUsuario'] = $results['idUsuario'];
+     $_SESSION['IdUsuario'] = $results['idUsuario'];
      if ($results['Id_tipo_usuario'] == 1) {
+      $_SESSION['IdEmpresa']=1;
        header('Location: ../InicioAdmin.php');
      }elseif ($results['Id_tipo_usuario'] == 2) {
        header('Location: ../inicioCliente.php');
