@@ -111,7 +111,7 @@
                                             <select multiple name="Pantalla" id="Pantalla" size="7" onchange="RellenarS(arrayJS[this.value]['Nombre'],arrayJS[this.value]['Descripcion'],arrayJS[this.value]['urlIMG'],arrayJS[this.value]['Precio'],arrayJS[this.value]['idServicios'])">
                                                 <?php
                                                 for ($i = 1; $i <= sizeof($Datos); $i++) {
-                                                    echo "<option value='" . $Datos[$i]['Precio'] . "'>";
+                                                    echo "<option value='" . $Datos[$i]['Precio'] .'--'.$Datos[$i]['idServicios']. "'>";
                                                     if ($Datos[$i]['urlIMG'] != "none") {
                                                         echo "Precio $" . $Datos[$i]['Precio'] . ":&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
                                                     } else {
@@ -121,6 +121,7 @@
                                                 ?>
                                             </select>
                                             <input type="hidden" value="" name="TotalEscondido" id="TotalEscondido">
+                                            <input type="hidden" value="" name="ArrayIDs" id="ArrayIDs">
                                         </form>
                                         <h3 id="totalNo"></h3>
                                     </div>
