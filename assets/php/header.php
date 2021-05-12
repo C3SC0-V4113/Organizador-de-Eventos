@@ -8,7 +8,7 @@ $mysqli = new mysqli('localhost', 'root', '', 'mydb', 3307)  or die($mysqli->err
 <section id="header" class="wrapper">
     <!-- Logo -->
     <div id="logo">
-        <h1><a href="InicioAdmin.php"><?php
+        <h1><a href="InicioAdmin.php"><br><br><?php
                                         $Nombre = "SELECT `Nombre` FROM `empresa` WHERE 1";
                                         $peticion = $mysqli->query($Nombre);
                                         $filaemprcontact = $peticion->fetch_assoc();
@@ -25,6 +25,7 @@ $mysqli = new mysqli('localhost', 'root', '', 'mydb', 3307)  or die($mysqli->err
                     <li>
                         <a href="./ActualizarEmpresa.php"> <input type="button" class="button special style5 large" value="Editar Informacion"></a>
                     </li>
+                    <br>
                 </form>
             </ul>
     </div>
@@ -73,7 +74,12 @@ $mysqli = new mysqli('localhost', 'root', '', 'mydb', 3307)  or die($mysqli->err
                 </ul>
             </li>
             <li><a href="AcercaDe.php">QUIENES SOMOS</a></li>
-            <li class="current"><a href="#">CONTACTANOS</a></li>
+            <li class="current"><a href="#">ADMINISTRADOR</a>
+            <ul>
+                <li><a href="CambioContra.php">CAMBIAR CONTRASEÑA</a></li>
+                <li><a href="class/CerrarSesion.php">CERRAR SESIÓN</a></li>
+                </ul>
+            </li>
         </ul>
     </nav>
 </section>

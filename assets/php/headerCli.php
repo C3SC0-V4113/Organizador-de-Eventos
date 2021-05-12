@@ -1,7 +1,10 @@
 <?php
 require_once 'class/empresa.class.php';
 $mysqli = new mysqli('localhost', 'root', '', 'mydb', 3307)  or die($mysqli->error);
+if(!isset($_SESSION))
+{session_start();}
 ?>
+
 <script src="assets/js/RellenarInputs.js?<?php echo time().".0"; ?>"></script>
 <!-- Header -->
 <section id="header" class="wrapper">
@@ -39,10 +42,31 @@ $mysqli = new mysqli('localhost', 'root', '', 'mydb', 3307)  or die($mysqli->err
                         </ul>
                     </li>
                 </ul>-->
+            <?php
+            if(isset($_SESSION['IdUsuario']))
+            {
+                $ref='InfoCliente.php';
+                $name= strtoupper($_SESSION['NombreUsuario']);
+                $downmenu = '
+                <ul>
+                <li><a href="InfoCliente.php">MI INFORMACIÓN</a></li>
+                <li><a href="CambioContra.php">CAMBIAR CONTRASEÑA</a></li>
+                <li><a href="class/CerrarSesion.php">CERRAR SESIÓN</a></li>
+                </ul>
+                ';
+            }
+            else 
+            {
+                $ref = 'Login.php';
+                $name = 'INICIAR SESIÓN';
+                $downmenu='';  
+            }
+            ?>
             </li>
             <li><a href="EventosCl.php">EVENTOS</a></li>
             <li><a href="AcercaDeCliente.php">QUIENES SOMOS</a></li>
-            <li class="current"><a href="#">CONTACTANOS</a></li>
+            <li><a href="<?php echo $ref ?>"><?php echo $name ?></a>
+            <?php echo $downmenu; ?></li>
         </ul>
     </nav>
 </section>

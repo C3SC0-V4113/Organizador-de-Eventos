@@ -1,3 +1,19 @@
+function Clientes()
+{
+    input1= document.getElementById('nombreC');
+    input2= document.getElementById('telC');
+    input3= document.getElementById('correoC');
+    boton1= document.getElementById('editar');
+    div= document.getElementById("actionspeciales");
+
+    input1.disabled = false;
+    input2.disabled = false;
+    input3.disabled = false;
+    input1.focus();
+    boton1.style.display = 'none';
+    div.insertAdjacentHTML("beforeend",'<li><input type="submit" id="actualizarcliente" name="actualizarcliente" class="button style1 large" value="Guardar Cambios"></li>');
+}
+
 function Busqueda()
 {
     area=document.getElementById("areaeventos");
