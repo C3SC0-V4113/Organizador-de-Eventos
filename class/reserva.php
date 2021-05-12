@@ -43,6 +43,8 @@ class Reserva extends MetodosEventos
         return $Devolver;
     }
 
+    
+
     public function InsertarServicios($Id, $servicios)
     {
         $Base = new mysqli('localhost', 'root', '', 'mydb', 3307);
@@ -52,7 +54,6 @@ class Reserva extends MetodosEventos
             $Insert .= "INSERT INTO `serviciosdeeventos`(`idReserva`, `idServicio`)";
             $Insert .= " VALUES ($Id,$value); ";
         }
-        echo "<h1>$Insert</h1>";
         if ($Base->multi_query($Insert)) {
             $Base->close();
             return 1;
@@ -60,6 +61,25 @@ class Reserva extends MetodosEventos
             $Base->close();
             return 0;
         }
+    }
+
+    public function TablaReservas($idCliente){
+        $Base = new mysqli('localhost', 'root', '', 'mydb', 3307);
+        $Base->set_charset("utf8");
+        $consulta="SELECT eventos.idEventos,eventos.Nombre,reservas.FechaReservada FROM reservas INNER JOIN eventos ON reservas.IDEvento=eventos.idEventos where eventos.idCliente =$idCliente";
+        $resultado = $Base->query($consulta);
+        $tabla="";
+        while($selector=$resultado->fetch_assoc()){
+            $tabla.="<tr>";
+            $tabla.="<td>".$selector['Nombre']."</td>";
+            $tabla.="<td>".$selector['FechaReservada']."</td>";
+            $tabla.="<td>";
+            $tabla.="<a href='ActualizarRef.php?edit=".$selector['idEventos']."' class='btn btn-info'>Editar</a>";
+            $tabla.="<a href='ReservacionesCliente.php?delete=".$selector['idEventos']."' class='btn btn-danger'>Eliminar</a>";
+            $tabla.="</td>";
+            $tabla.="</tr>";
+        }
+        return $tabla;
     }
 
     public function UltimoID()
@@ -154,4 +174,32 @@ class Reserva extends MetodosEventos
                 break;
         }
     }
+}
+
+if(isset($_GET['delete'])){
+    $mysqli=new mysqli('localhost', 'root', '', 'mydb', 3307);
+    $mysqli->set_charset("utf8");
+    $id=$_GET['delete'];
+    $consulta = "SELECT `idReserva` FROM `reservas` WHERE `IDEvento`=$id ORDER BY `idReserva` DESC LIMIT 1";
+    $idReserv=0;
+    $result = $Base->query($consulta);
+    
+        if ($result == TRUE) {
+            $selector = $result->fetch_array();
+            $idReserv = $selector['idReserva'];
+        }
+        echo $consulta;
+    $borrarDetalleSer="DELETE FROM `serviciosdeeventos` WHERE `idReserva`=$idReserv";
+    $borrarReserva="DELETE FROM `reservas` WHERE `IDEvento`=$id";
+    $borrarEvento="DELETE FROM `eventos` WHERE `idEventos`=$id";
+    echo $borrarDetalleSer."------".$borrarReserva."-----------".$borrarEvento;
+    $mysqli->query($borrarDetalleSer) or die($mysqli->error);
+    //$mysqli->query($borrarEvento) or die($mysqli->error);
+    $mysqli->query($borrarReserva) or die($mysqli->error);
+    $mysqli->query($borrarEvento) or die($mysqli->error);
+
+    $_SESSION['mensaje']="Se ha eliminado correctamente";
+    $_SESSION['msg_type']="danger";
+
+    header("location: ./ReservacionesCliente.php");
 }

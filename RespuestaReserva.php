@@ -50,7 +50,6 @@
                                     $Resultado2 = $Eventos->InsertarReservaR($Id, $fechaE);
                                     $IdR = $Eventos->UltimoID();
                                     $Resultado3 = $Eventos->InsertarServicios($IdR, $Servicios);
-                                    echo "<h1>$IdR</h1>";
                                     if ($Resultado > 0 && $Resultado2 > 0 && $Resultado3 > 0) //Si devuelve 1 es exito, falla si devuelve 0 o -1
                                     {
                                         $Eventos->ExitosR(1, $nameE);
