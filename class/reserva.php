@@ -74,12 +74,40 @@ class Reserva extends MetodosEventos
             $tabla.="<td>".$selector['Nombre']."</td>";
             $tabla.="<td>".$selector['FechaReservada']."</td>";
             $tabla.="<td>";
-            $tabla.="<a href='ActualizarRef.php?edit=".$selector['idEventos']."' class='btn btn-info'>Editar</a>";
+            $tabla.="<a href='ActualizarRef.php?editRes=".$selector['idEventos']."' class='btn btn-info'>Editar</a>";
             $tabla.="<a href='ReservacionesCliente.php?delete=".$selector['idEventos']."' class='btn btn-danger'>Eliminar</a>";
             $tabla.="</td>";
             $tabla.="</tr>";
         }
         return $tabla;
+    }
+
+    public function LlamarEventID($id){
+        $Base = new mysqli('localhost', 'root', '', 'mydb', 3307);
+        $Base->set_charset("utf8");
+        $consulta = "SELECT * FROM eventos WHERE IdEventos=$id";
+        $result = $Base->query($consulta);
+        if ($result == TRUE) {
+            $selector = $result->fetch_array();
+        }
+        $Base->close();
+        return $selector;
+    }
+
+    public function LlamarServiciosReserva($id){
+        $Base = new mysqli('localhost', 'root', '', 'mydb', 3307);
+        $Base->set_charset("utf8");
+        $Arreglo=array();
+        $consulta = "SELECT serviciosdeeventos.idServicio FROM serviciosdeeventos INNER JOIN reservas ON serviciosdeeventos.idReserva=reservas.idReserva WHERE reservas.IDEvento=$id";
+        $result = $Base->query($consulta);
+        if ($result == TRUE) {
+            while ($fila=mysqli_fetch_assoc($result)) {
+                array_push($Arreglo,$fila['idServicio']);
+            }
+            //$selector = $result->fetch_array();
+        }
+        $Base->close();
+        return $Arreglo;
     }
 
     public function UltimoID()
@@ -93,6 +121,49 @@ class Reserva extends MetodosEventos
             $id = $selector['idReserva'];
         }
         return $id;
+    }
+
+    public function ReservaEvento($idEvento){
+        $id=0;
+        $Base = new mysqli('localhost', 'root', '', 'mydb', 3307);
+        $Base->set_charset("utf8");
+        $consulta = "SELECT idReserva FROM reservas WHERE IDEvento =$idEvento";
+        echo $consulta;
+        $result = $Base->query($consulta);
+        if ($result == TRUE) {
+            $selector = $result->fetch_array();
+            $id = $selector['idReserva'];
+        }
+        return $id;
+    }
+
+    public function ActualizarEvento($idEvento,$nombre,$descripcion,$tipo,$Lugar,$fecha){
+        $Base = new mysqli('localhost','root','','mydb',3307);
+        $Base -> set_charset("utf8");
+        $UpdateE = "UPDATE `eventos` SET `IdTipoEvento`=$tipo,`Nombre`='$nombre',`fecha`='$fecha',`idLugar`=$Lugar,`Descripcion`='$descripcion' WHERE `idEventos`=$idEvento";
+        echo $UpdateE;
+        $Base->query($UpdateE);
+        $Exito = $Base->affected_rows;
+        $Base->close();
+        return $Exito;
+    }
+
+    public function ActualizarReserva($idRes,$fecha){
+        $Base = new mysqli('localhost','root','','mydb',3307);
+        $Base -> set_charset("utf8");
+        $UpdateE = "UPDATE `reservas` SET `FechaReservada`='$fecha' WHERE `idReserva`=$idRes";
+        echo $UpdateE;
+        $Base->query($UpdateE);
+        $Exito = $Base->affected_rows;
+        $Base->close();
+        return $Exito;
+    }
+
+    public function BorrarDetalle($idRes){
+        $Base = new mysqli('localhost','root','','mydb',3307);
+        $Base -> set_charset("utf8");
+        $borrarDetalleSer="DELETE FROM `serviciosdeeventos` WHERE `idReserva`=$idRes";
+        $Base->query($borrarDetalleSer);
     }
 
 
