@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Eventos - Wine & Champagne Eventos</title>
+    <title>Publicar Reservaciones - Wine & Champagne Eventos</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <link rel="stylesheet" href="assets/css/main.css?<?php echo time().".0"; ?>" media="all" />
@@ -24,21 +24,21 @@
 
         <!-- Main -->
         <div id="main" class="wrapper style2">
-            <div class="title">Actualizar Eventos</div>
+            <div class="title">Publicar Reservaciones</div>
             <div class="container">
                 <!-- Content -->
                 <div id="content">
                     <article class="box post">
                         <header class="style1">
-                            <h2>Actualizar Eventos de la Web</h2>
-                            <p>Seleccione el Evento que desea modificar:</p>
+                            <h2>Publicar Reservaciones</h2>
+                            <p>Seleccione la Reservacion que desea convertir en un Evento Publicado:</p>
                         </header>
                         <?php 
                         require 'class/Events.php';
                         $Eventos = new MetodosEventos();
                         $Base = new mysqli('localhost','root','','mydb',3307);
                         $Base -> set_charset("utf8");
-                        $Consulta = "Select * from Eventos where Visibilidad = 0 order by idEventos desc";
+                        $Consulta = "Select * from Eventos where Visibilidad = 1 order by fecha asc";
                         $Ejecucion = $Base->query($Consulta);
                         if($Ejecucion->num_rows!=0)
                         {
@@ -57,7 +57,7 @@
                             $Datos[1] = array('idEventos' => '','Nombre' => '','Descripcion' => '','idLugar' =>'none','fecha'=>"none",'idCliente'=>"none");
                             $Datos[2] = array('idEventos' => '','Nombre' => '','Descripcion' => '','idLugar' =>'none','fecha'=>"none",'idCliente'=>"none");
                             $Datos[3] = array('idEventos' => '','Nombre' => 'Oops!','Descripcion' => '','idLugar' =>'none','fecha'=>"none",'idCliente'=>"none");
-                            $Datos[4] = array('idEventos' => '','Nombre' => 'Aún no hay servicios registrados en la Base de Datos','Descripcion' => '','Lugar' =>'none','fecha'=>"none",'idCliente'=>"none");
+                            $Datos[4] = array('idEventos' => '','Nombre' => 'Aún no hay reservaciones registradas en la Base de Datos','Descripcion' => '','Lugar' =>'none','fecha'=>"none",'idCliente'=>"none");
                             $Datos[5] = array('idEventos' => '','Nombre' => '','Descripcion' => '','idLugar' =>'none','fecha'=>"none",'idCliente'=>"none");
                             $Datos[6] = array('idEventos' => '','Nombre' => '','Descripcion' => '','idLugar' =>'none','fecha'=>"none",'idCliente'=>"none");
                         }
@@ -93,16 +93,16 @@
                         </script>
                         <form name="PantallaSer" id="PantallaSer">
                             <select name="Pantalla" id="Pantalla" size="7"
-                                onchange="RellenarE(arrayJS[this.value]['Nombre'],arrayJS[this.value]['Descripcion'],arrayJS[this.value]['idCliente'],arrayJS[this.value]['idEventos'],arrayJS[this.value]['fecha'],arrayJS[this.value]['idLugar'],arrayJS[this.value]['IdTipoEvento']);Generar(arrayImagenes,arrayJS[this.value]['idEventos']);">
+                                onchange="RellenarR(arrayJS[this.value]['Nombre'],arrayJS[this.value]['Descripcion'],arrayJS[this.value]['idCliente'],arrayJS[this.value]['idEventos'],arrayJS[this.value]['fecha'],arrayJS[this.value]['idLugar'],arrayJS[this.value]['IdTipoEvento']);Generar(arrayImagenes,arrayJS[this.value]['idEventos']);">
                                 <?php 
-                                $desc = sizeof($Datos);
+                                $desc = 1;
                             for ($i=1; $i <= sizeof($Datos) ; $i++) 
                             { 
                               echo "<option value='".$i."'>";
-                              if($Datos[$i]['idLugar']!="none"){echo "Evento $desc:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";}
+                              if($Datos[$i]['idEventos']!=""){echo "Reservación $desc: [".$Datos[$i]['fecha']."] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";}
                               else{}
                               echo $Datos[$i]['Nombre']."</option>";
-                              $desc--;
+                              $desc++;
                             }
                             ?>
                             </select>
@@ -150,7 +150,7 @@
                                     </div>
                                     <div class="col-4 col-12-small">
                                         <label for="TipoE">Seleccione el tipo de evento</label>
-                                        <select name="TipoE" id="TipoE" required disabled>
+                                        <select name="TipoE" id="TipoE" required  readonly>
                                         <option disabled selected>Seleccione el tipo de Evento</option>
                                             <?php
                                             $Matriz2 = $Eventos->ConsultarTipos();
@@ -161,16 +161,16 @@
 
                                     <div class="col-4 col-12-small">
                                         <label for="FechaE">Fecha en que se realizó el evento</label>
-                                        <input class="event" type="date" disabled name="FechaE" id="FechaE"
+                                        <input class="event" type="date" readonly name="FechaE" id="FechaE"
                                              />
                                     </div>
                                     <div class="col-6 col-12-small">
-                                        <label for="ImgE">Agregar mas Imagenes</label>
+                                        <label for="ImgE">Agregar Imagenes</label>
                                         <p><b style="color:#AB2A3E;">Asegurese que el nombre de sus archivos no tenga
                                                 espacios en blancos</b></p>
                                         <div class="form-group">
                                             <input class="file-input" type="file" name="ImagenesE[]" id="ImagenesE[]"
-                                                onchange="cancel = true;" multiple="" disabled />
+                                                onchange="cancel = true;" multiple=""  required disabled/>
                                         </div>
                                     </div>
                                     <div class="col-12" id="todasfotos"  style="display:none;">
@@ -198,7 +198,7 @@
                                     <div class="col-12">
                                         <ul class="actions">
                                             <br><br>
-                                            <li><input type="submit" id="modificarE" name="modificarE" class="style5"
+                                            <li><input type="submit" id="PublicarR" name="PublicarR" class="style5"
                                                     value="Guardar Evento" onclick="cancel=false;" />
                                             </li>
                                             <li><input type="submit" class="style2" value="Cancelar"

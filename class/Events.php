@@ -185,7 +185,7 @@ public function Id($fila)
 
 public function GenerarHeaderEventos($titulo_header,$descrip_header)
     {
-        echo "<header class='style1'>
+        echo "<header class='style1' id='scroll'>
         <h2>$titulo_header</h2>
         <p>$descrip_header</p>
         </header>";
@@ -369,10 +369,11 @@ public function ExtraerBaseE($fila)
     {
         $Base = new mysqli('localhost','root','','mydb',3307);
         $Base -> set_charset("utf8");
-        $Insert = "INSERT INTO eventos (idEventos, IdTipoEvento, IdEmpresa, Id_Usuario, Nombre, fecha,idLugar,idCliente,Descripcion)";
-        $Insert .= " VALUES (?,?,?,?,?,?,?,?,?)";
+        $visibilidad=0;
+        $Insert = "INSERT INTO eventos (idEventos, IdTipoEvento, IdEmpresa, Id_Usuario, Nombre, fecha,idLugar,idCliente,Descripcion,Visibilidad)";
+        $Insert .= " VALUES (?,?,?,?,?,?,?,?,?,?)";
         $Resultado = $Base->prepare($Insert);
-        $Resultado->bind_param("iiiissiis",$Id,$TipoE,$Empresa,$Usuario,$Nombre,$Fecha,$Lugar,$Cliente,$Descripcion);
+        $Resultado->bind_param("iiiissiiss", $Id, $TipoE, $Empresa, $Usuario, $Nombre, $Fecha, $Lugar, $Cliente, $Descripcion, $visibilidad);
         $Devolver=$Resultado->execute();
         $Base->close();
         return $Devolver;
@@ -388,13 +389,38 @@ public function ExtraerBaseE($fila)
         $Base->close();
         return $Exito;
     }
+    public function PublicarReservacion($nameE,$descripE,$TipoE,$fechaE,$LugarE,$CliE,$idEvento)
+    {
+        $Base = new mysqli('localhost','root','','mydb',3307);
+        $Base -> set_charset("utf8");
+        $UpdateE = "UPDATE Eventos SET Nombre='$nameE', Descripcion='$descripE',IdTipoEvento='$TipoE',fecha='$fechaE',idLugar='$LugarE',idCliente='$CliE',Visibilidad=0 where idEventos='$idEvento'";
+        $EjecutarActu = $Base->query($UpdateE);
+        $Exito = $Base->affected_rows;
+        $Base->close();
+        return $Exito;
+    }
     public function EliminarEvento($deleteID)
     {
         $Base = new mysqli('localhost','root','','mydb',3307);
         $Base -> set_charset("utf8");
         $Delete = "DELETE FROM Eventos where idEventos='".$deleteID."'";
-        $EjecutarD = $Base->query($Delete);
-        $Exito = $Base->affected_rows;
+        if(!$Base->query($Delete))
+        {
+            $S = "SELECT idReserva from reservas where IDEvento='".$deleteID."'";
+            $IdC = $Base->query($S);
+            $resul = $IdC->fetch_assoc();
+            $idReser = $resul['idReserva'];
+            $D1= "DELETE from serviciosdeeventos where idReserva='".$idReser."'";
+            $Base->query($D1);
+            $D2="DELETE from reservas where idReserva='".$idReser."'";
+            $Base->query($D2);
+            $Base->query($Delete);
+            $Exito = $Base->affected_rows;
+        }
+        else {
+            $Exito = $Base->affected_rows;
+        }
+        
         $Base->close();
         return $Exito;
     }
@@ -407,7 +433,7 @@ public function ExtraerBaseE($fila)
                 echo "<p>El Evento: '$nameE' se guardo con éxito en la Base de Datos.</p>";
                 echo "<ul class='actions special'><form id='back' name='back'><li>
                 <a href='AgregarEvento.php'><input type='button' class='button special style5 large' value='Agregar otro Evento'></a>
-                <a href='EventosAd.php'><input type='button' class='button special style5 large' value='Regresar al la seccion de Servicios'></a>
+                <a href='EventosAd.php'><input type='button' class='button special style5 large' value='Regresar al la seccion de Eventos'></a>
                 </li></form></ul>";
                 break;
             case 2:
@@ -428,6 +454,15 @@ public function ExtraerBaseE($fila)
                 <a href='EventosAd.php'><input type='button' class='button special style5 large' value='Regresar al la seccion de Evento'></a>
                 </li></form></ul>";
                 break;
+                case 4:
+                    echo "<h2>¡Evento Publicado con Éxito!</h2>";
+                    echo "<p>El Evento '$nameE' fue publicado con Éxito</p>";
+                    echo "<ul class='actions special'><form id='back' name='back'>
+                    <a href='ActualizarEvento.php'><input type='button' class='button special style5 large' value='Actualizar Otro Evento'></a>
+                    <li>
+                    <a href='EventosAd.php'><input type='button' class='button special style5 large' value='Regresar al la seccion de Eventos'></a>
+                    </li></form></ul>";
+                    break;
             default:
                 # code...
                 break;
@@ -440,7 +475,7 @@ public function ExtraerBaseE($fila)
                 echo "<h2>¡Error, faltan argumentos!</h2>";
                 echo "<p>Vuelva a intentarlo otra vez, esta vez ingrese todos los argumentos solicitados</p>";
                 echo "<ul class='actions special'><form id='back' name='back'><li>
-                <a href='AgregarServicios.php'><input type='button' class='button special style5 large' value='Intentarlo de Nuevo'></a>
+                <a href='AgregarEvento.php'><input type='button' class='button special style5 large' value='Intentarlo de Nuevo'></a>
                 </li></form></ul>";
                 break;
             case 2:

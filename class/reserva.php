@@ -123,6 +123,7 @@ class Reserva extends MetodosEventos
             $selector = $result->fetch_array();
             $id = $selector['idReserva'];
         }
+        echo $id;
         return $id;
     }
 
@@ -209,14 +210,14 @@ class Reserva extends MetodosEventos
     &nbsp|&nbsp <i class="mostrar icon fas fa-user"></i><b>&nbsp;&nbsp; Cliente:</b> ' . $Cliente . '
     &nbsp|&nbsp <i class="mostrar icon fas fa-calendar-alt"></i><b>&nbsp;&nbsp; Fecha del Evento:</b> ' . $espanol . '
     &nbsp|&nbsp&nbsp;<i class="mostrar icon fas fa-caret-right"></i><b>&nbsp;&nbsp;<b> Tipo de Evento:</b> ' . $Tipo . '</p>
-    </header>
-    <section>
-   <hr><p><h3>DESCRIPCIÓN DEL EVENTO:</h3>
+    <hr>
+    <p><h3>DESCRIPCIÓN DEL EVENTO:</h3>
     <p>' . $Descripcion . '</p></p>
-    
+    </header>
     <ul class="actions">
         <li><a href="javascript:history.go(-1);" class="button style4">Volver Atrás</a></li>
     </ul>
+    <section>
     </section>';
     }
 

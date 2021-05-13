@@ -2,6 +2,7 @@
 <?php
 require_once 'class/empresa.class.php';
 $mysqli = new mysqli('localhost', 'root', '', 'mydb', 3307)  or die($mysqli->error);
+$mysqli->set_charset('utf8');
 ?>
 <!-- Footer -->
 <section id="footer" class="wrapper">
@@ -28,14 +29,14 @@ $mysqli = new mysqli('localhost', 'root', '', 'mydb', 3307)  or die($mysqli->err
                     <form method="post" action="class/Contactanos.php" onsubmit="Locacion(window.location.pathname)">
                         <div class="row gtr-50">
                             <div class="col-6 col-12-small">
-                                <input type="text" name="name" id="contact-name" placeholder="Nombre Completo" />
+                                <input type="text" name="contact-name" id="contact-name" placeholder="Nombre Completo" />
                             </div>
                             <div class="col-6 col-12-small">
-                                <input type="text" name="email" id="contact-email" placeholder="Correo Electronico" />
+                                <input type="text" name="contact-email" id="contact-email" placeholder="Correo Electronico" />
                             </div>
                             <div class="col-12">
-                                <textarea name="message" id="contact-message" placeholder="Mensaje" rows="4"></textarea>
-                                <input type="hidden" id="url" name="url" value="" readonly required>
+                                <textarea name="contact-message" id="contact-message" placeholder="Mensaje" rows="4"></textarea>
+                                <input type="hidden" id="url" name="url" value="">
                             </div>
                             <div class="col-12">
                                 <ul class="actions">

@@ -1,9 +1,11 @@
-<?php require 'class/enlace.class.php'; ?>
-<?php
+<?php 
+require 'class/enlace.class.php';
 require_once 'class/empresa.class.php';
 $mysqli = new mysqli('localhost', 'root', '', 'mydb', 3307)  or die($mysqli->error);
+$mysqli->set_charset('utf8');
 ?>
 <!-- Footer -->
+<meta charset="utf8">
 <section id="footer" class="wrapper">
     <div class="title">CONTACTANOS</div>
     <div class="container">
@@ -104,7 +106,7 @@ $mysqli = new mysqli('localhost', 'root', '', 'mydb', 3307)  or die($mysqli->err
                                     $peticion = $mysqli->query($Telefono);
                                     $filaemprcontact = $peticion->fetch_assoc();
                                     echo implode('-', str_split($filaemprcontact['Telefono'], 4));
-
+                                    $mysqli->close();
                                     ?>
                                 </p>
                             </section>

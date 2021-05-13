@@ -1,6 +1,6 @@
 <?php
 require_once 'class/empresa.class.php';
-$mysqli = new mysqli('localhost', 'root', '', 'mydb', 3307)  or die($mysqli->error);
+$mysqli = new mysqli('localhost', 'root', '', 'mydb', 3307)  or die($mysqli->error);$mysqli->set_charset('utf8');
 
 ?>
 <script src="assets/js/RellenarInputs.js?<?php echo time().".0"; ?>"></script>
@@ -50,6 +50,7 @@ $mysqli = new mysqli('localhost', 'root', '', 'mydb', 3307)  or die($mysqli->err
             <li>
                 <a href="EventosAd.php">EVENTOS</a>
                 <ul>
+                <li><a href="PublicarReservaciones.php">Publicar Reservaciones</a></li>
                 <li><a href="AgregarEvento.php">Agregar Evento</a></li>
                     <li>
                         <a>Editar Eventos</a>
@@ -74,13 +75,13 @@ $mysqli = new mysqli('localhost', 'root', '', 'mydb', 3307)  or die($mysqli->err
                 </ul>
             </li>
             <li><a href="AcercaDe.php">QUIENES SOMOS</a></li>
+            <li class="current"><a href="ReservacionesAdmin.php">RESERVACIONES</a></li>
             <li class="current"><a href="#">ADMINISTRADOR</a>
             <ul>
                 <li><a href="CambioContra.php">CAMBIAR CONTRASEÑA</a></li>
                 <li><a href="class/CerrarSesion.php">CERRAR SESIÓN</a></li>
                 </ul>
             </li>
-            <li class="current"><a href="ReservacionesAdmin.php">RESERVACIONES</a></li>
         </ul>
     </nav>
 </section>

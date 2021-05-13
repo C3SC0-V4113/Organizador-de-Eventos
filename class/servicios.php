@@ -36,8 +36,7 @@ class Servicio
         echo "<div class='col-6 col-12-medium'>
         <section>
         <h3 class='icon solid ".$this->url_icono."'>".$this->nombre."</h3>
-        <p>".$this->descripcion."</p>
-        <p>".$this->precio."</p>
+        <p>".$this->descripcion."<br><b>Precio del Servicio: $".$this->precio."</b></p>
         </section>
         </div>
         ";

@@ -54,7 +54,7 @@ function Generar(Vector, Id) {
         }
         Div.insertAdjacentHTML("beforeend","<input type='hidden' id='numeroFotos' name='numeroFotos' value='"+cont+"' readonly required>");
     }
-    else{console.log('nada1');}
+    else{Div.insertAdjacentHTML("beforeend","<input type='hidden' id='numeroFotos' name='numeroFotos' value='0' readonly required>");}
 }
 function OpcFiltros(opcion,vlug,vtipo)
 {
@@ -178,6 +178,43 @@ function RellenarE(Name, Descrip, Cliente, IdE,fecha,lugar,tipo)
         InLugar.value=lugar;
         InTipo.value = tipo;
         InID.value = IdE;
+    }
+    else
+    {
+
+    }
+    
+
+}
+function RellenarR(Name, Descrip, Cliente, IdE,fecha,lugar,tipo)
+{
+    InName = document.getElementById("nombreE");
+    InCli = document.getElementById("CliE");
+    InID= document.getElementById("idEventos");
+    Fecha = document.getElementById("FechaE");
+    InDescrip = document.getElementById("descripE");
+    InLugar = document.getElementById("LugarE");
+    InTipo = document.getElementById("TipoE");
+    Boton = document.getElementById("PublicarR");
+    Imagenes = document.getElementById("ImagenesE[]");
+    
+    if(Cliente != 'none' )
+    {
+        InName.disabled = false;
+        InDescrip.disabled = false;
+        InCli.disabled = false;
+        InLugar.disabled=false;
+        Boton.disabled = false;
+        Imagenes.disabled = false;
+    
+        InName.value = Name;
+        InDescrip.innerHTML = Descrip;
+        InCli.value=Cliente;
+        Fecha.value=fecha;
+        InLugar.value=lugar;
+        InTipo.value = tipo;
+        InID.value = IdE;
+        Imagenes.focus();
     }
     else
     {

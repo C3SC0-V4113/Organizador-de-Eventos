@@ -29,6 +29,7 @@
                     </header>
                     <ul class="actions special">
                         <form id="servicesbtn" name="servicesbtn">
+                        
                             <a href="./AgregarEvento.php">
                                 <li><input type="button" class="button special style5 large " value="Agregar Eventos" />
                                 </li>
@@ -39,6 +40,11 @@
                             </a>
                             <a href="./EliminarEventos.php">
                                 <li><input type="button" class="button special style5 large" value="Eliminar Eventos" />
+                                </li>
+                            </a>
+                            <br><br>
+                            <a href="./PublicarReservaciones.php">
+                                <li><input type="button" class="button special style5 large" value="Publicar Reservaciones" />
                                 </li>
                             </a>
 
@@ -55,8 +61,8 @@
                 $Base->set_charset("utf8");
                 ?>
                 <br>
-                <div class="row aln-center">
-                    <form method="post" action="EventosCl.php" name="filtroform" id=>
+                <div class="row aln-center" >
+                    <form method="post" action="EventosAd.php" name="filtroform" id=>
                         <div class="row aln-center">
                             <div class="col-4 col-12-medium">
                                 <select name="filtro" id="filtro" onchange="OpcFiltros(this.value,Lugares,Tipos)">
@@ -151,7 +157,7 @@
                             }
                         } else {
                             echo "<header class='col-12 style1'><br><hr>";
-                            echo "<p>Oops! Parece que no hay eventos con ese nombre.</p><hr></header>";
+                            echo "<p>Oops! Parece que no hay eventos con ese lugar.</p><hr></header>";
                         }
                         echo '<script>parte = document.getElementById("scroll");
                                         parte.scrollIntoView();</script>';
@@ -177,7 +183,7 @@
                             }
                         } else {
                             echo "<header class='col-12 style1'><br><hr>";
-                            echo "<p>Oops! Parece que no hay eventos con ese nombre.</p><hr></header>";
+                            echo "<p>Oops! Parece que no hay eventos de ese tipo.</p><hr></header>";
                         }
                         echo '<script>parte = document.getElementById("scroll");
                                         parte.scrollIntoView();</script>';

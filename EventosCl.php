@@ -155,7 +155,7 @@
                                 else 
                                 {
                                     echo "<header class='col-12 style1'><br><hr>";
-                                    echo "<p>Oops! Parece que no hay eventos con ese nombre.</p><hr></header>";
+                                    echo "<p>Oops! Parece que no hay eventos en ese lugar.</p><hr></header>";
                                 }
                                 echo '<script>parte = document.getElementById("scroll");
                                 parte.scrollIntoView();</script>';
@@ -190,7 +190,7 @@
                                 else 
                                 {
                                     echo "<header class='col-12 style1'><br><hr>";
-                                    echo "<p>Oops! Parece que no hay eventos con ese nombre.</p><hr></header>";
+                                    echo "<p>Oops! Parece que no hay eventos de ese tipo.</p><hr></header>";
                                 }
                                 echo '<script>parte = document.getElementById("scroll");
                                 parte.scrollIntoView();</script>';

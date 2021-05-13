@@ -1,6 +1,6 @@
 <?php
 require_once 'class/empresa.class.php';
-$mysqli = new mysqli('localhost', 'root', '', 'mydb', 3307)  or die($mysqli->error);
+$mysqli = new mysqli('localhost', 'root', '', 'mydb', 3307)  or die($mysqli->error);$mysqli->set_charset('utf8');
 if(!isset($_SESSION))
 {session_start();}
 ?>
@@ -65,9 +65,10 @@ if(!isset($_SESSION))
             </li>
             <li><a href="EventosCl.php">EVENTOS</a></li>
             <li><a href="AcercaDeCliente.php">QUIENES SOMOS</a></li>
+            <li class="current"><a href="ReservacionesCliente.php">RESERVACIONES</a></li>
             <li><a href="<?php echo $ref ?>"><?php echo $name ?></a>
             <?php echo $downmenu; ?></li>
-            <li class="current"><a href="ReservacionesCliente.php">RESERVACIONES</a></li>
+            
         </ul>
     </nav>
 </section>

@@ -1,4 +1,6 @@
 <?php
+echo 'akisito';
+echo $_POST['contact-message'];echo$_POST['contact-email'];echo$_POST['contact-name']; echo$_POST['url'];
 if(isset($_POST['contact-message']) && isset($_POST['contact-email']) && isset($_POST['contact-name'])&&isset($_POST['url']))
 {
 
@@ -11,11 +13,13 @@ $message = 'Nombre de Contacto: '.$name.PHP_EOL .'Correo de Contacto: '.$correoc
 $headers = 'From: eventoswinechampagne@gmail.com';
 if(mail($to, $subject, $message,$headers))
 {
+    echo 'aki';
     $url = $_POST['url'];
     $url = explode("PROYECTO/Organizador-de-Eventos/",$url);
     echo "<script language='javascript'>window.location.href='../".$url[1]."';window.alert('¡Mensaje de Contacto enviado con éxito!');</script>";
 }
 else {
+    echo 'aki2';
     $url = $_POST['url'];
     $url = explode("PROYECTO/Organizador-de-Eventos/",$url);
     echo "<script language='javascript'>window.location.href='../".$url[1]."'; window.alert('¡Error al enviar el mensaje de contacto!');</script>";

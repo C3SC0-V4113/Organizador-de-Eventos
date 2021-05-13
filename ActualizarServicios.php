@@ -122,7 +122,7 @@
                                             placeholder="Precio del Servicio" onchange="cancel = true;"
                                             required />
                                     </div>
-                                    <div class="col-12 col-12-small">
+                                    <div class="col-6 col-12-small">
                                         <label for="descripS">Descripción del Servicio</label>
                                         <textarea class="service" name="descripS" id="descripS" maxlength ="300"
                                             placeholder="Ingrese la Descripción del Servicio" rows="4"

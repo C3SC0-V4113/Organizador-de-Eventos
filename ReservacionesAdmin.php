@@ -142,7 +142,7 @@
                             }
                         } else {
                             echo "<header class='col-12 style1'><br><hr>";
-                            echo "<p>Oops! Parece que no hay eventos con ese nombre.</p><hr></header>";
+                            echo "<p>Oops! Parece que no hay reservaciones con ese nombre.</p><hr></header>";
                         }
                         echo '<script>parte = document.getElementById("scroll");
                                         parte.scrollIntoView();</script>';
@@ -168,7 +168,7 @@
                             }
                         } else {
                             echo "<header class='col-12 style1'><br><hr>";
-                            echo "<p>Oops! Parece que no hay eventos con ese nombre.</p><hr></header>";
+                            echo "<p>Oops! Parece que no hay reservaciones con ese nombre.</p><hr></header>";
                         }
                         echo '<script>parte = document.getElementById("scroll");
                                         parte.scrollIntoView();</script>';
@@ -194,7 +194,7 @@
                             }
                         } else {
                             echo "<header class='col-12 style1'><br><hr>";
-                            echo "<p>Oops! Parece que no hay eventos con ese nombre.</p><hr></header>";
+                            echo "<p>Oops! Parece que no hay reservaciones con ese nombre.</p><hr></header>";
                         }
                         echo '<script>parte = document.getElementById("scroll");
                                         parte.scrollIntoView();</script>';
@@ -220,7 +220,7 @@
                             }
                         } else {
                             echo "<header class='col-12 style1'><br><hr>";
-                            echo "<p>Oops! Parece que no hay eventos con ese nombre.</p><hr></header>";
+                            echo "<p>Oops! Parece que no hay reservaciones con ese nombre.</p><hr></header>";
                         }
                         echo '<script>parte = document.getElementById("scroll");
                                         parte.scrollIntoView();</script>';
@@ -246,7 +246,7 @@
                             }
                         } else {
                             echo "<header class='col-12 style1'><br><hr>";
-                            echo "<p>Oops! Parece que aún no hay eventos registrados.</p><hr></header>";
+                            echo "<p>Oops! Parece que aún no hay reservaciones registrados.</p><hr></header>";
                         }
                         echo '<script>parte = document.getElementById("scroll");
                                         parte.scrollIntoView();</script>';
@@ -270,7 +270,7 @@
                             }
                         } else {
                             echo "<header class='col-12 style1'><br><hr>";
-                            echo "<p>Oops! Parece que aún no hay eventos registrados.</p><hr></header>";
+                            echo "<p>Oops! Parece que aún no hay reservaciones registrados.</p><hr></header>";
                         }
                     }
 

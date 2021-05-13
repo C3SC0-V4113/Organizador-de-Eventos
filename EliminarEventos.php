@@ -38,7 +38,7 @@
                         $Eventos = new MetodosEventos();
                         $Base = new mysqli('localhost','root','','mydb',3307);
                         $Base -> set_charset("utf8");
-                        $Consulta = "Select * from Eventos order by Nombre asc";
+                        $Consulta = "Select * from Eventos where Visibilidad = 0 order by Nombre asc";
                         $Ejecucion = $Base->query($Consulta);
                         if($Ejecucion->num_rows!=0)
                         {

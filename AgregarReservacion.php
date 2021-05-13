@@ -19,7 +19,7 @@
     <div id="page-wrapper">
 
         <?php
-        require './assets/php/header.php';
+        require './assets/php/headerCli.php';
         ?>
 
         <!-- Main -->
@@ -38,14 +38,14 @@
                                 <div class="row gtr-50">
                                     <div class="col-6 col-12-small">
                                         <label for="nombreR">Nombre del Evento</label>
-                                        <input class="event" type="text" name="nombreR" id="nombreR" placeholder="Ingrese el Tipo de evento" onchange="cancel = true;" required />
+                                        <input class="event" type="text" name="nombreR" id="nombreR" placeholder="Ingrese el Nombre de Su Evento" onchange="cancel = true;" required />
                                     </div>
                                     <div class="col-12 col-12-small">
                                         <label for="descripR">Descripción del Evento</label>
                                         <textarea class="event" name="descripR" id="descripR" maxlength="500" placeholder="Ingrese la Descripción del Evento" rows="4" onchange="cancel = true;" required></textarea>
                                     </div>
                                     <div class="col-4 col-12-small">
-                                        <label for="LugarR">Seleccione el lugar donde se realizó el evento</label>
+                                        <label for="LugarR">Seleccione el lugar donde desea realizar su evento</label>
                                         <select name="LugarR" id="LugarR" required>
                                             <option disabled selected>Seleccione el lugar del Evento</option>
                                             <?php
@@ -145,7 +145,7 @@
 
         <!-- Highlights -->
         <?php
-        require './assets/php/footer.php';
+        require './assets/php/footerCli.php';
         ?>
     </div>
 
