@@ -77,7 +77,7 @@
 										?>
                                         <form action="class/reserva.php" method="post">
                                             <div class="row gtr-50">
-                                            <input type="hidden" name="idss" id="idss" value="<?php echo $id ?>">
+                                            <!--<input type="hidden" name="idss" id="idss" value="<?php //echo $id ?>">-->
                                                 <div class="col-xs-12" id="tabla">
                                                     <table class="table" style="color: white">
                                                         <thead>
