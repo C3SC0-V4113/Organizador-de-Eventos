@@ -80,6 +80,7 @@ $mysqli = new mysqli('localhost', 'root', '', 'mydb', 3307)  or die($mysqli->err
                 <li><a href="class/CerrarSesion.php">CERRAR SESIÓN</a></li>
                 </ul>
             </li>
+            <li class="current"><a href="ReservacionesAdmin.php">RESERVACIONES</a></li>
         </ul>
     </nav>
 </section>

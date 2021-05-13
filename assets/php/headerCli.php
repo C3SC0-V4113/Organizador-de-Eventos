@@ -67,6 +67,7 @@ if(!isset($_SESSION))
             <li><a href="AcercaDeCliente.php">QUIENES SOMOS</a></li>
             <li><a href="<?php echo $ref ?>"><?php echo $name ?></a>
             <?php echo $downmenu; ?></li>
+            <li class="current"><a href="ReservacionesCliente.php">RESERVACIONES</a></li>
         </ul>
     </nav>
 </section>

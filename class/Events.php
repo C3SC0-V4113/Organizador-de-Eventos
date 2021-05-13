@@ -1,14 +1,14 @@
 <?php
 class MetodosEventos
 {
-    private $nombreE;
-    private $descripcionE;
-    private $fecha;
-    private $lugar;
-    private $cliente;
-    private $tipo;
+    protected $nombreE;
+    protected $descripcionE;
+    protected $fecha;
+    protected $lugar;
+    protected $cliente;
+    protected $tipo;
     private $urlfoto;
-    private $idEvento;
+    protected $idEvento;
 
     public function setNombreE($name)
     {
@@ -250,28 +250,28 @@ public function ExtraerBaseE($fila)
             case 1:
                 $Base = new mysqli('localhost','root','','mydb',3307);
                 $Base -> set_charset("utf8");
-                $Busqueda = "Select idEventos,tipoevento.Nombre as Tipo,eventos.Nombre,fecha,NombreLugar,NombreCliente,substring(Descripcion,1,95) as Descripcion from Eventos INNER JOIN lugares ON eventos.idLugar = lugares.idLugar INNER JOIN tipoevento ON eventos.IdTipoEvento = tipoevento.idTipoEvento INNER JOIN cliente ON eventos.idCliente=cliente.idCliente where eventos.Nombre like '$palabra%' order by fecha DESC";
+                $Busqueda = "Select idEventos,tipoevento.Nombre as Tipo,eventos.Nombre,fecha,NombreLugar,NombreCliente,substring(Descripcion,1,95) as Descripcion from Eventos INNER JOIN lugares ON eventos.idLugar = lugares.idLugar INNER JOIN tipoevento ON eventos.IdTipoEvento = tipoevento.idTipoEvento INNER JOIN cliente ON eventos.idCliente=cliente.idCliente where eventos.Nombre like '$palabra%' AND eventos.Visibilidad=0 order by fecha DESC";
                 $Ejecucion = $Base->query($Busqueda);
                 $Base->close();
                 break;
             case 2:
                 $Base = new mysqli('localhost','root','','mydb',3307);
                 $Base -> set_charset("utf8");
-                $Busqueda = "Select idEventos,tipoevento.Nombre as Tipo,eventos.Nombre,fecha,NombreLugar,NombreCliente,substring(Descripcion,1,95) as Descripcion from Eventos INNER JOIN lugares ON eventos.idLugar = lugares.idLugar INNER JOIN tipoevento ON eventos.IdTipoEvento = tipoevento.idTipoEvento INNER JOIN cliente ON eventos.idCliente=cliente.idCliente where NombreLugar  = '$palabra' order by fecha DESC";
+                $Busqueda = "Select idEventos,tipoevento.Nombre as Tipo,eventos.Nombre,fecha,NombreLugar,NombreCliente,substring(Descripcion,1,95) as Descripcion from Eventos INNER JOIN lugares ON eventos.idLugar = lugares.idLugar INNER JOIN tipoevento ON eventos.IdTipoEvento = tipoevento.idTipoEvento INNER JOIN cliente ON eventos.idCliente=cliente.idCliente where NombreLugar  = '$palabra' AND eventos.Visibilidad=0  order by fecha DESC";
                 $Ejecucion = $Base->query($Busqueda);
                 $Base->close();
                 break;
             case 3:
                 $Base = new mysqli('localhost','root','','mydb',3307);
                 $Base -> set_charset("utf8");
-                $Busqueda = "Select idEventos,tipoevento.Nombre as Tipo,eventos.Nombre,fecha,NombreLugar,NombreCliente,substring(Descripcion,1,95) as Descripcion from Eventos INNER JOIN lugares ON eventos.idLugar = lugares.idLugar INNER JOIN tipoevento ON eventos.IdTipoEvento = tipoevento.idTipoEvento INNER JOIN cliente ON eventos.idCliente=cliente.idCliente where tipoevento.Nombre  = '$palabra' order by fecha DESC";
+                $Busqueda = "Select idEventos,tipoevento.Nombre as Tipo,eventos.Nombre,fecha,NombreLugar,NombreCliente,substring(Descripcion,1,95) as Descripcion from Eventos INNER JOIN lugares ON eventos.idLugar = lugares.idLugar INNER JOIN tipoevento ON eventos.IdTipoEvento = tipoevento.idTipoEvento INNER JOIN cliente ON eventos.idCliente=cliente.idCliente where tipoevento.Nombre  = '$palabra' AND eventos.Visibilidad=0 order by fecha DESC";
                 $Ejecucion = $Base->query($Busqueda);
                 $Base->close();
                 break;
             case 4:
                 $Base = new mysqli('localhost','root','','mydb',3307);
                 $Base -> set_charset("utf8");
-                $Busqueda = "Select idEventos,tipoevento.Nombre as Tipo,eventos.Nombre,fecha,NombreLugar,NombreCliente,substring(Descripcion,1,95) as Descripcion from Eventos INNER JOIN lugares ON eventos.idLugar = lugares.idLugar INNER JOIN tipoevento ON eventos.IdTipoEvento = tipoevento.idTipoEvento INNER JOIN cliente ON eventos.idCliente=cliente.idCliente order by fecha ASC";
+                $Busqueda = "Select idEventos,tipoevento.Nombre as Tipo,eventos.Nombre,fecha,NombreLugar,NombreCliente,substring(Descripcion,1,95) as Descripcion from Eventos INNER JOIN lugares ON eventos.idLugar = lugares.idLugar INNER JOIN tipoevento ON eventos.IdTipoEvento = tipoevento.idTipoEvento INNER JOIN cliente ON eventos.idCliente=cliente.idCliente WHERE eventos.Visibilidad=0 order by fecha ASC";
                 $Ejecucion = $Base->query($Busqueda);
                 $Base->close();
                 break;

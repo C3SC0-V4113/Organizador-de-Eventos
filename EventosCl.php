@@ -136,6 +136,7 @@
                                         while ($fila = $Ejec->fetch_assoc())
                                         {
                                             $Datos[]=$fila;
+                                            //$Consulta3='SELECT * FROM `fotoseventos` INNER JOIN eventos ON fotoseventos.idEventos=eventos.idEventos where eventos.Visibilidad=0 AND fotoseventos.idEventos='.$fila['idEventos'].' order by idFotos asc LIMIT 1';
                                             $Consulta3 = "Select * from FotosEventos where idEventos='".$fila['idEventos']."' order by idFotos asc LIMIT 1";
                                             $Ejecucion3 = $Base->query($Consulta3);
                                             $EventosM -> ExtraerBaseE($fila);
@@ -233,7 +234,7 @@
                             {
                                 echo '<script type="text/javascript">
                                 document.getElementById("filtro").value = "todos";</script>';
-                                $Consulta = "Select idEventos,tipoevento.Nombre as Tipo,eventos.Nombre,fecha,NombreLugar,NombreCliente,substring(Descripcion,1,95) as Descripcion from Eventos INNER JOIN lugares ON eventos.idLugar = lugares.idLugar INNER JOIN tipoevento ON eventos.IdTipoEvento = tipoevento.idTipoEvento INNER JOIN cliente ON eventos.idCliente=cliente.idCliente order by fecha DESC";
+                                $Consulta = "Select idEventos,tipoevento.Nombre as Tipo,eventos.Nombre,fecha,NombreLugar,NombreCliente,substring(Descripcion,1,95) as Descripcion from Eventos INNER JOIN lugares ON eventos.idLugar = lugares.idLugar INNER JOIN tipoevento ON eventos.IdTipoEvento = tipoevento.idTipoEvento INNER JOIN cliente ON eventos.idCliente=cliente.idCliente WHERE eventos.Visibilidad=0 order by fecha DESC ";
                                 $Ejecucion = $Base->query($Consulta);
                                 if($Ejecucion->num_rows!=0)
                                 {
@@ -265,7 +266,7 @@
                                 parte.scrollIntoView();</script>';
                             }
                         else{
-                                $Consulta = "Select idEventos,tipoevento.Nombre as Tipo,eventos.Nombre,fecha,NombreLugar,NombreCliente,substring(Descripcion,1,95) as Descripcion from Eventos INNER JOIN lugares ON eventos.idLugar = lugares.idLugar INNER JOIN tipoevento ON eventos.IdTipoEvento = tipoevento.idTipoEvento INNER JOIN cliente ON eventos.idCliente=cliente.idCliente order by fecha DESC";
+                                $Consulta = "Select idEventos,tipoevento.Nombre as Tipo,eventos.Nombre,fecha,NombreLugar,NombreCliente,substring(Descripcion,1,95) as Descripcion from Eventos INNER JOIN lugares ON eventos.idLugar = lugares.idLugar INNER JOIN tipoevento ON eventos.IdTipoEvento = tipoevento.idTipoEvento INNER JOIN cliente ON eventos.idCliente=cliente.idCliente WHERE eventos.Visibilidad=0 order by fecha DESC";
                                 $Ejecucion = $Base->query($Consulta);
                                 if($Ejecucion->num_rows!=0)
                                 {

@@ -1705,6 +1705,8 @@ input, select, textarea {
 	}
 
 	form input[type="text"],
+	form input[type="number"],
+	form input[type="date"],
 	form input[type="email"],
 	form input[type="password"],
 	form select,
@@ -1772,6 +1774,8 @@ input, select, textarea {
 		}
 
 	form input[type="text"],
+	form input[type="number"],
+	form input[type="date"],
 	form input[type="email"]
 	input[type="password"] {
 		line-height: 1em;
@@ -2702,6 +2706,8 @@ form input[type="text"].service,
 		}
 
 		#footer form input[type="text"],
+		#footer form input[type="number"],
+		#footer form input[type="date"],
 		#footer form input[type="email"],
 		#footer form input[type="password"],
 		#footer form select,
@@ -3414,4 +3420,6 @@ form input[type="text"].service,
 		border: solid 5px #eee;
 		
 	}
-	
+	#adver{
+		color: red;
+	}

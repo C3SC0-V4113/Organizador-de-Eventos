@@ -2,61 +2,78 @@
 <html>
 
 <head>
-    <title>Eventos - Wine & Champagne Eventos</title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-    <link rel="stylesheet" href="assets/css/main.css?<?php echo time() . ".0"; ?>" media="all" />
-    <link rel="stylesheet" href="assets/css/main2.css?<?php echo time() . ".0"; ?>">
-    <?php
-    session_start();
-    ?>
+	<title>Reservaciones - Wine & Champagne Eventos</title>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<link rel="stylesheet" href="assets/css/main.css" />
+	<link rel="stylesheet" href="assets/css/main.css?<?php echo time() . ".0"; ?>" media="all" />
+	<link rel="stylesheet" href="assets/css/contraste.css">
+
+	<?php
+	session_start();
+	?>
+
+	<!-- picker-->
+	<link href="//netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+	<link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
+	<link href="dist/css/fontawesome-iconpicker.min.css?<?php echo time() . ".0"; ?>" rel="stylesheet">
 </head>
 
 <body class="no-sidebar is-preload">
-    <div id="page-wrapper">
+	<div id="page-wrapper">
+		<?php
+		require './assets/php/header.php';
+		?>
+		<!-- Main -->
+		<div id="main" class="wrapper style2">
+			<div class="title">EXPERTOS EN ORGANIZACION</div>
+			<div class="container">
+				<!-- Content -->
+				<div id="content">
+					<article class="box post">
+						<header class="style1">
+							<h2>Con nosotros tú evento está seguro</h2>
+						</header>
+						<div class="feature-list">
+							<div class="row">
+								<div class="col-12 col-12-medium">
+									<section>
+										<h3></h3>
+										<p>Somos los indicados para crear hermosas memorias que durarán toda la vida a tu lado, con un pequeño formulario registra tú reservación</p>
+									</section>
+									<ul class="actions special">
+										<form id="servicesbtn" name="servicesbtn">
+											<a href="./AgregarReservacion.php">
+												<li>
+													<input type="button" class="button special style5 large" value="RESERVA YA!" onclick="document.servicesbtn.action = 'AgregarReservacion.php';">
+												</li>
+											</a>
+										</form>
+										<hr>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</article>
+				</div>
 
-        <?php
-        require './assets/php/header.php';
-        ?>
-
-        <!-- EVENTOS -->
-        <section id="highlights" class="wrapper style2">
-            <div class="title">NUESTROS EVENTOS</div>
-            <div class="container">
-                <div class="box post">
-                    <header class="style2">
-                        <h2>EDITAR EVENTOS</h2>
-                    </header>
-                    <ul class="actions special">
-                        <form id="servicesbtn" name="servicesbtn">
-                            <a href="./AgregarEvento.php">
-                                <li><input type="button" class="button special style5 large " value="Agregar Eventos" />
-                                </li>
-                            </a>
-                            <a href="./ActualizarEvento.php">
-                                <li><input type="button" class="button special style5 large" value="Actualizar Eventos" />
-                                </li>
-                            </a>
-                            <a href="./EliminarEventos.php">
-                                <li><input type="button" class="button special style5 large" value="Eliminar Eventos" />
-                                </li>
-                            </a>
-
-
-                        </form>
-                        <hr>
-                    </ul>
-                </div>
+			</div>
+		</div>
+		<!-- Highlights -->
+		<section id="highlights" class="wrapper style3">
+			<div class="title">Reservaciones</div>
+			<div class="container">
                 <?php
-                require 'class/Events.php';
-                $EventosM = new MetodosEventos();
-                $EventosM->GenerarHeaderEventos('EVENTOS EXTRAORDINARIOS', 'Para que tus eventos sean únicos y especiales');
+                require 'class/reserva.php';
+                $EventosM = new Reserva();
+                //$EventosM->GenerarHeaderEventos('EVENTOS EXTRAORDINARIOS', 'Para que tus eventos sean únicos y especiales');
                 $Base = new mysqli('localhost', 'root', '', 'mydb', 3307);
                 $Base->set_charset("utf8");
                 ?>
                 <br>
                 <div class="row aln-center">
-                    <form method="post" action="EventosCl.php" name="filtroform" id=>
+                    <form method="post" action="#" name="filtroform" id=>
                         <div class="row aln-center">
                             <div class="col-4 col-12-medium">
                                 <select name="filtro" id="filtro" onchange="OpcFiltros(this.value,Lugares,Tipos)">
@@ -106,7 +123,7 @@
                     if (isset($_POST['busqueda'])) {
                         $word = $_POST['busqueda'] ? $_POST['busqueda'] : '';
                         $EventosM->ScriptBusqueda('busqueda', 'nombre', $word);
-                        $Ejec = $EventosM->Busqueda($word, 1);
+                        $Ejec = $EventosM->BusquedaR($word, 1);
                         if ($Ejec->num_rows != 0) {
                             if ($Ejec) {
                                 while ($fila = $Ejec->fetch_assoc()) {
@@ -120,7 +137,7 @@
                                             $EventosM->ExtraerImg($img);
                                         }
                                     }
-                                    $EventosM->GenerarMiniEventos();
+                                    $EventosM->GenerarMiniReservas();
                                 }
                             }
                         } else {
@@ -132,7 +149,7 @@
                     } else if (isset($_POST['blugares'])) {
                         $word = $_POST['blugares'] ? $_POST['blugares'] : '';
                         $EventosM->ScriptBusqueda('blugares', 'lugar', $word);
-                        $Ejec = $EventosM->Busqueda($word, 2);
+                        $Ejec = $EventosM->BusquedaR($word, 2);
                         if ($Ejec->num_rows != 0) {
                             if ($Ejec) {
                                 while ($fila = $Ejec->fetch_assoc()) {
@@ -146,7 +163,7 @@
                                             $EventosM->ExtraerImg($img);
                                         }
                                     }
-                                    $EventosM->GenerarMiniEventos();
+                                    $EventosM->GenerarMiniReservas();
                                 }
                             }
                         } else {
@@ -158,7 +175,7 @@
                     } else if (isset($_POST['btipos'])) {
                         $word = $_POST['btipos'] ? $_POST['btipos'] : '';
                         $EventosM->ScriptBusqueda('btipos', 'tipo', $word);
-                        $Ejec = $EventosM->Busqueda($word, 3);
+                        $Ejec = $EventosM->BusquedaR($word, 3);
                         if ($Ejec->num_rows != 0) {
                             if ($Ejec) {
                                 while ($fila = $Ejec->fetch_assoc()) {
@@ -172,7 +189,7 @@
                                             $EventosM->ExtraerImg($img);
                                         }
                                     }
-                                    $EventosM->GenerarMiniEventos();
+                                    $EventosM->GenerarMiniReservas();
                                 }
                             }
                         } else {
@@ -184,7 +201,7 @@
                     } else if (isset($_POST['filtro']) && $_POST['filtro'] == 'antiguo') {
                         echo '<script type="text/javascript">
                                         document.getElementById("filtro").value = "antiguo";</script>';
-                        $Ejec = $EventosM->Busqueda('', 4);
+                        $Ejec = $EventosM->BusquedaR('', 4);
                         if ($Ejec->num_rows != 0) {
                             if ($Ejec) {
                                 while ($fila = $Ejec->fetch_assoc()) {
@@ -198,7 +215,7 @@
                                             $EventosM->ExtraerImg($img);
                                         }
                                     }
-                                    $EventosM->GenerarMiniEventos();
+                                    $EventosM->GenerarMiniReservas();
                                 }
                             }
                         } else {
@@ -210,7 +227,7 @@
                     } else if (isset($_POST['filtro']) && $_POST['filtro'] == 'todos') {
                         echo '<script type="text/javascript">
                                         document.getElementById("filtro").value = "todos";</script>';
-                        $Consulta = "Select idEventos,tipoevento.Nombre as Tipo,eventos.Nombre,fecha,NombreLugar,NombreCliente,substring(Descripcion,1,95) as Descripcion from Eventos INNER JOIN lugares ON eventos.idLugar = lugares.idLugar INNER JOIN tipoevento ON eventos.IdTipoEvento = tipoevento.idTipoEvento INNER JOIN cliente ON eventos.idCliente=cliente.idCliente order by fecha DESC";
+                        $Consulta = "Select idEventos,tipoevento.Nombre as Tipo,eventos.Nombre,fecha,NombreLugar,NombreCliente,substring(Descripcion,1,95) as Descripcion from Eventos INNER JOIN lugares ON eventos.idLugar = lugares.idLugar INNER JOIN tipoevento ON eventos.IdTipoEvento = tipoevento.idTipoEvento INNER JOIN cliente ON eventos.idCliente=cliente.idCliente WHERE eventos.Visibilidad=1 order by fecha DESC";
                         $Ejecucion = $Base->query($Consulta);
                         if ($Ejecucion->num_rows != 0) {
                             if ($Ejecucion) {
@@ -224,7 +241,7 @@
                                             $EventosM->ExtraerImg($img);
                                         }
                                     }
-                                    $EventosM->GenerarMiniEventos();
+                                    $EventosM->GenerarMiniReservas();
                                 }
                             }
                         } else {
@@ -234,7 +251,7 @@
                         echo '<script>parte = document.getElementById("scroll");
                                         parte.scrollIntoView();</script>';
                     } else {
-                        $Consulta = "Select idEventos,tipoevento.Nombre as Tipo,eventos.Nombre,fecha,NombreLugar,NombreCliente,substring(Descripcion,1,95) as Descripcion from Eventos INNER JOIN lugares ON eventos.idLugar = lugares.idLugar INNER JOIN tipoevento ON eventos.IdTipoEvento = tipoevento.idTipoEvento INNER JOIN cliente ON eventos.idCliente=cliente.idCliente WHERE eventos.Visibilidad=0 order by fecha DESC";
+                        $Consulta = "Select idEventos,tipoevento.Nombre as Tipo,eventos.Nombre,fecha,NombreLugar,NombreCliente,substring(Descripcion,1,95) as Descripcion from Eventos INNER JOIN lugares ON eventos.idLugar = lugares.idLugar INNER JOIN tipoevento ON eventos.IdTipoEvento = tipoevento.idTipoEvento INNER JOIN cliente ON eventos.idCliente=cliente.idCliente WHERE eventos.Visibilidad=1 order by fecha DESC";
                         $Ejecucion = $Base->query($Consulta);
                         if ($Ejecucion->num_rows != 0) {
                             if ($Ejecucion) {
@@ -248,7 +265,7 @@
                                             $EventosM->ExtraerImg($img);
                                         }
                                     }
-                                    $EventosM->GenerarMiniEventos();
+                                    $EventosM->GenerarMiniReservas();
                                 }
                             }
                         } else {
@@ -261,23 +278,18 @@
                     ?>
                 </div>
             </div>
-        </section>
-
-        <?php
-        require './assets/php/footer.php';
-        ?>
-
-    </div>
-
-    <!-- Scripts -->
-    <script src="assets/js/jquery.min.js"></script>
-    <script src="assets/js/jquery.dropotron.min.js"></script>
-    <script src="assets/js/browser.min.js"></script>
-    <script src="assets/js/breakpoints.min.js"></script>
-    <script src="assets/js/util.js"></script>
-    <script src="assets/js/main.js"></script>
-    <script src="assets/js/RellenarInputs.js?<?php echo time() . ".0"; ?>"></script>
-
+		</section>
+		<?php
+		require './assets/php/footer.php';
+		?>
+	</div>
+	<!-- Scripts -->
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/jquery.dropotron.min.js"></script>
+	<script src="assets/js/browser.min.js"></script>
+	<script src="assets/js/breakpoints.min.js"></script>
+	<script src="assets/js/util.js"></script>
+	<script src="assets/js/main.js"></script>
 
 </body>
 

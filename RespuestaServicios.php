@@ -36,13 +36,12 @@
                                 $nameS = isset($_POST['nombreS']) ? trim($_POST['nombreS']):-1;
                                 $descripS = isset($_POST['descripS']) ? trim($_POST['descripS']):-1;
                                 $iconoS = isset($_POST['Icono']) ? trim($_POST['Icono']):-1;
-                                $Usuario = isset($_SESSION['IdUsuario']) ? trim($_SESSION['IdUsuario']):-1;
-                                $Empresa = isset($_SESSION['IdEmpresa']) ? trim($_SESSION['IdEmpresa']):-1;
+                                $priceS = isset($_POST['PresioS']) ? trim($_POST['PresioS']):-1;
                                 
-                                if($nameS!=-1 && $descripS!=-1 && $iconoS!=-1 && $Usuario!=-1 && $Empresa!=-1)
+                                if($nameS!=-1 && $descripS!=-1 && $iconoS!=-1 && $priceS!=-1)
                                 {
                                     $Id=$Servicios->ConsultaNumId();
-                                    $Exito = $Servicios ->InsertarServicio($Id,$nameS,$descripS,$iconoS,$Usuario,$Empresa);
+                                    $Exito = $Servicios ->InsertarServicio($Id,$nameS,$descripS,$iconoS,$priceS);
                                     if(($Exito)!=0 && ($Exito)!=-1)
                                     {
                                         $Servicios->Exito($nameS,1);
@@ -91,8 +90,9 @@
                                 $nameS = isset($_POST['nombreS']) ? trim($_POST['nombreS']):-1;
                                 $descripS = isset($_POST['descripS']) ? trim($_POST['descripS']):-1;
                                 $iconoS = isset($_POST['Icono']) ? trim($_POST['Icono']):-1;
+                                $priceS = isset($_POST['PresioS']) ? trim($_POST['PresioS']):-1;
                                 $ID = isset($_POST['IdServicios']) ? trim($_POST['IdServicios']):-1;
-                                $Compa = "Select Nombre,Descripcion,urlIMG from Servicios where idServicios=$ID";
+                                $Compa = "Select Nombre,Descripcion,urlIMG,Precio from Servicios where idServicios=$ID";
                                 $Comparacion = $Base->query($Compa);
                                 if($Comparacion->num_rows!=0)
                                 {
@@ -105,7 +105,7 @@
                                        }
                                        else 
                                        {
-                                            $Exito = $Servicios->ActualizarServicio($nameS,$descripS,$iconoS,$ID);
+                                            $Exito = $Servicios->ActualizarServicio($nameS,$descripS,$iconoS,$priceS,$ID);
                                             if($Exito!=-1)
                                             {
                                                 $Servicios->Exito($nameS,3);

@@ -4,6 +4,7 @@ class Servicio
     private $nombre;
     private $descripcion;
     private $url_icono;
+    private $precio;
 
     public function setNombre($name)
     {
@@ -20,6 +21,11 @@ class Servicio
         $this->url_icono = $url;
     }
 
+    public function setPrecio($price)
+    {
+        $this->precio = $price;
+    }
+
     public function getNombre()
     {
         return $this->nombre;
@@ -31,6 +37,7 @@ class Servicio
         <section>
         <h3 class='icon solid ".$this->url_icono."'>".$this->nombre."</h3>
         <p>".$this->descripcion."</p>
+        <p>".$this->precio."</p>
         </section>
         </div>
         ";
@@ -50,6 +57,7 @@ class Servicio
             $this-> setNombre($fila['Nombre']);
 		    $this-> setDescripcion($fila['Descripcion']);
 		    $this-> setURL_Icono($fila['urlIMG']);
+            $this-> setPrecio($fila['Precio']);
         }
         else {}
     }
@@ -86,14 +94,14 @@ class Servicio
         return $Id;
     }
 
-    public function InsertarServicio($Id,$NombreS,$DescripcionS,$IconoS,$Usuario,$Empresa)
+    public function InsertarServicio($Id,$NombreS,$DescripcionS,$IconoS,$Precio)
     {
         $Base = new mysqli('localhost','root','','mydb',3307);
         $Base -> set_charset("utf8");
-        $Insert = "INSERT INTO Servicios (idServicios, Nombre, Descripcion, urlIMG, IdEmpresa, Id_Usuario)";
-        $Insert .= "VALUES (?,?,?,?,?,?)";
+        $Insert = "INSERT INTO Servicios (idServicios, Nombre, Descripcion, urlIMG, Precio)";
+        $Insert .= "VALUES (?,?,?,?,?)";
         $Resultado = $Base->prepare($Insert);
-        $Resultado->bind_param("isssii",$Id,$NombreS,$DescripcionS,$IconoS,$Empresa,$Usuario);
+        $Resultado->bind_param("issss",$Id,$NombreS,$DescripcionS,$IconoS,$Precio);
         $Resultado->execute();
         $Base ->close();
         return $Resultado->affected_rows;
@@ -121,11 +129,11 @@ class Servicio
         }
         return $Exito;
     }
-    public function ActualizarServicio($NombreS,$DescripS,$IconoS,$ID)
+    public function ActualizarServicio($NombreS,$DescripS,$IconoS,$PrecioS,$ID)
     {
         $Base = new mysqli('localhost','root','','mydb',3307);
         $Base -> set_charset("utf8");
-        $UpdateSer = "UPDATE Servicios SET Nombre='$NombreS', Descripcion='$DescripS',urlIMG='$IconoS' where idServicios=$ID";
+        $UpdateSer = "UPDATE Servicios SET Nombre='$NombreS', Descripcion='$DescripS',urlIMG='$IconoS', Precio='$PrecioS' where idServicios=$ID";
         $EjecutarA = $Base->query($UpdateSer);
         $Exito = $Base->affected_rows;
         $Base ->close();
