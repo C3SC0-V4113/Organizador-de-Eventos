@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3307
--- Tiempo de generación: 09-05-2021 a las 08:04:20
+-- Tiempo de generación: 13-05-2021 a las 18:10:48
 -- Versión del servidor: 10.4.17-MariaDB
 -- Versión de PHP: 8.0.0
 
@@ -41,7 +41,9 @@ CREATE TABLE `cliente` (
 
 INSERT INTO `cliente` (`idCliente`, `idUsuario`, `NombreCliente`, `Telefono`, `Correo`) VALUES
 (1, 4, 'Pana', '7872-4055', 'frankjose00@gmail.com'),
-(2, 5, 'Miguel', '2525-2525', 'vallecesco@gmai.com');
+(2, 5, 'Miguel', '2525-2525', 'vallecesco@gmai.com'),
+(3, 1, 'CESCO', '7872-4055', 'frankjose00@gmail.com'),
+(4, 3, 'valcha', '52526565', 'valcha.juancar@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -59,7 +61,6 @@ CREATE TABLE `detalle_empresa_enlaces` (
 --
 
 INSERT INTO `detalle_empresa_enlaces` (`IDEnlaces`, `IDEmpresa`) VALUES
-(3, 1),
 (33, 1),
 (38, 1),
 (41, 1);
@@ -113,7 +114,6 @@ CREATE TABLE `enlaces` (
 --
 
 INSERT INTO `enlaces` (`IDEnlaces`, `Nombre`, `Enlace`) VALUES
-(3, 'Twitter', 'https://twitter.com/compose/tweet/media'),
 (33, 'GitHub', 'https://github.com/'),
 (38, 'Facebook', 'https://m.facebook.com/home.php'),
 (41, 'LinkedIn', 'https://www.linkedin.com/feed/');
@@ -143,7 +143,11 @@ CREATE TABLE `eventos` (
 
 INSERT INTO `eventos` (`idEventos`, `IdTipoEvento`, `IdEmpresa`, `Id_Usuario`, `Nombre`, `fecha`, `idLugar`, `idCliente`, `Descripcion`, `Visibilidad`) VALUES
 (1, 3, 1, 1, 'Papyrus Undertale', '2021-05-03', 1, 1, 'Fiesta con tematica de Papyrus, el querido personaje de Undertale', 0),
-(2, 3, 1, 1, 'Cumpleaños con Spiderman', '2020-12-07', 2, 2, 'Fiesta de un niño de 5 años con tematica de Spiderman', 1);
+(2, 3, 1, 1, 'Cumpleaños con Spiderman', '2020-12-07', 2, 2, 'Fiesta de un niño de 5 años con tematica de Spiderman', 1),
+(8, 6, 1, 1, 'Prueba de Edicion', '2022-11-01', 1, 1, 'Les Miserables y Sweeney Todd', 1),
+(10, 6, 1, 1, 'Prueba 4 y de Edicion', '2021-10-16', 1, 1, 'Cats Andrew Lloyd Webber', 1),
+(13, 4, 1, 1, 'Prueba Multiple 2.0', '2021-12-07', 2, 1, 'Venom Snake Punished', 1),
+(14, 4, 1, 1, 'Fiesta de Michi', '2021-08-21', 1, 1, 'Mi gatito Cumple 6 años', 1);
 
 -- --------------------------------------------------------
 
@@ -215,8 +219,19 @@ INSERT INTO `lugares` (`idLugar`, `NombreLugar`, `DirecccionLugar`) VALUES
 
 CREATE TABLE `reservas` (
   `idReserva` int(11) NOT NULL,
+  `IDEvento` int(11) NOT NULL,
   `FechaReservada` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `reservas`
+--
+
+INSERT INTO `reservas` (`idReserva`, `IDEvento`, `FechaReservada`) VALUES
+(20, 8, '2022-11-01'),
+(22, 10, '2021-10-16'),
+(25, 13, '2021-12-07'),
+(26, 14, '2021-08-21');
 
 -- --------------------------------------------------------
 
@@ -252,6 +267,20 @@ CREATE TABLE `serviciosdeeventos` (
   `idReserva` int(11) NOT NULL,
   `idServicio` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `serviciosdeeventos`
+--
+
+INSERT INTO `serviciosdeeventos` (`idSDE`, `idReserva`, `idServicio`) VALUES
+(12, 26, 3),
+(13, 26, 1),
+(14, 26, 3),
+(15, 26, 2),
+(36, 20, 1),
+(37, 25, 2),
+(38, 25, 1),
+(39, 22, 2);
 
 -- --------------------------------------------------------
 
@@ -384,7 +413,8 @@ ALTER TABLE `lugares`
 -- Indices de la tabla `reservas`
 --
 ALTER TABLE `reservas`
-  ADD PRIMARY KEY (`idReserva`);
+  ADD PRIMARY KEY (`idReserva`),
+  ADD KEY `IDEvento` (`IDEvento`);
 
 --
 -- Indices de la tabla `servicios`
@@ -427,7 +457,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `cliente`
 --
 ALTER TABLE `cliente`
-  MODIFY `idCliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `idCliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `enlaces`
@@ -451,13 +481,13 @@ ALTER TABLE `lugares`
 -- AUTO_INCREMENT de la tabla `reservas`
 --
 ALTER TABLE `reservas`
-  MODIFY `idReserva` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idReserva` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT de la tabla `serviciosdeeventos`
 --
 ALTER TABLE `serviciosdeeventos`
-  MODIFY `idSDE` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idSDE` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`
@@ -503,6 +533,12 @@ ALTER TABLE `fotoseventos`
 --
 ALTER TABLE `infoservicios`
   ADD CONSTRAINT `infoservicios_ibfk_1` FOREIGN KEY (`idEmpresa`) REFERENCES `empresa` (`idEmpresa`);
+
+--
+-- Filtros para la tabla `reservas`
+--
+ALTER TABLE `reservas`
+  ADD CONSTRAINT `IDEvento` FOREIGN KEY (`IDEvento`) REFERENCES `eventos` (`idEventos`);
 
 --
 -- Filtros para la tabla `serviciosdeeventos`
