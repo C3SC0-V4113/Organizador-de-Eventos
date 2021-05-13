@@ -87,7 +87,6 @@
                                 }
                             } else if (isset($_POST['modificarE'])) {
                                 $IdEvent=isset($_POST['IDEscondido']) ? trim($_POST['IDEscondido']) : -1;
-                                echo "<h1> Creo que no hay problema".$IdEvent."</h1>";
                                 $nameE = isset($_POST['nombreR']) ? trim($_POST['nombreR']) : -1;
                                 $descripE = isset($_POST['descripR']) ? trim($_POST['descripR']) : -1;
                                 $LugarE = isset($_POST['LugarR']) ? trim($_POST['LugarR']) : -1;
@@ -98,19 +97,18 @@
                                 /*---------------------*/
                                 if ($nameE != -1 && $IdEvent != -1 && $descripE != -1 && $LugarE != -1 && $TipoE != -1 && $fechaE != -1) {
                                     $IdRes = $Eventos->ReservaEvento($IdEvent);
-                                    echo "<h1>$IdRes</h1>";
                                     $Resultado=$Eventos->ActualizarEvento($IdEvent,$nameE,$descripE,$TipoE,$LugarE,$fechaE);
                                     $Resultado2 = $Eventos->ActualizarReserva($IdRes, $fechaE);
                                     $Res=$Eventos->BorrarDetalle($IdRes);
                                     $Resultado3 = $Eventos->InsertarServicios($IdRes, $Servicios);
                                     if ($Resultado > 0 && $Resultado2 > 0 && $Resultado3 > 0) //Si devuelve 1 es exito, falla si devuelve 0 o -1
                                     {
-                                        $Eventos->ExitosR(1, $nameE);
+                                        $Eventos->ExitosR(2, $nameE);
                                     } else {
-                                        $Eventos->ErroresR(2);
+                                        $Eventos->ErroresR(4);
                                     }
                                 } else {
-                                    $Eventos->ErroresR(1);
+                                    $Eventos->ErroresR(3);
                                 }
                             }
                             $Base->close();

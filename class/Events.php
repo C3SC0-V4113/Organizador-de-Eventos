@@ -8,7 +8,7 @@ class MetodosEventos
     protected $cliente;
     protected $tipo;
     private $urlfoto;
-    private $idEvento;
+    protected $idEvento;
 
     public function setNombreE($name)
     {

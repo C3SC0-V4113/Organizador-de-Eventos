@@ -60,7 +60,7 @@ $mysqli = new mysqli('localhost', 'root', '', 'mydb', 3307)  or die($mysqli->err
                 </ul>
             </li>
             <li><a href="AcercaDe.php">QUIENES SOMOS</a></li>
-            <li class="current"><a href="ReservacionesCliente.php">RESERVACIONES</a></li>
+            <li class="current"><a href="ReservacionesAdmin.php">RESERVACIONES</a></li>
         </ul>
     </nav>
 </section>
