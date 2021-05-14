@@ -212,8 +212,8 @@ class Reserva extends MetodosEventos
         $espanol =  $numeroDia . " de " . $nombreMes . " de " . $anio;
         echo '<div class="col-4 col-12-medium">
     <section class="highlight">
-        <a href="MostrarReserva.php?id=' . $this->idEvento . '&tipo=' . $this->tipo . '" class="image featured"><img src="images/pic02.jpg" alt="' . $this->nombreE . '" /></a>
-        <h3><a href="MostrarReserva.php?id=' . $this->idEvento . '&tipo=' . $this->tipo . '">' . $this->nombreE . '<br><i class="minitext icon fas fa-map-marker-alt"></i><a class="minit"> ' . $this->lugar . ' / ' . $this->tipo . '</a><br><i class="minitext icon fas fa-calendar-alt"></i><a class="minit"> ' . $espanol . '</a></a></h3>
+        <a href="MostrarReserva.php?id=' . $this->idEvento . '&tipo=' . $this->tipo . '" class=" featured"><img style="width: 50%;" src="images/byn.jpg" alt="' . $this->nombreE . '" /></a>
+        <br><br><h3><a class="minit" href="MostrarReserva.php?id=' . $this->idEvento . '&tipo=' . $this->tipo . '">' . $this->nombreE . '<br><i class="minitext icon fas fa-map-marker-alt"></i><a> ' . $this->lugar . ' / ' . $this->tipo . '</a><br><i class="minitext icon fas fa-calendar-alt"></i><a> ' . $espanol . '</a></a></h3>
         <ul class="actions">
             <li><a href="MostrarReserva.php?id=' . $this->idEvento . '&tipo=' . $this->tipo . '" class="button style4">Leer Más</a></li>
         </ul>

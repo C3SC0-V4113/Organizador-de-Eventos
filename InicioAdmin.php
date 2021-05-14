@@ -26,17 +26,17 @@
                 <div id="content">
                     <article class="box post">
                         <header class="style2">
-                            <h2>Creando experiencias inolvidables</h2>
-                            <p>Nuestra empresa de eventos radica en comercializar un servicio integral cinco estrellas de eventos para empresas y particulares creando experiencias y generando emociones para ti.</p>
+                        <h2>CREANDO EXPERIENCIAS INOLVIDABLES</h2>
+                            <p style="text-align: justify;">Nuestra empresa de eventos radica en comercializar un servicio integral cinco estrellas de eventos para empresas y particulares creando experiencias y generando emociones para ti.</p>
                         </header>
                         <p class="image featured" id="entrada">
                             <?php $ruta = "images/principal.png"; ?>
                             <img src="<?php echo $ruta; ?>" alt="" />
                         </p>
-                        <h2>¿Por qué elegirnos?</h2>
-                        <p>Son muchos los diferentes criterios por los que nos guiamos para decidir y escoger. En esta empresa de eventos valoramos la gran capacidad de nuestras celebraciones para aportar a los asistentes la posibilidad de encontrar un lugar en el que experimentar y sentir de manera diferente, en el que también puedas relacionarte con los demás, aprender, descubrir y compartir vivencias.</p>
-                        <p>Todos nuestros eventos, sin excepción, captan la atención de los invitados, pues cada uno de ellos es diferente y único, y en cada uno de ellos se sienten y se tienen diferentes experiencias y sensaciones.</p>
-                        <p>Esto es posible gracias a el gran equipo de profesionales que se encuentra detrás de cada acontecimiento, un equipo que se caracteriza por su pasión, especialización, entusiasmo, experiencia y vocación en todo lo que organiza nuestra empresa de eventos</p><br>
+                        <h2>¿POR QUÉ ELEGIRNOS?</h2>
+                        <p style="text-align: justify;">Son muchos los diferentes criterios por los que nos guiamos para decidir y escoger. En esta empresa de eventos valoramos la gran capacidad de nuestras celebraciones para aportar a los asistentes la posibilidad de encontrar un lugar en el que experimentar y sentir de manera diferente, en el que también puedas relacionarte con los demás, aprender, descubrir y compartir vivencias.
+                        Todos nuestros eventos, sin excepción, captan la atención de los invitados, pues cada uno de ellos es diferente y único, y en cada uno de ellos se sienten y se tienen diferentes experiencias y sensaciones.
+                        Esto es posible gracias a el gran equipo de profesionales que se encuentra detrás de cada acontecimiento, un equipo que se caracteriza por su pasión, especialización, entusiasmo, experiencia y vocación en todo lo que organiza nuestra empresa de eventos</p><br>
                     </article>
                 </div>
             </div>
@@ -99,7 +99,7 @@
         <section id="highlights" class="wrapper style2">
             <div class="row aln-center" id="areaeventos">
                 <?php
-                    $Consulta = "Select idEventos,tipoevento.Nombre as Tipo,eventos.Nombre,fecha,NombreLugar,NombreCliente,substring(Descripcion,1,95) as Descripcion from Eventos INNER JOIN lugares ON eventos.idLugar = lugares.idLugar INNER JOIN tipoevento ON eventos.IdTipoEvento = tipoevento.idTipoEvento INNER JOIN cliente ON eventos.idCliente=cliente.idCliente order by fecha DESC LIMIT 2";
+                    $Consulta = "Select idEventos,tipoevento.Nombre as Tipo,eventos.Nombre,fecha,NombreLugar,NombreCliente,substring(Descripcion,1,95) as Descripcion from Eventos INNER JOIN lugares ON eventos.idLugar = lugares.idLugar INNER JOIN tipoevento ON eventos.IdTipoEvento = tipoevento.idTipoEvento INNER JOIN cliente ON eventos.idCliente=cliente.idCliente where Visibilidad=0 order by fecha DESC LIMIT 2 ";
                     $Ejecucion = $Base->query($Consulta);
                     if($Ejecucion->num_rows!=0)
                     {

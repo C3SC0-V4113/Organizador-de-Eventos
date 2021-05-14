@@ -139,7 +139,6 @@
                                                             $temporal = $_FILES['ImagenesE']['tmp_name'][$i];
                                                             move_uploaded_file($temporal,$address);
                                                             $Direcciones[$i]=$address;
-                                                            print_r($Direcciones);
                                                             
                                                         }
                                                     }

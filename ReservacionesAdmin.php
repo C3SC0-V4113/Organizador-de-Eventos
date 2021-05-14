@@ -9,6 +9,7 @@
 	<link rel="stylesheet" href="assets/css/main.css" />
 	<link rel="stylesheet" href="assets/css/main.css?<?php echo time() . ".0"; ?>" media="all" />
 	<link rel="stylesheet" href="assets/css/contraste.css">
+    
 
 	<?php
 	session_start();
@@ -62,7 +63,7 @@
 		</div>
 		<!-- Highlights -->
 		<section id="highlights" class="wrapper style3">
-			<div class="title">Reservaciones</div>
+			<div class="title" id="llegar">Reservaciones</div>
 			<div class="container">
                 <?php
                 require 'class/reserva.php';
@@ -73,8 +74,8 @@
                 ?>
                 <br>
                 <div class="row aln-center">
-                    <form method="post" action="#" name="filtroform" id=>
-                        <div class="row aln-center">
+                    <form method="post" action="" name="filtroform" >
+                        <div class="row aln-center" >
                             <div class="col-4 col-12-medium">
                                 <select name="filtro" id="filtro" onchange="OpcFiltros(this.value,Lugares,Tipos)">
                                     <option disabled selected>Seleccione un filtro</option>
@@ -144,7 +145,7 @@
                             echo "<header class='col-12 style1'><br><hr>";
                             echo "<p>Oops! Parece que no hay reservaciones con ese nombre.</p><hr></header>";
                         }
-                        echo '<script>parte = document.getElementById("scroll");
+                        echo '<script>parte = document.getElementById("llegar");
                                         parte.scrollIntoView();</script>';
                     } else if (isset($_POST['blugares'])) {
                         $word = $_POST['blugares'] ? $_POST['blugares'] : '';
@@ -170,7 +171,7 @@
                             echo "<header class='col-12 style1'><br><hr>";
                             echo "<p>Oops! Parece que no hay reservaciones con ese nombre.</p><hr></header>";
                         }
-                        echo '<script>parte = document.getElementById("scroll");
+                        echo '<script>parte = document.getElementById("llegar");
                                         parte.scrollIntoView();</script>';
                     } else if (isset($_POST['btipos'])) {
                         $word = $_POST['btipos'] ? $_POST['btipos'] : '';
@@ -196,7 +197,7 @@
                             echo "<header class='col-12 style1'><br><hr>";
                             echo "<p>Oops! Parece que no hay reservaciones con ese nombre.</p><hr></header>";
                         }
-                        echo '<script>parte = document.getElementById("scroll");
+                        echo '<script>parte = document.getElementById("llegar");
                                         parte.scrollIntoView();</script>';
                     } else if (isset($_POST['filtro']) && $_POST['filtro'] == 'antiguo') {
                         echo '<script type="text/javascript">
@@ -222,7 +223,7 @@
                             echo "<header class='col-12 style1'><br><hr>";
                             echo "<p>Oops! Parece que no hay reservaciones con ese nombre.</p><hr></header>";
                         }
-                        echo '<script>parte = document.getElementById("scroll");
+                        echo '<script>parte = document.getElementById("llegar");
                                         parte.scrollIntoView();</script>';
                     } else if (isset($_POST['filtro']) && $_POST['filtro'] == 'todos') {
                         echo '<script type="text/javascript">
@@ -248,7 +249,7 @@
                             echo "<header class='col-12 style1'><br><hr>";
                             echo "<p>Oops! Parece que aún no hay reservaciones registrados.</p><hr></header>";
                         }
-                        echo '<script>parte = document.getElementById("scroll");
+                        echo '<script>parte = document.getElementById("llegar");
                                         parte.scrollIntoView();</script>';
                     } else {
                         $Consulta = "Select idEventos,tipoevento.Nombre as Tipo,eventos.Nombre,fecha,NombreLugar,NombreCliente,substring(Descripcion,1,95) as Descripcion from Eventos INNER JOIN lugares ON eventos.idLugar = lugares.idLugar INNER JOIN tipoevento ON eventos.IdTipoEvento = tipoevento.idTipoEvento INNER JOIN cliente ON eventos.idCliente=cliente.idCliente WHERE eventos.Visibilidad=1 order by fecha DESC";

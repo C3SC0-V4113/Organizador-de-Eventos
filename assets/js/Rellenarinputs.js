@@ -190,11 +190,13 @@ function RellenarR(Name, Descrip, Cliente, IdE,fecha,lugar,tipo)
 {
     InName = document.getElementById("nombreE");
     InCli = document.getElementById("CliE");
+    SeCli = document.getElementById("Cli");
     InID= document.getElementById("idEventos");
     Fecha = document.getElementById("FechaE");
     InDescrip = document.getElementById("descripE");
     InLugar = document.getElementById("LugarE");
     InTipo = document.getElementById("TipoE");
+    SeTipo = document.getElementById("Tipo");
     Boton = document.getElementById("PublicarR");
     Imagenes = document.getElementById("ImagenesE[]");
     
@@ -202,7 +204,6 @@ function RellenarR(Name, Descrip, Cliente, IdE,fecha,lugar,tipo)
     {
         InName.disabled = false;
         InDescrip.disabled = false;
-        InCli.disabled = false;
         InLugar.disabled=false;
         Boton.disabled = false;
         Imagenes.disabled = false;
@@ -215,6 +216,8 @@ function RellenarR(Name, Descrip, Cliente, IdE,fecha,lugar,tipo)
         InTipo.value = tipo;
         InID.value = IdE;
         Imagenes.focus();
+        SeCli.value=Cliente;
+        SeTipo.value=tipo;
     }
     else
     {

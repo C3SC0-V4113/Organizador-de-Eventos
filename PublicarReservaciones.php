@@ -38,7 +38,7 @@
                         $Eventos = new MetodosEventos();
                         $Base = new mysqli('localhost','root','','mydb',3307);
                         $Base -> set_charset("utf8");
-                        $Consulta = "Select * from Eventos where Visibilidad = 1 order by fecha asc";
+                        $Consulta = "Select * from Eventos where Visibilidad = 1 and fecha < now() order by fecha asc";
                         $Ejecucion = $Base->query($Consulta);
                         if($Ejecucion->num_rows!=0)
                         {
@@ -123,14 +123,15 @@
                                             disabled />
                                     </div>
                                     <div class="col-6 col-12-small">
-                                        <label for="CliE">Seleccione el cliente al que pertenece el evento</label>
-                                        <select name="CliE" id="CliE" required disabled>
+                                        <label for="Cli">Seleccione el cliente al que pertenece el evento</label>
+                                        <select name="Cli" id="Cli" required disabled>
                                         <option disabled selected>Seleccione el Cliente</option>
                                             <?php
                                             $Matriz = $Eventos->ConsultarClientes();
                                             echo $Eventos ->ImprimirClientes($Matriz);
                                     ?>
                                     </select>
+                                    <input type="hidden" name="CliE" id="CliE">
                                     </div>
                                     <div class="col-12 col-12-small">
                                         <label for="descripE">Descripción del Evento</label>
@@ -149,14 +150,15 @@
                                     </select>
                                     </div>
                                     <div class="col-4 col-12-small">
-                                        <label for="TipoE">Seleccione el tipo de evento</label>
-                                        <select name="TipoE" id="TipoE" required  readonly>
+                                        <label for="Tipo">Seleccione el tipo de evento</label>
+                                        <select name="Tipo" id="Tipo" required  disabled>
                                         <option disabled selected>Seleccione el tipo de Evento</option>
                                             <?php
                                             $Matriz2 = $Eventos->ConsultarTipos();
                                             echo $Eventos ->ImprimirTipos($Matriz2);
                                     ?>
                                         </select>
+                                        <input type="hidden" name="TipoE" id="TipoE">
                                     </div>
 
                                     <div class="col-4 col-12-small">

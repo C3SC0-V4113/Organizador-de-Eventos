@@ -1,6 +1,21 @@
 @import url("fontawesome-all.min.css");
 @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400italic,700,900");
-
+i.minitext
+{
+	font-size: 12px;
+	margin-top: 0;
+	color: #ffffff;
+	font-weight: 500;
+	list-style:none
+}
+a.minit
+{
+	font-size: 15px;
+	margin-top: 0;
+	color: #ffffff;
+	font-weight: 600;
+	list-style:none
+}
 abbr[title]
 {
 	text-decoration: none;
