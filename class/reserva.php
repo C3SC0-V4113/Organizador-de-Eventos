@@ -221,8 +221,12 @@ class Reserva extends MetodosEventos
 </div>';
     }
 
-    public function MostrarReserva($Nombre, $Lugar, $Tipo, $Descripcion, $Cliente, $fechita)
+    public function MostrarReserva($Nombre, $Lugar, $Tipo, $Descripcion, $Cliente, $fechita,$tel,$correo,$id)
     {
+        $Base = new mysqli('localhost','root','','mydb',3307);
+        $Base -> set_charset("utf8");
+        $C = "SELECT servicios.Nombre,servicios.Precio from serviciosdeeventos INNER JOIN servicios on serviciosdeeventos.idServicio= servicios.idServicios inner join reservas on serviciosdeeventos.idReserva = reservas.idReserva INNER join eventos on reservas.IDEvento = eventos.idEventos where eventos.idEventos=$id";
+        $Ejecucion = $Base->query($C);
         $fecha = substr($fechita, 0, 10);
         $numeroDia = date('d', strtotime($fecha));
         $dia = date('l', strtotime($fecha));
@@ -232,18 +236,31 @@ class Reserva extends MetodosEventos
         $meses_EN = array("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December");
         $nombreMes = str_replace($meses_EN, $meses_ES, $mes);
         $espanol =  $numeroDia . " de " . $nombreMes . " de " . $anio;
-        echo '<header class="style1">
-    <h2>' . $Nombre . '</h2><hr>
+        echo '
+    <h2 style="text-align:center;font-size:25px;">' . $Nombre . '</h2><hr>
     <p id="arriba" style="text-align:left;"><i class="mostrar icon fas fa-map-marker-alt"></i><b> &nbsp;&nbsp;Lugar del Evento:</b> ' . $Lugar . '
-    &nbsp|&nbsp <i class="mostrar icon fas fa-user"></i><b>&nbsp;&nbsp; Cliente:</b> ' . $Cliente . '
     &nbsp|&nbsp <i class="mostrar icon fas fa-calendar-alt"></i><b>&nbsp;&nbsp; Fecha del Evento:</b> ' . $espanol . '
-    &nbsp|&nbsp&nbsp;<i class="mostrar icon fas fa-caret-right"></i><b>&nbsp;&nbsp;<b> Tipo de Evento:</b> ' . $Tipo . '</p>
-    <hr>
-    <p><h3>DESCRIPCIÓN DEL EVENTO:</h3>
-    <p>' . $Descripcion . '</p></p>
-    </header>
+    &nbsp|&nbsp&nbsp;<i class="mostrar icon fas fa-caret-right"></i><b>&nbsp;&nbsp;<b> Tipo de Evento:</b> ' . $Tipo . '
+    &nbsp|&nbsp <i class="mostrar icon fas fa-user"></i><b>&nbsp;&nbsp; Cliente:</b> ' . $Cliente . '
+    <br><i class="mostrar icon fas fa-phone"></i><b>&nbsp;&nbsp; Telefono Cliente:</b> ' . $tel . '
+    &nbsp|&nbsp <i class="mostrar icon fas fa-envelope"></i><b>&nbsp;&nbsp; Correo Cliente:</b> ' . $correo . '</p>
+    
+   
+    <table><tr><th colspan="2" class="last"><h3>SERVICIOS SELECCIONADOS EN LA RESERVA</h3></th></tr>
+    <tr style="border-bottom: solid 1px #ccc;"><th>SERVICIOS</th><th>PRECIO DE SERVICIOS</th></tr>';
+    $i=0;
+    $sum=0;
+    while($Datos = $Ejecucion->fetch_assoc())
+    {
+        $i++;
+        echo '<tr ><td class="list"><B>Servicio '.$i.':</B>&nbsp&nbsp&nbsp&nbsp; '.$Datos['Nombre'].'</td><td style="text-align:center;">$ '.$Datos['Precio'].'</td></tr>';
+        $sum = $sum +$Datos['Precio'];
+    }
+    echo '<tr class="last"><td style="text-align:center;">TOTAL RESERVACIÓN</td><td style="text-align:center;">$ '.number_format($sum,2).'</td></tr></table>
+    <h3>DESCRIPCIÓN DEL EVENTO:</h3>
+    <p class="descripcion">' . $Descripcion . '</p>
     <ul class="actions">
-        <li><a href="javascript:history.go(-1);" class="button style4">Volver Atrás</a></li>
+        <li><a href="ReservacionesAdmin.php" class="button style4">Volver Atrás</a></li>
     </ul>
     <section>
     </section>';

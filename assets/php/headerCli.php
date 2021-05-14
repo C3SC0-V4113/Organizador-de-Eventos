@@ -59,7 +59,7 @@ if(!isset($_SESSION))
             else 
             {
                 $ref = 'Login.php';
-                $name = 'INICIAR SESIÓN';
+                $name = 'INICIAR SESIÓN PARA RESERVAR';
                 $downmenu='';  
                 $reser='';
             }

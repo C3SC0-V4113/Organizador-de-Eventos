@@ -27,40 +27,6 @@
 		require './assets/php/header.php';
 		?>
 		<!-- Main -->
-		<div id="main" class="wrapper style2">
-			<div class="title">EXPERTOS EN ORGANIZACION</div>
-			<div class="container">
-				<!-- Content -->
-				<div id="content">
-					<article class="box post">
-						<header class="style1">
-							<h2>Con nosotros tú evento está seguro</h2>
-						</header>
-						<div class="feature-list">
-							<div class="row">
-								<div class="col-12 col-12-medium">
-									<section>
-										<h3></h3>
-										<p>Somos los indicados para crear hermosas memorias que durarán toda la vida a tu lado, con un pequeño formulario registra tú reservación</p>
-									</section>
-									<ul class="actions special">
-										<form id="servicesbtn" name="servicesbtn">
-											<a href="./AgregarReservacion.php">
-												<li>
-													<input type="button" class="button special style5 large" value="RESERVA YA!" onclick="document.servicesbtn.action = 'AgregarReservacion.php';">
-												</li>
-											</a>
-										</form>
-										<hr>
-									</ul>
-								</div>
-							</div>
-						</div>
-					</article>
-				</div>
-
-			</div>
-		</div>
 		<!-- Highlights -->
 		<section id="highlights" class="wrapper style3">
 			<div class="title" id="llegar">Reservaciones</div>
