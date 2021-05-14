@@ -47,8 +47,6 @@
 
                                 if ($nameE != -1 && $CliE != -1 && $descripE != -1 && $LugarE != -1 && $TipoE != -1 && $fechaE != -1) {
                                     $Id = $Eventos->IDEvento();
-                                    echo "<p>Nombre: $nameE-----IdCliente: $CliE---------IdUsuario: $Usuario----------Id Evento:$Id---------Descripcion: $descripE---------IdLugar: $LugarE------------IdTipo: $TipoE---------Fecha: $fechaE
-                                    ----------Empresa: $Empresa</p>";
                                     $Resultado = $Eventos->InsertarReservaE($Id, $TipoE, $Empresa, $Usuario, $nameE, $fechaE, $LugarE, $CliE, $descripE);
                                     $Resultado2 = $Eventos->InsertarReservaR($Id, $fechaE);
                                     $IdR = $Eventos->UltimoID();

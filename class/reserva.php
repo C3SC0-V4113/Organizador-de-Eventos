@@ -69,11 +69,9 @@ class Reserva extends MetodosEventos
         }
         if ($Base->multi_query($Insert)) {
             $Base->close();
-            echo "Hola";
             return 1;
         } else {
             $Base->close();
-            echo "Adios";
             return 0;
         }
     }
@@ -154,7 +152,6 @@ class Reserva extends MetodosEventos
             $selector = $result->fetch_array();
             $id = $selector['idReserva'];
         }
-        echo $id;
         return $id;
     }
 
