@@ -129,9 +129,8 @@
                                         <ul class="actions">
                                             <li><input type="submit" id="guardarE" name="guardarE" class="style5" value="Guardar Reservacion" onclick="cancel=false;" />
                                             </li>
-                                            <li><a href="EventosAd.php"><input type="button" class="style2" value="Cancelar" onclick="cancel = true; document.AddReserva.action = 'EventosAd.php';" /></a>
+                                            <li><a href="ReservacionesCliente.php"><input type="button" class="style2" value="Cancelar" onclick="cancel = true; document.AddReserva.action = 'EventosAd.php';" /></a>
                                             </li>
-                                            <li><input type="reset" class="style2" value="Limpiar Campos" onclick="LimpiarE()" /></li>
                                         </ul>
                                     </div>
                                 </div>

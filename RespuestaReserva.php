@@ -34,14 +34,15 @@
                             $Eventos = new Reserva();
                             if (isset($_POST['guardarE'])) {
                                 $nameE = isset($_POST['nombreR']) ? trim($_POST['nombreR']) : -1;
-                                $CliE = isset($_SESSION['IdUsuario']) ? trim($_SESSION['IdUsuario']) : -1;
+                                $CliE = $Eventos->ObtenerCliente($_SESSION['IdUsuario']);
+                                $CliE = $CliE['idCliente'];
                                 $descripE = isset($_POST['descripR']) ? trim($_POST['descripR']) : -1;
                                 $LugarE = isset($_POST['LugarR']) ? trim($_POST['LugarR']) : -1;
                                 $TipoE = isset($_POST['TipoR']) ? trim($_POST['TipoR']) : -1;
                                 $fechaE = isset($_POST['FechaReserva']) ? trim($_POST['FechaReserva']) : -1;
                                 $fechaE = date("Y-m-d", strtotime($fechaE));
                                 $Usuario = isset($_SESSION['IdUsuario']) ? trim($_SESSION['IdUsuario']) : -1;
-                                $Empresa = isset($_SESSION['IdEmpresa']) ? trim($_SESSION['IdEmpresa']) : -1;
+                                $Empresa = isset($_SESSION['IdEmpresa']) ? trim($_SESSION['IdEmpresa']) : 1;
                                 $Servicios = isset($_POST['ArrayIDs']) ? explode(',', $_POST['ArrayIDs']) : 0;
 
                                 if ($nameE != -1 && $CliE != -1 && $descripE != -1 && $LugarE != -1 && $TipoE != -1 && $fechaE != -1) {
@@ -53,32 +54,6 @@
                                     if ($Resultado > 0 && $Resultado2 > 0 && $Resultado3 > 0) //Si devuelve 1 es exito, falla si devuelve 0 o -1
                                     {
                                         $Eventos->ExitosR(1, $nameE);
-                                        /*if(isset($_FILES['ImagenesE']))
-                                        {
-                                            $num_archivos = count($_FILES['ImagenesE']['name']);
-                                            if($num_archivos!=0)
-                                            {
-                                                for ($i=0; $i <=$num_archivos; $i++) 
-                                                { 
-                                                    if(!empty($_FILES['ImagenesE']['name'][$i]))
-                                                    {
-                                                        $address = "ImagenesSubidas/".$_FILES['ImagenesE']['name'][$i];
-                                                        if(file_exists($address))
-                                                        {
-                                                            echo "<p>El archivo: ".$_FILES['ImagenesE']['name'][$i]." ya existe en el servidor<br>Archivo:</p><br>";
-                                                            #$Direcciones[$i]=$address;
-                                                        }
-                                                        else 
-                                                        {
-                                                            $temporal = $_FILES['ImagenesE']['tmp_name'][$i];
-                                                            move_uploaded_file($temporal,$address);
-                                                            $Direcciones[$i]=$address;
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }*/
-                                        //$Eventos->GuardarImagenesBase($Direcciones,$Id);
                                     } else {
                                         $Eventos->ErroresR(2);
                                     }
@@ -86,7 +61,7 @@
                                     $Eventos->ErroresR(1);
                                 }
                             } else if (isset($_POST['modificarE'])) {
-                                $IdEvent=isset($_POST['IDEscondido']) ? trim($_POST['IDEscondido']) : -1;
+                                $IdEvent = isset($_POST['IDEscondido']) ? trim($_POST['IDEscondido']) : -1;
                                 $nameE = isset($_POST['nombreR']) ? trim($_POST['nombreR']) : -1;
                                 $descripE = isset($_POST['descripR']) ? trim($_POST['descripR']) : -1;
                                 $LugarE = isset($_POST['LugarR']) ? trim($_POST['LugarR']) : -1;
@@ -97,9 +72,9 @@
                                 /*---------------------*/
                                 if ($nameE != -1 && $IdEvent != -1 && $descripE != -1 && $LugarE != -1 && $TipoE != -1 && $fechaE != -1) {
                                     $IdRes = $Eventos->ReservaEvento($IdEvent);
-                                    $Resultado=$Eventos->ActualizarEvento($IdEvent,$nameE,$descripE,$TipoE,$LugarE,$fechaE);
+                                    $Resultado = $Eventos->ActualizarEvento($IdEvent, $nameE, $descripE, $TipoE, $LugarE, $fechaE);
                                     $Resultado2 = $Eventos->ActualizarReserva($IdRes, $fechaE);
-                                    $Res=$Eventos->BorrarDetalle($IdRes);
+                                    $Res = $Eventos->BorrarDetalle($IdRes);
                                     $Resultado3 = $Eventos->InsertarServicios($IdRes, $Servicios);
                                     if ($Resultado > 0 && $Resultado2 > 0 && $Resultado3 > 0) //Si devuelve 1 es exito, falla si devuelve 0 o -1
                                     {
@@ -114,9 +89,6 @@
                             $Base->close();
                             ?>
                         </header>
-                        <section>
-
-                        </section>
                     </article>
                 </div>
 

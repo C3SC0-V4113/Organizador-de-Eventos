@@ -174,6 +174,7 @@
     <script src="assets/js/ConfirmarSalir.js"></script>
     <script src="assets/js/RellenarInputs.js?<?php echo time() . ".0"; ?>"></script>
     <script src="assets/js/total.js"></script>
+    <script src="assets/js/rellenarActReser.js"></script>
     <script src="assets/js/calendario.js"></script>
     <script src="//code.jquery.com/jquery-2.2.1.min.js"></script>
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>

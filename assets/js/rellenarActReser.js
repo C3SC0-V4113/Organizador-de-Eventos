@@ -7,7 +7,7 @@ var identificadores=document.getElementById("ArrayIDs");
 var LugTipo=document.getElementById("LugarTipo");
 text.innerText="Total de: $0";
 
-/*if (LugTipo.value!="") {
+if (LugTipo.value!="") {
     var LugSTipS=LugTipo.value.split("--");
     var IdLug=LugSTipS[0];
     var IdTip=LugSTipS[1];
@@ -24,7 +24,7 @@ if (identificadores.value!="") {
 }
 else{
     console.log("Hola mundo")
-}*/
+}
 
 selector.addEventListener("change",function(){
     SeleccionarValores(selector)
