@@ -16,11 +16,24 @@ class Reserva extends MetodosEventos
         $this->IdReserva;
     }
 
+    public function ObtenerCliente($IdUser){
+        $Base = new mysqli('localhost', 'root', '', 'mydb', 3307);
+        $Base->set_charset("utf8");
+        $Insert="SELECT `idCliente` FROM cliente WHERE `idUsuario`=$IdUser";
+        $result = $Base->query($Insert);
+        if ($result == TRUE) {
+            $selector = $result->fetch_array();
+        }
+        $Base->close();
+        return $selector;
+    }
+
     public function InsertarReservaE($Id, $TipoE, $Empresa, $Usuario, $Nombre, $Fecha, $Lugar, $Cliente, $Descripcion)
     {
         $visibilidad = 1;
         $Base = new mysqli('localhost', 'root', '', 'mydb', 3307);
         $Base->set_charset("utf8");
+        //echo "<h1>$Id------$Usuario------$Cliente</h1>";
         $Insert = "INSERT INTO eventos (idEventos, IdTipoEvento, IdEmpresa, Id_Usuario, Nombre, fecha,idLugar,idCliente,Descripcion,Visibilidad)";
         $Insert .= " VALUES (?,?,?,?,?,?,?,?,?,?)";
         $Resultado = $Base->prepare($Insert);
@@ -56,18 +69,36 @@ class Reserva extends MetodosEventos
         }
         if ($Base->multi_query($Insert)) {
             $Base->close();
+            echo "Hola";
             return 1;
         } else {
             $Base->close();
+            echo "Adios";
             return 0;
         }
+    }
+
+    public function HayReservas($idCliente){
+        $Base = new mysqli('localhost', 'root', '', 'mydb', 3307);
+        $Base->set_charset("utf8");
+        $consulta = "SELECT eventos.idEventos,eventos.Nombre,reservas.FechaReservada FROM reservas INNER JOIN eventos ON reservas.IDEvento=eventos.idEventos where eventos.Id_Usuario =$idCliente";
+        $result = $Base->query($consulta);
+        //echo mysqli_num_rows($result);
+        if (mysqli_num_rows($result)==0) {
+            $selector = true;
+        }
+        else{
+            $selector = false;
+        }
+        $Base->close();
+        return $selector;
     }
 
     public function TablaReservas($idCliente)
     {
         $Base = new mysqli('localhost', 'root', '', 'mydb', 3307);
         $Base->set_charset("utf8");
-        $consulta = "SELECT eventos.idEventos,eventos.Nombre,reservas.FechaReservada FROM reservas INNER JOIN eventos ON reservas.IDEvento=eventos.idEventos where eventos.idCliente =$idCliente";
+        $consulta = "SELECT eventos.idEventos,eventos.Nombre,reservas.FechaReservada FROM reservas INNER JOIN eventos ON reservas.IDEvento=eventos.idEventos where eventos.Id_Usuario =$idCliente";
         $resultado = $Base->query($consulta);
         $tabla = "";
         while ($selector = $resultado->fetch_assoc()) {
@@ -76,7 +107,7 @@ class Reserva extends MetodosEventos
             $tabla .= "<td>" . $selector['FechaReservada'] . "</td>";
             $tabla .= "<td>";
             $tabla .= "<a href='ActualizarRef.php?editRes=" . $selector['idEventos'] . "' class='btn btn-info'>Editar</a>";
-            $tabla .= "<a href='ReservacionesCliente.php?delete=" . $selector['idEventos'] . "' class='btn btn-danger'>Eliminar</a>";
+            $tabla .= "<a href='ReservacionesCliente.php?deleted=" . $selector['idEventos'] . "' class='btn btn-danger'>Eliminar</a>";
             $tabla .= "</td>";
             $tabla .= "</tr>";
         }
@@ -322,10 +353,10 @@ class Reserva extends MetodosEventos
     }
 }
 
-if (isset($_GET['delete'])) {
+if (isset($_GET['deleted'])) {
     $mysqli = new mysqli('localhost', 'root', '', 'mydb', 3307);
     $mysqli->set_charset("utf8");
-    $id = $_GET['delete'];
+    $id = $_GET['deleted'];
     $consulta = "SELECT `idReserva` FROM `reservas` WHERE `IDEvento`=$id ORDER BY `idReserva` DESC LIMIT 1";
     $idReserv = 0;
     $result = $Base->query($consulta);
