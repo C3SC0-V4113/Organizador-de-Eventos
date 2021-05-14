@@ -54,18 +54,20 @@ if(!isset($_SESSION))
                 <li><a href="class/CerrarSesion.php">CERRAR SESIÓN</a></li>
                 </ul>
                 ';
+                $reser='<li class="current"><a href="ReservacionesCliente.php">RESERVACIONES</a></li>';
             }
             else 
             {
                 $ref = 'Login.php';
                 $name = 'INICIAR SESIÓN';
                 $downmenu='';  
+                $reser='';
             }
             ?>
             </li>
             <li><a href="EventosCl.php">EVENTOS</a></li>
             <li><a href="AcercaDeCliente.php">QUIENES SOMOS</a></li>
-            <li class="current"><a href="ReservacionesCliente.php">RESERVACIONES</a></li>
+            <?php echo $reser;?>
             <li><a href="<?php echo $ref ?>"><?php echo $name ?></a>
             <?php echo $downmenu; ?></li>
             

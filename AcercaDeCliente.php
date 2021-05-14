@@ -83,7 +83,7 @@
 							<div class="row">
 								<div class="col-6 col-12-medium">
 									<section>
-										<h3 class=<?php echo "'";
+										<h3 class=<?php echo "'icon ";
 													$empresa->Showlogodesc();
 													echo "'"; ?>><?php $empresa->Showtitulodesc(); ?></h3>
 										<p><?php $empresa->ShowDescripcion(); ?></p>
